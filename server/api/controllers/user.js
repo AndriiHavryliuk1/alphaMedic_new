@@ -12,6 +12,14 @@ exports.getAllUsers = (req, res, next) => {
         }) ;
 };
 
+exports.getUser = (req, res, next) => {
+    User.findById(req.params.id).exec().then((data) => {
+        res.status(200).json(data); 
+    }).catch((error) => {
+        next(error);
+    });
+}
+
 exports.createUser = async (req, res, next) => {
 
     if (await checkIsDuplicatedEmail(req.body.email)) {
@@ -39,6 +47,14 @@ exports.createUser = async (req, res, next) => {
         next(error);
     });
 };
+
+exports.updateUser = (req, res, next) => {
+    User.findById(req.params.id).exec().then((data) => {
+        res.status(200).json(data); 
+    }).catch((error) => {
+        next(error);
+    });
+}
 
 async function checkIsDuplicatedEmail(email) {
     const result = await User.find({ email: email, active: true});
