@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const usersRouter = require('./api/routes/user');
+const apointmentsRouter = require('./api/routes/appointments');
 const configuration = require('./config/configuration');
 
 
@@ -16,6 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use('/users', usersRouter);
+app.use('/appointments', apointmentsRouter);
 
 // handle all errors
 app.use((error, req, res, next) => {
