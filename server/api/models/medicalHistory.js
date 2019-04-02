@@ -13,10 +13,7 @@ const medicalHistorySchema = mongoose.Schema({
     },
     warningLabels: { type: Array },
     procedures: { type: Array },
-    lastModificationTime: {
-        type: Date,
-        default: new Date()
-    }
-});
+    lastModificationUser: { type: String, default: null }
+}, { timestamps: true });
 
 module.exports = mongoose.model('MedicalHistory', medicalHistorySchema);

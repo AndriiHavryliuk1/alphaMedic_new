@@ -23,8 +23,18 @@ const appointmentSchema = mongoose.Schema({
         required: true, 
         ref: 'User'
     },
-    lastModificationTime: { type: Date, default: new Date() }
-});
+    lastModificationUser: { type: String, default: null }
+}, { timestamps: true });
+
+appointmentSchema.statics.checkIf = function (ids, minutesSinceLast, callback) {
+    var recentDate = new Date();
+    recentDate.removeMinutes(minutesSinceLast); // It will remove the minutes
+    this.find(
+        {'location.timestamp': {$lt: recentDate}},
+        callback
+    );
+}
+
 
 module.exports = mongoose.model('Appointment', appointmentSchema);
 

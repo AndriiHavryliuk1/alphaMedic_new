@@ -27,7 +27,7 @@ const userSchema = mongoose.Schema({
         },
         ref: 'Department'
     },
-    lastModificationTime: { type: Date }
-});
+    lastModificationUser: { type: String, default: null }
+}, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);

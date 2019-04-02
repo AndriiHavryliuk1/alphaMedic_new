@@ -13,7 +13,7 @@ const departmentSchema = mongoose.Schema({
         ref: 'User'
     },
     doctors: { type: Array },
-    lastModificationTime: { type: Date, default: new Date() }
-});
+    lastModificationUser: { type: String, default: null }
+}, { timestamps: true });
 
 module.exports = mongoose.model('Department', departmentSchema);

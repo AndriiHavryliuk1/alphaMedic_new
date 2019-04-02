@@ -37,8 +37,7 @@ exports.createUser = async (req, res, next) => {
         imageURL: req.body.imageURL,
         birthday: req.body.birthday,
         gender: req.body.gender, 
-        roles: req.body.roles,
-        lastModificationTime: new Date()
+        roles: req.body.roles
     });
 
     newUser.save().then((data) => {
