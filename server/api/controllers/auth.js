@@ -1,4 +1,6 @@
-const { validatonResult } = require('express-validator/check');
+const mongoose = require('mongoose');
+const { validationResult } = require('express-validator/check');
+const jwt = require('jsonwebtoken');
 
 const User  = require('../models/user');
 
@@ -11,12 +13,12 @@ exports.getUser = (req, res, next) => {
 }
 
 exports.signup = async (req, res, next) => {
-    const errors = validatonResult(req);
+    const errors = validationResult(req);
     if (!errors.isEmpty()) {
         const error = new Error('Validation failed.');
         error.statusCode = 422;
         error.data = errors.array();
-        throw error;
+        next(error);
     }
 
     const newUser = new User({
@@ -36,4 +38,27 @@ exports.signup = async (req, res, next) => {
     }).catch(error => {
         next(error);
     });
+};
+
+exports.login = (req, res, next) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    User.findOne({ email: email}).then((user) => {
+        if (!user || password !== user.password) {
+            const error = !user ? new Error('User with this email could not be found!') : new Error('Wrong password!');
+            error.statusCode = 401;
+            throw error; 
+        }
+
+        const token = jwt.sign({
+            email: user.email,
+            userId: user._id.toString()
+        }, 'secretKey', { expiresIn: '5h' });
+
+        res.status(200).json({ token: token, userId: user._id.toString() });
+
+    }).catch(error => {
+        next(error);
+    });
+
 };

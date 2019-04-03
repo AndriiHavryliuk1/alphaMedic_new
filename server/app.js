@@ -6,6 +6,7 @@ const CORS = require('cors');
 const usersRouter = require('./api/routes/user');
 const apointmentsRouter = require('./api/routes/appointments');
 const configuration = require('./config/configuration');
+const authRouter = require('./api/routes/auth');
 
 const app = express();
 const PORT = 3000;
@@ -20,6 +21,7 @@ app.use(CORS());
 
 app.use('/users', usersRouter);
 app.use('/appointments', apointmentsRouter);
+app.use('/auth', authRouter)
 
 // handle all errors
 app.use((error, req, res, next) => {
