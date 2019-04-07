@@ -7,6 +7,7 @@ const usersRouter = require('./api/routes/user');
 const apointmentsRouter = require('./api/routes/appointments');
 const configuration = require('./config/configuration');
 const authRouter = require('./api/routes/auth');
+const isAuth = require('./middleware/is-auth');
 
 const app = express();
 const PORT = 3000;
@@ -19,8 +20,8 @@ app.use(bodyParser.json());
 // Allow CORS
 app.use(CORS());
 
-app.use('/users', usersRouter);
-app.use('/appointments', apointmentsRouter);
+app.use('/users', isAuth, usersRouter);
+app.use('/appointments', isAuth, apointmentsRouter);
 app.use('/auth', authRouter)
 
 // handle all errors
