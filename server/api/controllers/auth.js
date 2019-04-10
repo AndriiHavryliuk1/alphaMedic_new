@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { validationResult } = require('express-validator/check');
 const jwt = require('jsonwebtoken');
+const { SECRET_TOKEN_KEY } = require('../../config/configuration')
 
 const User  = require('../models/user');
 
@@ -52,10 +53,11 @@ exports.login = (req, res, next) => {
 
         const token = jwt.sign({
             email: user.email,
-            userId: user._id.toString()
-        }, 'secretKey', { expiresIn: '5h' });
+            userId: user._id.toString(),
+            roles: user.roles
+        }, SECRET_TOKEN_KEY, { expiresIn: '5h' });
 
-        res.status(200).json({ token: token, userId: user._id.toString() });
+        res.status(200).json({ token: token, userId: user._id.toString(), roles: user.roles });
 
     }).catch(error => {
         next(error);
