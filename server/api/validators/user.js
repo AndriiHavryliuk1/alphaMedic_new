@@ -2,7 +2,7 @@ const { body } = require('express-validator/check');
 
 const User = require('../models/user');
 
-exports.signupValidator = () => {
+exports.addUser = () => {
     return [
         body('email')
             .isEmail()
@@ -26,19 +26,12 @@ exports.signupValidator = () => {
         body('lastName')
             .trim()
             .not()
-            .isEmpty()
-    ]
-};
-
-exports.loginValidator = () => {
-    return [
-        body('email')
-            .isEmail()
-            .withMessage('Please enter a valid email message.')
-            .normalizeEmail(),
-        body('password')
+            .isEmpty(),
+        body('imageURL')
             .trim()
-            .isLength({ min: 6 })
-            .isAlphanumeric()
+            .isURL(),
+        body('gender')
+            .not()
+            .isEmpty(),
     ]
 };

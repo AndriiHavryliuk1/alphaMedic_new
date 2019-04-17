@@ -33,13 +33,25 @@ exports.registerNewAppointment = async (req, res, next) => {
         return;
     }
 
-    const startDate = new Date(req.body.dateStart)
+    const startDate = new Date(req.body.dateStart);
+    const endDate = new Date(startDate.getTime() + ((req.body.duration - 1) * 1000));
+    { $or: [ { quantity: { $lt: 20 } }, { price: 10 } ] }
+    const existedAppointment = await Appointment.findOne({ $or: [{dateStart: {$gte: startDate, $lte: endDate}}, {dateEnd: {$gte: startDate, $lte: endDate}},     
+        { $and: [ { dateStart: { $lt: startDate } }, { dateEnd: { $gt: startDate } } ] }, { $and: [ { dateStart: { $lt: endDate } }, { dateEnd: { $gt: endDate } } ] }
+    ]}).exec();
+    
+    if (existedAppointment) {
+        const error = new Error("Date for this appointment already choosen!")
+        error.status = 404;
+        next(error);
+        return;
+    }
 
     const newAppointment = new Appointment({
         _id: mongoose.Types.ObjectId(),
         dateStart: startDate,
         duration: req.body.duration, // sec
-        dateEnd: new Date(startDate.getTime() + (req.body.duration * 1000)),
+        dateEnd: endDate,
         doctor: req.body.doctor,
         patient: req.body.patient
     });

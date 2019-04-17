@@ -9,5 +9,9 @@ module.exports = {
     PROCEDURES: {
         TREATMENT: "TREATMENT",
         EXAMINATION: "EXAMINATION"
+    },
+    GENDER: {
+        MALE: "MALE",
+        FEMALE: "FEMALE"
     }
 }
