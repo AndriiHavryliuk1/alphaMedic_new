@@ -1,0 +1,7 @@
+<app-header (changeView)="changeViewCallback($event)"></app-header>
+
+<div >
+  <app-home *ngIf="viewType === 'home'"></app-home>
+  <app-doctors-list *ngIf="viewType === 'doctorsList'"></app-doctors-list>
+  <app-sign-to-appointment *ngIf="viewType === 'signToAppointment'"></app-sign-to-appointment>
+</div>
