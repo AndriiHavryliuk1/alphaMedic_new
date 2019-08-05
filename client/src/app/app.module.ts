@@ -1,6 +1,8 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {MatInputModule, MatButtonModule, MatSelectModule, MatIconModule, MatToolbarModule} from '@angular/material';
+import {
+  MatInputModule, MatButtonModule, MatSelectModule, MatIconModule, MatToolbarModule
+} from '@angular/material';
 import {FormsModule} from '@angular/forms';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -19,35 +21,38 @@ import {HomeComponent} from './home/home.component';
 import {DepartmentsListComponent} from './departments/departments-list/departments-list.component';
 import {DepartmentsService} from "./services/departments.service";
 import {DoctorsService} from "./services/doctors.service";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {DoctorsListResolver} from "./doctors/doctors-list/doctors-list-resolver.service";
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        HeaderComponent,
-        AppointmentComponent,
-        DoctorsListComponent,
-        DoctorsSingleViewComponent,
-        SignToAppointmentComponent,
-        AppointmentDetailComponent,
-        RegistrationComponent,
-        LoginComponent,
-        AppointmentsListComponent,
-        UserSingleViewComponent,
-        HomeComponent,
-        DepartmentsListComponent
-    ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        MatInputModule,
-        MatButtonModule,
-        MatSelectModule,
-        MatIconModule,
-        MatToolbarModule
-    ],
-    providers: [DepartmentsService, DoctorsService],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    AppointmentComponent,
+    DoctorsListComponent,
+    DoctorsSingleViewComponent,
+    SignToAppointmentComponent,
+    AppointmentDetailComponent,
+    RegistrationComponent,
+    LoginComponent,
+    AppointmentsListComponent,
+    UserSingleViewComponent,
+    HomeComponent,
+    DepartmentsListComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatIconModule,
+    MatToolbarModule,
+    BrowserAnimationsModule
+  ],
+  providers: [DepartmentsService, DoctorsService, DoctorsListResolver],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }

@@ -21,6 +21,10 @@ export class DoctorsService {
     return this.doctors.slice();
   }
 
+  public getDoctor(id: number): Doctor {
+    return this.doctors.find((doctor) => id === doctor.id);
+  }
+
   public addDoctor(newDoctor) {
     this.doctors.push(newDoctor);
     this.doctorsListChanged.emit(this.doctors)

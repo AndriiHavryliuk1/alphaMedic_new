@@ -6,4 +6,9 @@
 
 .header-label {
   margin: 0 10px;
+  text-decoration: none;
+}
+
+.header-label :hover {
+  cursor: pointer;
 }

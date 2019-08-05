@@ -1,9 +1,10 @@
 <mat-toolbar>
-  <h4 (click)="changeViewFn('home')">New AlphaMedic</h4>
-  <div class="header-label" (click)="changeViewFn('doctorsList')"><a>List of doctors</a></div>
-  <div class="header-label" (click)="changeViewFn('signToAppointment')"><a>Assign to appointment</a></div>
+  <h4 routerLink="/" style="cursor: pointer">New AlphaMedic</h4>
+  <button mat-button class="header-label" routerLinkActive="active-link" routerLink="/doctors">List of doctors</button>
+  <button mat-button class="header-label" routerLinkActive="active-link" routerLink="/sign-to-appointment">Assign to appointment</button>
+
   <div class="auth-div">
-    <a class="header-label" href="">Sign in</a>
-    <a class="header-label" href="">Sign up</a>
+    <a class="header-label" routerLink="/sign-in">Sign in</a>
+    <a class="header-label" routerLink="/sign-up">Sign up</a>
   </div>
 </mat-toolbar>
