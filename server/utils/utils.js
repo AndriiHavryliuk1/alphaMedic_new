@@ -3,8 +3,7 @@ module.exports = {
         PATIENT: "PATIENT",
         ADMIN: "ADMIN",
         RECEPTIONIST: "RECEPTIONIST",
-        DOCTOR: "DOCTOR",
-        HEAD_DEPARTMENT: "HEAD_DEPARTMENT"
+        DOCTOR: "DOCTOR"
     },
     PROCEDURES: {
         TREATMENT: "TREATMENT",

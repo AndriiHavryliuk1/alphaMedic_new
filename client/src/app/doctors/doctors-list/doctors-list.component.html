@@ -1,3 +1,16 @@
-<p>
-  doctors-list works!
-</p>
+<div>
+  <h1>
+    List of doctors!
+  </h1>
+
+  <div *ngFor="let doctor of doctors; trackBy: index">
+    <div>
+      <span>{{doctor.firstName + " " + doctor.lastName}}</span>
+    </div>
+  </div>
+
+</div>
+
+
+
+

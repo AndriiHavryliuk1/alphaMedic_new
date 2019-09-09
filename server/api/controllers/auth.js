@@ -3,7 +3,7 @@ const { validationResult } = require('express-validator/check');
 const jwt = require('jsonwebtoken');
 const { SECRET_TOKEN_KEY } = require('../../config/configuration')
 
-const User  = require('../models/user');
+const User  = require('../models/user/user');
 
 exports.getUser = (req, res, next) => {
     User.findById(req.params.id).exec().then((data) => {

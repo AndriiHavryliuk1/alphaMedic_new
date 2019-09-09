@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const { ROLES } = require('../../utils/utils')
+const { ROLES } = require('../../../utils/utils');
 
 const userSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
@@ -10,9 +10,12 @@ const userSchema = mongoose.Schema({
     password: { type: String, required: true },
     imageURL: { data: Buffer, contentType: String },
     birthday: { type: Date },
+    type: { type: String, default: ROLES.PATIENT },
     gender: { type: String },
     roles: { type: Array, default: [ROLES.PATIENT] },
     active: { type: Boolean, default: true },
+    lastModificationUser: { type: String, default: null },
+    medicalHistory: { type: Array },
     education: { type: Array },
     schedule: {
         type: {
@@ -26,8 +29,8 @@ const userSchema = mongoose.Schema({
             _id: mongoose.Schema.Types.ObjectId
         },
         ref: 'Department'
-    },
-    lastModificationUser: { type: String, default: null }
-}, { timestamps: true });
+    }
+}, { timestamps: true, collection: 'users'});
+
 
 module.exports = mongoose.model('User', userSchema);

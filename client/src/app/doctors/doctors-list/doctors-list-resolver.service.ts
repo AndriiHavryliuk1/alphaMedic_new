@@ -7,16 +7,16 @@ import {Injectable, EventEmitter} from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class DoctorsListResolver implements Resolve {
+export class DoctorsListResolver implements Resolve<Doctor> {
   constructor(private doctorsService: DoctorsService) {
 
   }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Doctor>|Promise<Doctor>|Doctor[] {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any>|Promise<any>|any {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           resolve(this.doctorsService.getDoctors());
-        }, 3000)
+        }, 1000)
       })
   }
 }

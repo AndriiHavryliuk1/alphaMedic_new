@@ -1,15 +1,18 @@
 const mongoose = require('mongoose');
+const { ROLES } = require('../../utils/utils');
 
-const User = require('../models/user');
+const User = require('../models/user/user');
 
 exports.getAllUsers = (req, res, next) => {
-    User.find().exec()
-        .then(result => {
-            res.status(200).json(result);
-        })
-        .catch(error => {
-            next(error);
-        }) ;
+    return findFnByParamsObject(req, res, next, {});
+};
+
+exports.getAllDoctors = (req, res, next) => {
+    return findFnByParamsObject(req, res, next, {type: ROLES.DOCTOR});
+};
+
+exports.getAllPatients = (req, res, next) => {
+    return findFnByParamsObject(req, res, next, {type: ROLES.PATIENT});
 };
 
 exports.getUser = (req, res, next) => {
@@ -35,9 +38,12 @@ exports.createUser = async (req, res, next) => {
         email: req.body.email,
         password: req.body.password,
         imageURL: req.body.imageURL,
+        type: req.body.type || ROLES.PATIENT, 
         birthday: req.body.birthday,
         gender: req.body.gender, 
-        roles: req.body.roles
+        roles: req.body.roles || [ROLES.PATIENT],
+        education: req.body.education,
+        medicalHistory: req.body.medicalHistory
     });
 
     newUser.save().then((data) => {
@@ -53,6 +59,16 @@ exports.updateUser = (req, res, next) => {
     }).catch((error) => {
         next(error);
     });
+}
+
+function findFnByParamsObject(req, res, next, obj) {
+    return User.find(obj).exec()
+        .then(result => {
+            res.status(200).json(result);
+        })
+        .catch(error => {
+            next(error);
+        }) ;
 }
 
 async function checkIsDuplicatedEmail(email) {

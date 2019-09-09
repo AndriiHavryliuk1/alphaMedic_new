@@ -16,6 +16,7 @@ export class DoctorsListComponent implements OnInit {
     console.log(this.activatedRoute.data);
     this.activatedRoute.data.subscribe((data) => {
       this.doctors = data['doctors'];
+      console.log(this.doctors);
     })
   }
 
