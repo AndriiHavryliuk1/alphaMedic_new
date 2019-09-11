@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const { ROLES } = require('../../utils/utils');
 
 const User = require('../models/user/user');
+const Doctor = require('../models/user/doctor');
 
 exports.getAllUsers = (req, res, next) => {
     return findFnByParamsObject(req, res, next, {});
@@ -59,6 +60,27 @@ exports.updateUser = (req, res, next) => {
     }).catch((error) => {
         next(error);
     });
+}
+
+exports.updateDoctor = async (req, res, next) => {
+    try {
+        const doctor = new Doctor(await User.findById(req.params.id).exec());
+        for (let prop in req.body) {
+            if (doctor.hasOwnProperty(prop)) {
+                doctor[prop] = req.body[prop];
+            }
+        }
+
+        const user = new User({doctor});
+        user.save().exec().then((data) => {
+            res.status(200).json(data); 
+        }).catch((error) => {
+            next(error);
+        });
+    } catch(e) {
+        next(e);
+    }
+   
 }
 
 function findFnByParamsObject(req, res, next, obj) {

@@ -1,4 +1,4 @@
-class AbstractUser {
+module.exports = class AbstractUser {
     constructor(user) {
         this._id = user._id;
         this.firstName = user.firstName;
@@ -12,8 +12,5 @@ class AbstractUser {
         this.roles = user.roles;
         this.active = user.active
         this.lastModificationUser = user.lastModificationUser;
-        this.lastModificationTime = user.lastModificationTime;
     }
 }
-
-export { AbstractUser as default}
