@@ -16,7 +16,7 @@ export class DoctorsListResolver implements Resolve<Doctor> {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
           resolve(this.doctorsService.getDoctors());
-        }, 1000)
-      })
+        }, 1000);
+      });
   }
 }

@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {
   MatInputModule, MatButtonModule, MatSelectModule, MatIconModule, MatToolbarModule
 } from '@angular/material';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -23,6 +23,7 @@ import {DepartmentsService} from "./services/departments.service";
 import {DoctorsService} from "./services/doctors.service";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DoctorsListResolver} from "./doctors/doctors-list/doctors-list-resolver.service";
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,8 @@ import {DoctorsListResolver} from "./doctors/doctors-list/doctors-list-resolver.
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
+    MatButtonToggleModule,
     MatInputModule,
     MatButtonModule,
     MatSelectModule,
