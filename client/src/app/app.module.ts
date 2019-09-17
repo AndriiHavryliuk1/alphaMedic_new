@@ -24,6 +24,7 @@ import {DoctorsService} from "./services/doctors.service";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DoctorsListResolver} from "./doctors/doctors-list/doctors-list-resolver.service";
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {AuthService} from "./auth/auth.service";
 
 @NgModule({
   declarations: [
@@ -54,7 +55,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
     MatToolbarModule,
     BrowserAnimationsModule
   ],
-  providers: [DepartmentsService, DoctorsService, DoctorsListResolver],
+  providers: [DepartmentsService, DoctorsService, DoctorsListResolver, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

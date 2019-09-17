@@ -1,3 +1,25 @@
-<p>
-  registration works!
-</p>
+<div class="content-centered container">
+
+  <h1 class="text-centered">Registration page</h1>
+
+  <div class="auth-container content-centered">
+    <mat-form-field>
+      <input matInput placeholder="Enter your email" [formControl]="email" required>
+      <mat-error *ngIf="email.invalid">{{getErrorMessage('email')}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Enter your password" [type]="hidden ? 'password' : 'text'" [formControl]="password"
+             minlength="6">
+      <mat-error *ngIf="password.invalid">{{getErrorMessage('password')}}</mat-error>
+      <button mat-icon-button matSuffix (click)="hidden = !hidden" [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hidden">
+        <mat-icon>{{hidden ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
+
+    <button class="auth-btn" mat-raised-button (click)="login()">Login</button>
+  </div>
+
+</div>
