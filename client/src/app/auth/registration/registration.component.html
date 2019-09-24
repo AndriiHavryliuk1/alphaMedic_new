@@ -4,22 +4,50 @@
 
   <div class="auth-container content-centered">
     <mat-form-field>
-      <input matInput placeholder="Enter your email" [formControl]="email" required>
-      <mat-error *ngIf="email.invalid">{{getErrorMessage('email')}}</mat-error>
+      <input matInput placeholder="Enter your first name" [formControl]="firstName" required>
+      <mat-error *ngIf="firstName.invalid">{{getErrorMessage(this.firstName)}}</mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Enter your password" [type]="hidden ? 'password' : 'text'" [formControl]="password"
+      <input matInput placeholder="Enter your last name" [formControl]="lastName" required>
+      <mat-error *ngIf="lastName.invalid">{{getErrorMessage(this.lastName)}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Choose a date of birth"
+             [formControl]="birthday">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="birthday.invalid">{{getErrorMessage(this.birthday)}}</mat-error>
+    </mat-form-field>
+
+    <div class="gender-field">
+      <span class="gender-field-item">Select your gender:</span>
+      <mat-radio-group aria-label="Select your gender" [formControl]="gender">
+        <mat-radio-button value="male" class="gender-field-item">Male</mat-radio-button>
+        <mat-radio-button value="female">Female</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <mat-form-field>
+      <input matInput placeholder="Enter your email" [formControl]="email" required>
+      <mat-error *ngIf="email.invalid">{{getErrorMessage(this.email)}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Enter your password" type="password" [formControl]="password"
              minlength="6">
-      <mat-error *ngIf="password.invalid">{{getErrorMessage('password')}}</mat-error>
-      <button mat-icon-button matSuffix (click)="hidden = !hidden" [attr.aria-label]="'Hide password'"
-              [attr.aria-pressed]="hidden">
-        <mat-icon>{{hidden ? 'visibility_off' : 'visibility'}}</mat-icon>
-      </button>
+      <mat-error *ngIf="password.invalid">{{getErrorMessage(this.password)}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="Confirm your email" type="password" [formControl]="confirmPassword"
+             minlength="6">
+      <mat-error *ngIf="confirmPassword.invalid">{{getErrorMessage(this.confirmPassword)}}</mat-error>
     </mat-form-field>
 
 
-    <button class="auth-btn" mat-raised-button (click)="login()">Login</button>
+    <button class="auth-btn" mat-raised-button (click)="register()">Sign up</button>
   </div>
 
 </div>

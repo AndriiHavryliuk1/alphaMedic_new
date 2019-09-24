@@ -28,10 +28,8 @@ exports.signup = async (req, res, next) => {
         lastName: req.body.lastName,
         email: req.body.email,
         password: req.body.password,
-        imageURL: req.body.imageURL,
         birthday: req.body.birthday,
-        gender: req.body.gender, 
-        roles: req.body.roles
+        gender: req.body.gender
     });
 
     newUser.save().then((data) => {

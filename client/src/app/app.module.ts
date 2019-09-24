@@ -1,7 +1,14 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {
-  MatInputModule, MatButtonModule, MatSelectModule, MatIconModule, MatToolbarModule
+  MatInputModule,
+  MatButtonModule,
+  MatSelectModule,
+  MatIconModule,
+  MatToolbarModule,
+  MatDatepickerModule,
+  MatRadioModule,
+  MatNativeDateModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
@@ -53,6 +60,10 @@ import {AuthService} from "./auth/auth.service";
     MatSelectModule,
     MatIconModule,
     MatToolbarModule,
+    MatToolbarModule,
+    MatDatepickerModule,
+    MatRadioModule,
+    MatNativeDateModule,
     BrowserAnimationsModule
   ],
   providers: [DepartmentsService, DoctorsService, DoctorsListResolver, AuthService],

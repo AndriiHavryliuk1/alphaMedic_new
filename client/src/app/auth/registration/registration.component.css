@@ -1,0 +1,15 @@
+.container mat-form-field {
+  height: 80px;
+}
+
+.container {
+  width: 40%;
+}
+
+.gender-field {
+  color: rgb(155, 155, 155);
+}
+
+.gender-field-item {
+  margin-right: 15px;
+}
