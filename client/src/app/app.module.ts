@@ -8,7 +8,7 @@ import {
   MatToolbarModule,
   MatDatepickerModule,
   MatRadioModule,
-  MatNativeDateModule
+  MatNativeDateModule, MatSnackBarModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
@@ -62,6 +62,7 @@ import {AuthService} from "./auth/auth.service";
     MatToolbarModule,
     MatToolbarModule,
     MatDatepickerModule,
+    MatSnackBarModule,
     MatRadioModule,
     MatNativeDateModule,
     BrowserAnimationsModule

@@ -2,6 +2,8 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import {AuthService} from '../auth.service';
 import { sha256 } from 'js-sha256';
+import {AlertService} from '../../services/alertService';
+import CONSTANTS from '../../utils/constants';
 
 @Component({
   selector: 'app-registration',
@@ -20,7 +22,7 @@ export class RegistrationComponent implements OnInit {
   public birthday = new FormControl(null);
   public gender = new FormControl('male');
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private alertService: AlertService) { }
 
   ngOnInit() {
   }
@@ -31,9 +33,12 @@ export class RegistrationComponent implements OnInit {
   }
 
   register() {
-    console.log(this.password.value);
-    console.log(sha256(this.password.value));
-
+    if (this.firstName.invalid || this.lastName.invalid
+      || this.email.invalid || this.password.invalid
+      || this.confirmPassword.invalid || this.birthday.invalid) {
+      this.alertService.showAlert('Registration data is not valid', CONSTANTS.ALERT_DURATION.ERROR, CONSTANTS.ALERT_TYPES.ERROR);
+      return;
+    }
   }
 
 }
