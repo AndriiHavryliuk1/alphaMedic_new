@@ -4,6 +4,7 @@ import {AuthService} from '../auth.service';
 import { sha256 } from 'js-sha256';
 import {AlertService} from '../../services/alertService';
 import CONSTANTS from '../../utils/constants';
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-registration',
@@ -22,7 +23,7 @@ export class RegistrationComponent implements OnInit {
   public birthday = new FormControl(null);
   public gender = new FormControl('male');
 
-  constructor(private authService: AuthService, private alertService: AlertService) { }
+  constructor(private authService: AuthService, private alertService: AlertService, private http: HttpClient) { }
 
   ngOnInit() {
   }
@@ -39,6 +40,22 @@ export class RegistrationComponent implements OnInit {
       this.alertService.showAlert('Registration data is not valid', CONSTANTS.ALERT_DURATION.ERROR, CONSTANTS.ALERT_TYPES.ERROR);
       return;
     }
+
+    const newUser = {
+      firstName: this.firstName.value,
+      lastName: this.lastName.value,
+      email: this.email.value,
+      password: sha256(this.password.value),
+      birthday: this.birthday.value,
+      gender: this.gender.value
+    };
+
+    return this.http.post(CONSTANTS.SERVER_URL + "auth/signup", newUser).subscribe((data) => {
+      console.log(data);
+      return data;
+    });
+
+   // this.authService.register(newUser).unsubscribe();
   }
 
 }

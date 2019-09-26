@@ -32,6 +32,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {DoctorsListResolver} from "./doctors/doctors-list/doctors-list-resolver.service";
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {AuthService} from "./auth/auth.service";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import {AuthService} from "./auth/auth.service";
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
     MatButtonToggleModule,
     MatInputModule,
