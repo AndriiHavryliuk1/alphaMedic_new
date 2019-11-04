@@ -50,7 +50,7 @@ export class RegistrationComponent implements OnInit {
       gender: this.gender.value
     };
 
-    return this.http.post(CONSTANTS.SERVER_URL + "auth/signup", newUser).subscribe((data) => {
+    this.http.post(CONSTANTS.SERVER_URL + "auth/signup", newUser).subscribe((data) => {
       console.log(data);
       return data;
     });
