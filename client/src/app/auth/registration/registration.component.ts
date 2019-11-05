@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
-import {AuthService} from '../auth.service';
+import {AuthService} from '../services/auth.service';
 import { sha256 } from 'js-sha256';
 import {AlertService} from '../../services/alertService';
 import CONSTANTS from '../../utils/constants';

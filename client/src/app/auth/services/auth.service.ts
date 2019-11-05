@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import {FormControl} from "@angular/forms";
-import {HttpClient} from "@angular/common/http";
+import {FormControl} from '@angular/forms';
+import {HttpClient} from '@angular/common/http';
 
-import CONSTANTS from '../utils/constants';
+import CONSTANTS from '../../utils/constants';
+import {AuthResource} from './auth.resource';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authResource: AuthResource) { }
 
   getErrorMessage(formControl: FormControl) {
     if (formControl.hasError('required')) {
@@ -25,10 +26,10 @@ export class AuthService {
   }
 
   register(data: any) {
-    debugger;
-    return this.http.post(CONSTANTS.SERVER_URL + "auth/signup", data).subscribe((data) => {
-      console.log(data);
-      return data;
-    })
-  };
+    return this.authResource.register(data);
+  }
+
+  login(data: any) {
+    return this.authResource.login(data);
+  }
 }

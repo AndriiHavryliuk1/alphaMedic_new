@@ -26,13 +26,13 @@ import {AppointmentsListComponent} from './appointments/appointments-list/appoin
 import {UserSingleViewComponent} from './user/user-single-view/user-single-view.component';
 import {HomeComponent} from './home/home.component';
 import {DepartmentsListComponent} from './departments/departments-list/departments-list.component';
-import {DepartmentsService} from "./services/departments.service";
-import {DoctorsService} from "./services/doctors.service";
+import {DepartmentsService} from './services/departments.service';
+import {DoctorsService} from './services/doctors.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {DoctorsListResolver} from "./doctors/doctors-list/doctors-list-resolver.service";
+import {DoctorsListResolver} from './doctors/doctors-list/doctors-list-resolver.service';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {AuthService} from "./auth/auth.service";
-import {HttpClientModule} from "@angular/common/http";
+import {AuthService} from './auth/services/auth.service';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [

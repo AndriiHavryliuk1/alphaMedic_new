@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
-import {AuthService} from "../auth.service";
+import {AuthService} from "../services/auth.service";
 import {HttpClient} from "@angular/common/http";
 import {sha256} from 'js-sha256';
 import CONSTANTS from "../../utils/constants";
@@ -41,9 +41,11 @@ export class LoginComponent implements OnInit {
       password: sha256(this.password.value)
     };
 
-    this.http.post(CONSTANTS.SERVER_URL + "auth/login", userData).subscribe((data) => {
+    this.authService.login(userData).subscribe((data) => {
       console.log(data);
       return data;
+    }, (error) => {
+      console.log(error);
     });
 
   }
