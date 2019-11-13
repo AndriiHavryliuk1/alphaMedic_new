@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const { validationResult } = require('express-validator/check');
 const jwt = require('jsonwebtoken');
-const { SECRET_TOKEN_KEY } = require('../../config/configuration')
+const { SECRET_TOKEN_KEY } = require('../../config/configuration');
+const Patient = require('../models/user/Patient')
 
 const User  = require('../models/user/user');
 
@@ -33,7 +34,11 @@ exports.signup = async (req, res, next) => {
     });
 
     newUser.save().then((data) => {
-        res.status(200).json(data);
+        const patient = new Patient(data);
+        if (req.body.returnSecuredToken) {
+            patient.token = generateToken(patient);
+        }
+        return res.status(200).json(patient);
     }).catch(error => {
         next(error);
     });
@@ -49,11 +54,7 @@ exports.login = (req, res, next) => {
             throw error; 
         }
 
-        const token = jwt.sign({
-            email: user.email,
-            userId: user._id.toString(),
-            roles: user.roles
-        }, SECRET_TOKEN_KEY, { expiresIn: '5h' });
+        const token = generateToken(user);
 
         res.status(200).json({ token: token, userId: user._id.toString(), roles: user.roles });
 
@@ -62,3 +63,11 @@ exports.login = (req, res, next) => {
     });
 
 };
+
+function generateToken(user) {
+    return jwt.sign({
+        email: user.email,
+        userId: user._id.toString(),
+        roles: user.roles
+    }, SECRET_TOKEN_KEY, { expiresIn: '5h' });
+}

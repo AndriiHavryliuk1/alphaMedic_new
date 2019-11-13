@@ -1,18 +1,20 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 
-import CONSTANTS from '../../utils/constants';
 import {AuthResource} from './auth.resource';
+import {catchError} from "rxjs/internal/operators";
+import {throwError} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private authResource: AuthResource) { }
+  constructor(private http: HttpClient, private authResource: AuthResource) {
+  }
 
-  getErrorMessage(formControl: FormControl) {
+  public getErrorMessage(formControl: FormControl) {
     if (formControl.hasError('required')) {
       return 'You must enter a value';
     } else if (formControl.hasError('email')) {
@@ -25,11 +27,21 @@ export class AuthService {
     return '';
   }
 
-  register(data: any) {
-    return this.authResource.register(data);
+  public register(data: any) {
+    return this.authResource.register(data)
+      .pipe(catchError(this.errorHandler));
   }
 
-  login(data: any) {
-    return this.authResource.login(data);
+  public login(data: any) {
+    return this.authResource.login(data)
+      .pipe(catchError(this.errorHandler));
+  }
+
+  private errorHandler(response) {
+    if (response.error.message) {
+      return throwError(response.error);
+    }
+    return throwError("An unknown error occurred!")
+
   }
 }

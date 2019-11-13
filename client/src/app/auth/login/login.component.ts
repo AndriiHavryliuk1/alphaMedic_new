@@ -44,8 +44,8 @@ export class LoginComponent implements OnInit {
     this.authService.login(userData).subscribe((data) => {
       console.log(data);
       return data;
-    }, (error) => {
-      console.log(error);
+    }, (error: Error) => {
+      this.alertService.showAlert(error.message, CONSTANTS.ALERT_DURATION.ERROR, CONSTANTS.ALERT_TYPES.ERROR);
     });
 
   }

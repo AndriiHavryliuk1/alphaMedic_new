@@ -1,6 +1,5 @@
 const AbstractUser = require("./abstractUser");
 
-
 class Patient extends AbstractUser {
     constructor(patient) {
         this.super(patient);
@@ -8,3 +7,5 @@ class Patient extends AbstractUser {
     }
 
 }
+
+module.exports = Patient;

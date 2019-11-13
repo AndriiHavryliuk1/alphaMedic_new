@@ -41,9 +41,9 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Confirm your email" type="password" [formControl]="confirmPassword"
+      <input matInput placeholder="Confirm your password" type="password" [formControl]="confirmedPassword"
              minlength="6">
-      <mat-error *ngIf="confirmPassword.invalid">{{getErrorMessage(this.confirmPassword)}}</mat-error>
+      <mat-error *ngIf="confirmedPassword.invalid">{{getErrorMessage(this.confirmedPassword)}}</mat-error>
     </mat-form-field>
 
 
