@@ -57,7 +57,7 @@ export class RegistrationComponent implements OnInit {
       this.initFields();
     }, (error) => {
       console.log(error);
-      this.initFields();
+     // this.initFields();
     });
 
     // this.authService.register(newUser).unsubscribe();

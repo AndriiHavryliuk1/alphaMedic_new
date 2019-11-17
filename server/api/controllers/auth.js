@@ -34,11 +34,16 @@ exports.signup = async (req, res, next) => {
     });
 
     newUser.save().then((data) => {
-        const patient = new Patient(data);
-        if (req.body.returnSecuredToken) {
-            patient.token = generateToken(patient);
+        try {
+            const patient = new Patient(data);
+            if (req.body.returnSecuredToken) {
+                patient.token = generateToken(patient);
+            }
+            return res.status(200).json(patient);
+        } catch(error) {
+            User.findByIdAndDelete({_id: data._id}).exec();
+            next(error);
         }
-        return res.status(200).json(patient);
     }).catch(error => {
         next(error);
     });
