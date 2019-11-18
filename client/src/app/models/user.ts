@@ -1,5 +1,7 @@
+import * as jwt_decode from 'jwt-decode';
+
 export class User {
-  private expirationDate: Data;
+  private expirationDate: Date;
 
   constructor(private _id,
               private firstName,
@@ -10,12 +12,17 @@ export class User {
               private type,
               private gender,
               private roles,
-              private token
-  ) {
-
+              private _token) {
+    if (_token) {
+      const decoded = jwt_decode(_token);
+      this.expirationDate = new Date(decoded.exp * 1000);
+    }
   }
 
   get token() {
-    return this.token
+    if (new Date() <= this.expirationDate) {
+      return this._token;
+    }
+    return null;
   }
 }

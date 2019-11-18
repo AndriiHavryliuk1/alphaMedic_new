@@ -4,14 +4,19 @@ import {HttpClient} from '@angular/common/http';
 
 import {AuthResource} from './auth.resource';
 import {catchError} from "rxjs/internal/operators";
-import {throwError} from "rxjs";
+import {throwError, Subject} from "rxjs";
+import {User} from "../../models/user";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+//  public user = new Subject<User>();
+
   constructor(private http: HttpClient, private authResource: AuthResource) {
+
+
   }
 
   public getErrorMessage(formControl: FormControl) {
