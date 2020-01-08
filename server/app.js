@@ -9,6 +9,7 @@ const patientsRouter = require('./api/routes/patients');
 const apointmentsRouter = require('./api/routes/appointments');
 const configuration = require('./config/configuration');
 const authRouter = require('./api/routes/auth');
+const externalAPIRouter = require('./api/routes/externalAPI');
 const isAuth = require('./middleware/is-auth');
 const isAuthorized = require('./middleware/is-authorized');
 
@@ -27,7 +28,8 @@ app.use('/users', isAuth, usersRouter);
 app.use('/appointments', isAuth, apointmentsRouter);
 app.use('/patients', isAuth, patientsRouter);
 app.use('/doctors', doctorsRouter);
-app.use('/auth', authRouter)
+app.use('/auth', authRouter);
+app.use('/external-api', externalAPIRouter);
 
 // handle all errors
 app.use((error, req, res, next) => {
