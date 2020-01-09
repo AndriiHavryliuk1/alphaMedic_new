@@ -7,4 +7,6 @@ const externalAPI = require('../controllers/externalAPI');
 // GET users get all doctors 
 router.get('/countries', externalAPI.getAllCountries);
 
+router.get('/count', externalAPI.getAllCountrieCallsCount);
+
 module.exports = router;
