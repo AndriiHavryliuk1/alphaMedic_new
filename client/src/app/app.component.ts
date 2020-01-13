@@ -10,7 +10,6 @@ export class AppComponent {
   viewType = 'home';
 
   public changeViewCallback(newViewType) {
-    debugger;
     this.viewType = newViewType;
   }
 }

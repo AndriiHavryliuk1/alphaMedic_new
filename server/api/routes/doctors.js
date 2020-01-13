@@ -5,7 +5,7 @@ const isAuthorized = require('../../middleware/is-authorized');
 const isAuth = require('../../middleware/is-auth');
 const { ROLES } = require('../../utils/utils');
 
-const usersController = require('../controllers/user');
+const usersController = require('../controllers/user/user');
 // const patientsController = require('../controllers/user');
 
 // GET users get all doctors 

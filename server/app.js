@@ -3,7 +3,8 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const CORS = require('cors');
 
-const usersRouter = require('./api/routes/user');
+const usersRouter = require('./api/routes/user/user');
+const userSettingsRouter = require('./api/routes/user/userSettings');
 const doctorsRouter = require('./api/routes/doctors');
 const patientsRouter = require('./api/routes/patients');
 const apointmentsRouter = require('./api/routes/appointments');
@@ -11,7 +12,6 @@ const configuration = require('./config/configuration');
 const authRouter = require('./api/routes/auth');
 const externalAPIRouter = require('./api/routes/externalAPI');
 const isAuth = require('./middleware/is-auth');
-const isAuthorized = require('./middleware/is-authorized');
 
 const app = express();
 const PORT = 3000;
@@ -25,6 +25,7 @@ app.use(bodyParser.json());
 app.use(CORS());
 
 app.use('/users', isAuth, usersRouter);
+app.use('/userSettings', isAuth, userSettingsRouter);
 app.use('/appointments', isAuth, apointmentsRouter);
 app.use('/patients', isAuth, patientsRouter);
 app.use('/doctors', isAuth, doctorsRouter);

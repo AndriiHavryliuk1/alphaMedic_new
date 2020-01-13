@@ -1,5 +1,5 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {
   MatInputModule,
   MatButtonModule,
@@ -34,6 +34,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {AuthService} from './services/auth/auth.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptorService} from './services/auth/auth-interceptor.service';
+import {appInitializerFactory, AppInitializerService} from './services/app/app-initializer.service';
 
 @NgModule({
   declarations: [
@@ -70,11 +71,21 @@ import {AuthInterceptorService} from './services/auth/auth-interceptor.service';
     MatNativeDateModule,
     BrowserAnimationsModule
   ],
-  providers: [DepartmentsService, DoctorsService, DoctorsListResolver, AuthService, {
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptorService,
-    multi: true
-  }],
+  providers: [
+    DepartmentsService,
+    DoctorsService,
+    DoctorsListResolver,
+    AuthService,
+    AppInitializerService, {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }, {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializerFactory,
+      deps: [AppInitializerService],
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
