@@ -3,8 +3,13 @@
   <button mat-button class="header-label" routerLinkActive="active-link" routerLink="/doctors">List of doctors</button>
   <button mat-button class="header-label" routerLinkActive="active-link" routerLink="/sign-to-appointment">Assign to appointment</button>
 
-  <div class="auth-div">
+  <div class="auth-div" *ngIf="!isAuthenticated">
     <a class="header-label" routerLink="/sign-in">Sign in</a>
     <a class="header-label" routerLink="/sign-up">Sign up</a>
+  </div>
+
+  <div class="auth-div" *ngIf="isAuthenticated">
+    <a class="header-label" routerLink="/user">Profile</a>
+    <span class="header-label" (click)="signOut()">Sign out</span>
   </div>
 </mat-toolbar>

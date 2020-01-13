@@ -3,16 +3,16 @@ import {FormControl} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 
 import {AuthResource} from './auth.resource';
-import {catchError} from "rxjs/internal/operators";
-import {throwError, Subject} from "rxjs";
-import {User} from "../../models/user";
+import {catchError, tap} from 'rxjs/internal/operators';
+import {throwError, Subject} from 'rxjs';
+import {User} from '../../models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-//  public user = new Subject<User>();
+  public user = new Subject<User>();
 
   constructor(private http: HttpClient, private authResource: AuthResource) {
 
@@ -39,14 +39,23 @@ export class AuthService {
 
   public login(data: any) {
     return this.authResource.login(data)
-      .pipe(catchError(this.errorHandler));
+      .pipe(catchError(this.errorHandler), tap(response => {
+        const user = new User(response.user, response.token);
+        localStorage.setItem('jwt', response.token);
+        this.user.next(user);
+      }));
+  }
+
+  public logOut() {
+    localStorage.removeItem('jwt');
+    this.user.next(null);
   }
 
   private errorHandler(response) {
     if (response.error.message) {
       return throwError(response.error);
     }
-    return throwError("An unknown error occurred!")
+    return throwError('An unknown error occurred!');
 
   }
 }

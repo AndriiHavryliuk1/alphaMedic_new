@@ -61,7 +61,7 @@ exports.login = (req, res, next) => {
 
         const token = generateToken(user);
 
-        res.status(200).json({ token: token, userId: user._id.toString(), roles: user.roles });
+        res.status(200).json({ token: token, user: user._doc });
 
     }).catch(error => {
         next(error);

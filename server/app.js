@@ -27,7 +27,7 @@ app.use(CORS());
 app.use('/users', isAuth, usersRouter);
 app.use('/appointments', isAuth, apointmentsRouter);
 app.use('/patients', isAuth, patientsRouter);
-app.use('/doctors', doctorsRouter);
+app.use('/doctors', isAuth, doctorsRouter);
 app.use('/auth', authRouter);
 app.use('/external-api', externalAPIRouter);
 

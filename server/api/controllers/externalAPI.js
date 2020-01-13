@@ -1,9 +1,3 @@
-const mongoose = require('mongoose');
-const { ROLES } = require('../../utils/utils');
-
-const User = require('../models/user/user');
-const Doctor = require('../models/user/doctor');
-
 const https = require('https');
 
 global.allCountriesCallsCount = 0;

@@ -5,13 +5,13 @@
   <div class="auth-container content-centered">
     <mat-form-field>
       <input matInput placeholder="Enter your email" [formControl]="email" required>
-      <mat-error *ngIf="email.invalid">{{getErrorMessage(this.email)}}</mat-error>
+      <mat-error *ngIf="email.invalid">{{authService.getErrorMessage(this.email)}}</mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <input matInput placeholder="Enter your password" [type]="hidden ? 'password' : 'text'" [formControl]="password"
              minlength="6">
-      <mat-error *ngIf="password.invalid">{{getErrorMessage(this.password)}}</mat-error>
+      <mat-error *ngIf="password.invalid">{{authService.getErrorMessage(this.password)}}</mat-error>
       <button mat-icon-button matSuffix (click)="hidden = !hidden" [attr.aria-label]="'Hide password'"
               [attr.aria-pressed]="hidden">
         <mat-icon>{{hidden ? 'visibility_off' : 'visibility'}}</mat-icon>

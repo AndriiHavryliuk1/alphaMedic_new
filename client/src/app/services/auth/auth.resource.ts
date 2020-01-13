@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 import CONSTANTS from '../../utils/constants';
+import {User} from '../../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,6 @@ export class AuthResource {
   }
 
   login(data: any) {
-    return this.http.post(CONSTANTS.SERVER_URL + 'auth/login', data);
+    return this.http.post<{user: User, token: string}>(CONSTANTS.SERVER_URL + 'auth/login', data);
   }
 }

@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
-import {AuthService} from '../services/auth.service';
+import {AuthService} from '../../services/auth/auth.service';
 import {sha256} from 'js-sha256';
-import {AlertService} from '../../services/alertService';
+import {AlertService} from '../../services/alert.service';
 import CONSTANTS from '../../utils/constants';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-registration',

@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
-import {AuthService} from "../services/auth.service";
-import {HttpClient} from "@angular/common/http";
+import {AuthService} from '../../services/auth/auth.service';
+import {HttpClient} from '@angular/common/http';
 import {sha256} from 'js-sha256';
-import CONSTANTS from "../../utils/constants";
-import {AlertService} from "../../services/alertService";
+import CONSTANTS from '../../utils/constants';
+import {AlertService} from '../../services/alert.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,10 @@ export class LoginComponent implements OnInit {
   email = new FormControl('', [Validators.required, Validators.email]);
   password = new FormControl('', [Validators.required]);
 
-  constructor(private http: HttpClient, private authService: AuthService, private alertService: AlertService) {
+  constructor(private http: HttpClient,
+              private router: Router,
+              private authService: AuthService,
+              private alertService: AlertService) {
   }
 
   ngOnInit() {
@@ -42,16 +46,11 @@ export class LoginComponent implements OnInit {
     };
 
     this.authService.login(userData).subscribe((data) => {
-      console.log(data);
-      return data;
+      this.router.navigate(['user']);
     }, (error: Error) => {
       this.alertService.showAlert(error.message, CONSTANTS.ALERT_DURATION.ERROR, CONSTANTS.ALERT_TYPES.ERROR);
     });
 
-  }
-
-  getErrorMessage(formControl: FormControl) {
-    return this.authService.getErrorMessage(formControl);
   }
 
 }

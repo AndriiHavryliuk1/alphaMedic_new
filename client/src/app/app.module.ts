@@ -27,12 +27,13 @@ import {UserSingleViewComponent} from './user/user-single-view/user-single-view.
 import {HomeComponent} from './home/home.component';
 import {DepartmentsListComponent} from './departments/departments-list/departments-list.component';
 import {DepartmentsService} from './services/departments.service';
-import {DoctorsService} from './services/doctors.service';
+import {DoctorsService} from './services/doctors/doctors.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {DoctorsListResolver} from './doctors/doctors-list/doctors-list-resolver.service';
+import {DoctorsListResolver} from './services/doctors/doctors-list-resolver.service';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {AuthService} from './auth/services/auth.service';
-import {HttpClientModule} from '@angular/common/http';
+import {AuthService} from './services/auth/auth.service';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {AuthInterceptorService} from './services/auth/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,11 @@ import {HttpClientModule} from '@angular/common/http';
     MatNativeDateModule,
     BrowserAnimationsModule
   ],
-  providers: [DepartmentsService, DoctorsService, DoctorsListResolver, AuthService],
+  providers: [DepartmentsService, DoctorsService, DoctorsListResolver, AuthService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule {
