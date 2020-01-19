@@ -8,7 +8,6 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  @Output('changeView') public changeView = new EventEmitter<string>();
   public isAuthenticated: boolean;
   private userSub: Subscription;
 
@@ -28,10 +27,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   public signOut() {
     this.authService.logOut();
-  }
-
-  public changeViewFn(viewType) {
-    this.changeView.emit(viewType);
   }
 
 }

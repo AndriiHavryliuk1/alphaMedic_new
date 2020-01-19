@@ -7,14 +7,17 @@ import {LoginComponent} from './auth/login/login.component';
 import {RegistrationComponent} from './auth/registration/registration.component';
 import {DoctorsListResolver} from './services/doctors/doctors-list-resolver.service';
 import {UserSingleViewComponent} from './user/user-single-view/user-single-view.component';
+import {AuthGuard} from './guards/auth.guard';
+import {PatientsListComponent} from './patients/patients-list/patients-list.component';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'doctors', resolve: {doctors: DoctorsListResolver}, component: DoctorsListComponent},
-  {path: 'sign-to-appointment', component: SignToAppointmentComponent},
+  {path: '', component: HomeComponent, canActivate: [AuthGuard]},
+  {path: 'doctors', resolve: {doctors: DoctorsListResolver}, component: DoctorsListComponent, canActivate: [AuthGuard]},
+  {path: 'sign-to-appointment', component: SignToAppointmentComponent, canActivate: [AuthGuard]},
+  {path: 'patients', component: PatientsListComponent, canActivate: [AuthGuard]},
   {path: 'sign-in', component: LoginComponent},
   {path: 'sign-up', component: RegistrationComponent},
-  {path: 'user', component: UserSingleViewComponent},
+  {path: 'user', component: UserSingleViewComponent, canActivate: [AuthGuard]},
 
 ];
 

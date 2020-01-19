@@ -1,7 +1,8 @@
 <mat-toolbar>
-  <h4 routerLink="/" style="cursor: pointer">New AlphaMedic</h4>
-  <button mat-button class="header-label" routerLinkActive="active-link" routerLink="/doctors">List of doctors</button>
-  <button mat-button class="header-label" routerLinkActive="active-link" routerLink="/sign-to-appointment">Assign to appointment</button>
+  <app-svg-icon svgSrc="assets/images/tooth.svg"></app-svg-icon>
+  <h4 routerLink="/" style="cursor: pointer">Xdent</h4>
+  <button mat-button class="header-label" routerLinkActive="active-link" routerLink="/patients">Пацієнти</button>
+  <button mat-button class="header-label" routerLinkActive="active-link" routerLink="/sign-to-appointment">Реєстратура</button>
 
   <div class="auth-div" *ngIf="!isAuthenticated">
     <a class="header-label" routerLink="/sign-in">Sign in</a>

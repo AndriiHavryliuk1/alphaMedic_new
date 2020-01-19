@@ -1,0 +1,37 @@
+<svg width="1600" height="3000" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str3 {stroke:#2B2A29;stroke-width:20;stroke-miterlimit:22.9256;stroke-opacity:0.000000}
+    .str2 {stroke:#66C3D0;stroke-width:50;stroke-miterlimit:22.9256}
+    .str1 {stroke:#9D9E9E;stroke-width:25;stroke-miterlimit:22.9256}
+    .str0 {stroke:#2B2A29;stroke-width:20;stroke-miterlimit:22.9256}
+    .fil0 {fill:none}
+    .fil3 {fill:none}
+    .fil4 {fill:none}
+    .fil1 {fill:#F3F3F3}
+    .fil2 {fill:#727271;fill-rule:nonzero}
+   ]]>
+  </style>
+ </defs>
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="3002" width="1602" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g id="Layer_x0020_1">
+   <metadata transform="translate(-533.3382568359375,-300.0027770996094) translate(0,-16.666820526123047) translate(500.004638671875,333.33642578125) translate(33.333641052246094,16.666820526123047) translate(-16.666820526123047,0) translate(-16.666820526123047,0) translate(-1100.0101318359375,-1050.009765625) translate(1200.0111083984375,1183.34423828125) " id="CorelCorpID_0Corel-Layer"/>
+   <g id="_1437072442480">
+    <line id="svg_7" y2="2667.778121" x2="75.537358" y1="2667.778121" x1="75.537358" class="fil3 str3"/>
+   </g>
+   <g id="_1437072443344">
+    <g id="svg_24">
+     <path id="svg_21" d="m804.117224,1562.429302c-384.61,180.66 -101.93,1429.48 -372.49,1014.66c-85.1,-130.49 -319.31,-837.47 -202.06,-1472.1c45.49,-246.16 -164.38,-300.55 -161.82,-606.83c5.82,-694.87 651.83,-360.18 736.37,-264.57c127.37,-118.71 730.56,-430.29 736.37,264.57c2.56,306.28 -213.85,400.14 -168.39,606.83c138.63,630.29 -270.54,1619.02 -370.33,1774.95c-266.96,417.14 186.97,-1136.85 -197.65,-1317.51z" class="fil1 str1"/>
+     <path id="svg_22" d="m738.347224,332.259302c133.93,-263.43 796.34,-528.95 802.14,165.91c4.17,505.13 -549.8,789.92 -951.2,922.57" class="fil0 str2"/>
+     <path id="svg_23" d="m390.087224,1044.159302l-15.92,-975.16c254.03,-30.78 542.94,225.63 587.84,276.41" class="fil0 str2"/>
+    </g>
+   </g>
+  </g>
+ </g>
+</svg>
