@@ -5,7 +5,6 @@ const appointmentSchema = mongoose.Schema({
     dateStart: { type: Date, required: true },
     dateEnd: { type: Date, required: true },
     duration: { type: Number, required: true }, // sec
-    warnings: String,
     doctor: {
         type: {
             _id: mongoose.Schema.Types.ObjectId,
@@ -23,6 +22,10 @@ const appointmentSchema = mongoose.Schema({
         required: true, 
         ref: 'User'
     },
+    workplace: String,
+    generalDiagnosis: String,
+
+    diagnosis: [{tooth: {}, service: {}}],
     lastModificationUser: { type: String, default: null }
 }, { timestamps: true });
 
