@@ -1,6 +1,6 @@
 const { body } = require('express-validator/check');
 
-const User = require('../models/user/user');
+const User = require('../modelsMongoose/user');
 
 exports.signupValidator = () => {
     return [

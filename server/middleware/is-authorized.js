@@ -1,10 +1,10 @@
 module.exports = (requiredRoles) => {
     return (req, res, next) => {
-        if (requiredRoles.some(reqRole => req.roles.indexOf(reqRole) > -1)) {
+        if (requiredRoles.contains(req.role)) {
             return next()
         }
         const error = new Error('Not authorized.');
         error.statusCode = 401;
         throw error;
     }
-}
+};

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { ROLES } = require('../../../utils/utils');
 
-const User = require('../../models/user/user');
+const User = require('../../modelsMongoose/user');
 const Doctor = require('../../models/user/doctor');
 
 exports.getAllUsers = (req, res, next) => {
@@ -22,7 +22,7 @@ exports.getUser = (req, res, next) => {
     }).catch((error) => {
         next(error);
     });
-}
+};
 
 exports.createUser = async (req, res, next) => {
 
@@ -39,12 +39,11 @@ exports.createUser = async (req, res, next) => {
         email: req.body.email,
         password: req.body.password,
         imageURL: req.body.imageURL,
-        type: req.body.type || ROLES.PATIENT, 
         birthday: req.body.birthday,
         gender: req.body.gender, 
-        roles: req.body.roles || [ROLES.PATIENT],
+        role: req.body.role || [ROLES.PATIENT],
         education: req.body.education,
-        medicalHistory: req.body.medicalHistory
+        medicalCard: req.body.medicalCard
     });
 
     newUser.save().then((data) => {

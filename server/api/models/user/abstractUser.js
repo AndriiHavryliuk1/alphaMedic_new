@@ -7,10 +7,9 @@ class AbstractUser {
         this.password = user.password;
         this.imageURL = user.imageUrl;
         this.birthday = user.birthday;
-        this.type = user.type;
         this.gender = user.gender;
-        this.roles = user.roles;
-        this.active = user.active
+        this.role = user.role;
+        this.active = user.active;
         this.lastModificationUser = user.lastModificationUser;
     }
 }

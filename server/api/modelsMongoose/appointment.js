@@ -11,7 +11,7 @@ const appointmentSchema = mongoose.Schema({
             firstName: { type: String, required: true },
             lastName: { type: String, required: true },
         },
-        ref: 'User'
+        required: true
     },
     patient: {
         type: {
@@ -19,30 +19,18 @@ const appointmentSchema = mongoose.Schema({
             firstName: { type: String, required: true },
             lastName: { type: String, required: true },
         }, 
-        required: true, 
-        ref: 'User'
+        required: true
     },
     workplace: String,
     generalDiagnosis: String,
-
-    diagnosis: [{tooth: {}, service: {}}],
+    notes: String,
+    provisionalDiagnosis: [{
+        tooth: String, 
+        service: String, 
+        diagnosis: String
+    }],
     lastModificationUser: { type: String, default: null }
 }, { timestamps: true });
 
-appointmentSchema.statics.checkIf = function (ids, minutesSinceLast, callback) {
-    var recentDate = new Date();
-    recentDate.removeMinutes(minutesSinceLast); // It will remove the minutes
-    this.find(
-        {'location.timestamp': {$lt: recentDate}},
-        callback
-    );
-}
-
 
 module.exports = mongoose.model('Appointment', appointmentSchema);
-
-/**
- * default: () => {
-        new Date(this.dateStart.getTime() + this.duration * 1000) 
-    }
- */

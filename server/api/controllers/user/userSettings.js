@@ -1,4 +1,4 @@
-const User = require('../../models/user/user');
+const User = require('../../modelsMongoose/user');
 
 exports.getUserSettings = async (req, res, next) => {
     try {

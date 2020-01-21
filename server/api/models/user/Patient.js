@@ -3,7 +3,7 @@ const AbstractUser = require("./abstractUser");
 class Patient extends AbstractUser {
     constructor(patient) {
         super(patient);
-        this.medicalHistory = patient.medicalHistory;
+        this.medicalCard = patient.medicalCard;
     }
 
 }

@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const { SECRET_TOKEN_KEY } = require('../../config/configuration');
 const Patient = require('../models/user/Patient')
 
-const User  = require('../models/user/user');
+const User  = require('../modelsMongoose/user');
 
 exports.getUser = (req, res, next) => {
     User.findById(req.params.id).exec().then((data) => {
@@ -73,6 +73,6 @@ function generateToken(user) {
     return jwt.sign({
         email: user.email,
         userId: user._id.toString(),
-        roles: user.roles
+        role: user.role
     }, SECRET_TOKEN_KEY, { expiresIn: '5h' });
 }

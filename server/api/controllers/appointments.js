@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-const Appointment = require('../models/appointment');
-const User = require('../models/user/user');
+const Appointment = require('../modelsMongoose/appointment');
+const User = require('../modelsMongoose/user');
 
 exports.getAppointments = (req, res, next) => {
     findBy().then(result => {

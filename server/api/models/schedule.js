@@ -1,12 +1,35 @@
-const mongoose = require('mongoose');
 
-const treatmentSchema = mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,
-    doctorId: mongoose.Schema.Types.ObjectId,
-    patientId: mongoose.Schema.Types.ObjectId,
-    startDate: Date,
-    endDate: Date,
-    lastModificationUser: { type: String, default: null }
-}, { timestamps: true });
+class Schedule {
+    constructor(schedule = {}) {
+        this.monday = {
+            startDateTime: schedule.startDate || "10:00",
+            endDateTime: schedule.endDate || "19:00"
+        };
+        this.tuesday = {
+            startDateTime: schedule.startDate || "10:00",
+            endDateTime: schedule.endDate || "19:00"
+        };
+        this.wednesday = {
+            startDateTime: schedule.startDate || "10:00",
+            endDateTime: schedule.endDate || "19:00"
+        };
+        this.thursday = {
+            startDateTime: schedule.startDate || "10:00",
+            endDateTime: schedule.endDate || "19:00"
+        };
+        this.friday = {
+            startDateTime: schedule.startDate || "10:00",
+            endDateTime: schedule.endDate || "19:00"
+        };
+        this.saturday = {
+            startDateTime: schedule.startDate || "10:00",
+            endDateTime: schedule.endDate || "15:00"
+        };
+        this.sunday = {
+            startDateTime: schedule.startDate || null,
+            endDateTime: schedule.endDate || null
+        };
+    }
+}
 
-module.exports = mongoose.model('Treatment', treatmentSchema);
+module.exports = Schedule;
