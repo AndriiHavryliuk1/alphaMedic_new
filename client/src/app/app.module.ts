@@ -36,7 +36,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptorService} from './services/auth/auth-interceptor.service';
 import {appInitializerFactory, AppInitializerService} from './services/app/app-initializer.service';
 import {SharedModule} from './shared/shared.module';
-import { PatientsListComponent } from './patients/patients-list/patients-list.component';
+import {PatientsModule} from './patients/patients.module';
 
 @NgModule({
   declarations: [
@@ -52,8 +52,7 @@ import { PatientsListComponent } from './patients/patients-list/patients-list.co
     AppointmentsListComponent,
     UserSingleViewComponent,
     HomeComponent,
-    DepartmentsListComponent,
-    PatientsListComponent
+    DepartmentsListComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +72,8 @@ import { PatientsListComponent } from './patients/patients-list/patients-list.co
     MatRadioModule,
     MatNativeDateModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+    PatientsModule
   ],
   providers: [
     DepartmentsService,

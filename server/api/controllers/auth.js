@@ -2,7 +2,9 @@ const mongoose = require('mongoose');
 const { validationResult } = require('express-validator/check');
 const jwt = require('jsonwebtoken');
 const { SECRET_TOKEN_KEY } = require('../../config/configuration');
-const Patient = require('../models/user/Patient')
+const Patient = require('../models/user/Patient');
+
+const doctorsController = require('./user/doctors');
 
 const User  = require('../modelsMongoose/user');
 
@@ -12,7 +14,7 @@ exports.getUser = (req, res, next) => {
     }).catch((error) => {
         next(error);
     });
-}
+};
 
 exports.signup = async (req, res, next) => {
     const errors = validationResult(req);
@@ -23,30 +25,8 @@ exports.signup = async (req, res, next) => {
         next(error);
     }
 
-    const newUser = new User({
-        _id: mongoose.Types.ObjectId(),
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        password: req.body.password,
-        birthday: req.body.birthday,
-        gender: req.body.gender
-    });
-
-    newUser.save().then((data) => {
-        try {
-            const patient = new Patient(data);
-            if (req.body.returnSecuredToken) {
-                patient.token = generateToken(patient);
-            }
-            return res.status(200).json(patient);
-        } catch(error) {
-            User.findByIdAndDelete({_id: data._id}).exec();
-            next(error);
-        }
-    }).catch(error => {
-        next(error);
-    });
+    // for now registration only for doctors
+    return doctorsController.createDoctor(req, res, next);
 };
 
 exports.login = (req, res, next) => {

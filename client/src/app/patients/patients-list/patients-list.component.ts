@@ -12,4 +12,8 @@ export class PatientsListComponent implements OnInit {
   ngOnInit() {
   }
 
+  addNewPatient() {
+
+  }
+
 }

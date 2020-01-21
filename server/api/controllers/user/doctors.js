@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const {ROLES} = require('../../../utils/utils');
+const Schedule = require('../../models/schedule');
 
 const User = require('../../modelsMongoose/user');
 
@@ -64,14 +65,14 @@ exports.createDoctor = async (req, res, next) => {
         role: req.body.role || ROLES.DOCTOR,
         education: req.body.education,
         address: req.body.address,
-        schedule: req.body.schedule
+        schedule: req.body.schedule || new Schedule()
     });
 
     try {
-        const savedUser = await newUser.save().exec();
-        res.status(200).json(savedUser);
+        const savedUser = await newUser.save();
+        return res.status(200).json(savedUser);
     } catch (error) {
-        next(error);
+        return next(error);
     }
 };
 
