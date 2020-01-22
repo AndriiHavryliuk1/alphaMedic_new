@@ -14,15 +14,15 @@ import {HttpClient} from '@angular/common/http';
 export class RegistrationComponent implements OnInit {
   public minDate = new Date('01-01-1900');
   public maxDate = new Date();
-  public firstName = new FormControl('', [Validators.required]);
-  public lastName = new FormControl('', [Validators.required]);
+  public name = new FormControl('', [Validators.required]);
+  public surname = new FormControl('', [Validators.required]);
   public email = new FormControl('', [Validators.required, Validators.email]);
   public password = new FormControl('', [Validators.required]);
   public confirmedPassword = new FormControl('', [Validators.required]);
   public birthday = new FormControl(null);
   public gender = new FormControl('male');
 
-  constructor(private authService: AuthService, private alertService: AlertService, private http: HttpClient) {
+  constructor(private authService: AuthService, private alertService: AlertService) {
   }
 
   ngOnInit() {
@@ -30,11 +30,11 @@ export class RegistrationComponent implements OnInit {
 
 
   getErrorMessage(formControl: FormControl) {
-    return this.authService.getErrorMessage(formControl);
+    return this.alertService.getErrorMessage(formControl);
   }
 
   register() {
-    if (this.firstName.invalid || this.lastName.invalid
+    if (this.name.invalid || this.surname.invalid
       || this.email.invalid || this.password.invalid
       || this.confirmedPassword.invalid || this.birthday.invalid) {
       this.alertService.showAlert('Registration data is not valid', CONSTANTS.ALERT_DURATION.ERROR, CONSTANTS.ALERT_TYPES.ERROR);
@@ -42,8 +42,8 @@ export class RegistrationComponent implements OnInit {
     }
 
     const newUser = {
-      firstName: this.firstName.value,
-      lastName: this.lastName.value,
+      name: this.name.value,
+      surname: this.surname.value,
       email: this.email.value,
       password: sha256(this.password.value),
       birthday: this.birthday.value,
@@ -64,8 +64,8 @@ export class RegistrationComponent implements OnInit {
   }
 
   private initFields() {
-    this.firstName = new FormControl('', [Validators.required]);
-    this.lastName = new FormControl('', [Validators.required]);
+    this.name = new FormControl('', [Validators.required]);
+    this.surname = new FormControl('', [Validators.required]);
     this.email = new FormControl('', [Validators.required, Validators.email]);
     this.password = new FormControl('', [Validators.required]);
     this.confirmedPassword = new FormControl('', [Validators.required]);

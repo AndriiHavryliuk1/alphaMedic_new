@@ -1,16 +1,16 @@
 export class Doctor {
     public id: number;
-    public firstName: string;
-    public lastName: string;
+    public name: string;
+    public surname: string;
     public email: string;
     public password: string;
     public schedule: {};
     public lastModificationUser: string;
-    
-    constructor(id, firstName, lastName, email, password, schedule, lastModificationUser) {
+
+    constructor(id, name, surname, email, password, schedule, lastModificationUser) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.name = name;
+        this.surname = surname;
         this.email = email;
         this.password = password;
         this.schedule = schedule;

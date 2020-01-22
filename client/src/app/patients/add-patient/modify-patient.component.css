@@ -1,0 +1,12 @@
+.dialog-width {
+  min-width: 500px;
+  max-width: 600px;
+}
+
+.mat-dialog-content .mat-form-field .first-field {
+  margin: 0;
+}
+
+.mat-dialog-content .mat-form-field {
+  margin: 10px 0;
+}

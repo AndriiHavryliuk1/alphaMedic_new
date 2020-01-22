@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 
 import {AuthResource} from './auth.resource';
 import {catchError, tap} from 'rxjs/internal/operators';
-import {throwError, Subject, BehaviorSubject} from 'rxjs';
+import {throwError, BehaviorSubject} from 'rxjs';
 import {User} from '../../models/user';
 
 @Injectable({
@@ -17,19 +17,6 @@ export class AuthService {
   constructor(private http: HttpClient, private authResource: AuthResource) {
 
 
-  }
-
-  public getErrorMessage(formControl: FormControl) {
-    if (formControl.hasError('required')) {
-      return 'You must enter a value';
-    } else if (formControl.hasError('email')) {
-      return 'Email invalid';
-    } else if (formControl.hasError('matDatepickerParse')) {
-      return 'Date invalid';
-    } else if (formControl.hasError('minlength')) {
-      return 'Value must has more then 6 length';
-    }
-    return '';
   }
 
   public register(data: any) {

@@ -20,7 +20,7 @@ export class AppInitializerService {
 
   public getUserSettings() {
     return new Promise((resolve) => {
-      this.http.get<IUserSettings>(CONSTANTS.SERVER_URL + 'userSettings', {
+      this.http.get<IUserSettings>(CONSTANTS.SERVER_URL + '/userSettings', {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + localStorage.getItem('jwt')
         })

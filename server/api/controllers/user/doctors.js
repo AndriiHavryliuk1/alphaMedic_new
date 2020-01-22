@@ -53,8 +53,8 @@ exports.createDoctor = async (req, res, next) => {
 
     const newUser = new User({
         _id: mongoose.Types.ObjectId(),
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
+        name: req.body.name,
+        surname: req.body.surname,
         fatherName: req.body.fatherName,
         phoneNumbers: req.body.phoneNumbers,
         email: req.body.email,

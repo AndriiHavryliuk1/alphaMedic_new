@@ -4,13 +4,13 @@
 
   <div class="auth-container content-centered">
     <mat-form-field>
-      <input matInput placeholder="Enter your first name" [formControl]="firstName" required>
-      <mat-error *ngIf="firstName.invalid">{{getErrorMessage(this.firstName)}}</mat-error>
+      <input matInput placeholder="Enter your first name" [formControl]="name" required>
+      <mat-error *ngIf="name.invalid">{{getErrorMessage(this.name)}}</mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Enter your last name" [formControl]="lastName" required>
-      <mat-error *ngIf="lastName.invalid">{{getErrorMessage(this.lastName)}}</mat-error>
+      <input matInput placeholder="Enter your last name" [formControl]="surname" required>
+      <mat-error *ngIf="surname.invalid">{{getErrorMessage(this.surname)}}</mat-error>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">

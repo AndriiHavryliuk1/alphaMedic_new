@@ -6,8 +6,8 @@ const departmentSchema = mongoose.Schema({
     description: { type: String },
     departmentHead: {
         type: {
-            firstName: { type: String, required: true },
-            lastName: { type: String, required: true },
+            name: { type: String, required: true },
+            surname: { type: String, required: true },
             _id: mongoose.Schema.Types.ObjectId
         },
         ref: 'User'

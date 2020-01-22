@@ -39,3 +39,11 @@ body {
 .color {
   color: #66C3D0;
 }
+
+.mat-dialog-content .mat-form-field {
+  width: 100%;
+}
+
+mat-dialog-actions.mat-dialog-actions {
+  float: right;
+}

@@ -2,17 +2,20 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 import CONSTANTS from '../../utils/constants';
-import {Doctor} from '../../doctors/doctor.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DoctorsResource {
+export class PatientsResource {
 
   constructor(private http: HttpClient) { }
 
-  getDoctors() {
-    return this.http.get<Doctor[]>(CONSTANTS.SERVER_URL + '/doctors');
+  getPatients() {
+    return this.http.get(CONSTANTS.SERVER_URL + '/patients');
+  }
+
+  createPatient(data) {
+    return this.http.post(CONSTANTS.SERVER_URL + '/patients', data);
   }
 
 }

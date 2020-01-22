@@ -4,8 +4,8 @@ const { ROLES } = require('../../utils/utils');
 
 const userSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    firstName: { type: String, required: true },
-    lastName: { type: String, required: true },
+    name: { type: String, required: true },
+    surname: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
     phoneNumbers: { type: Array },

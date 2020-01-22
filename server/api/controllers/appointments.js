@@ -79,7 +79,7 @@ async function validateNewAppointment(appointment, next) {
 
 
     function checkUser(type) {
-        return !appointment[type] || appointment[type]._id || appointment[type].firstName || appointment[type].lastName;
+        return !appointment[type] || appointment[type]._id || appointment[type].name || appointment[type].surname;
     }
 
 }

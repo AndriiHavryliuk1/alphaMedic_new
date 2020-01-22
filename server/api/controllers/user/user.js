@@ -34,8 +34,8 @@ exports.createUser = async (req, res, next) => {
 
     const newUser = new User({
         _id: mongoose.Types.ObjectId(),
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
+        name: req.body.name,
+        surname: req.body.surname,
         email: req.body.email,
         password: req.body.password,
         imageURL: req.body.imageURL,

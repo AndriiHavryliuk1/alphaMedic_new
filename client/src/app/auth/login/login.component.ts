@@ -53,4 +53,8 @@ export class LoginComponent implements OnInit {
 
   }
 
+  getErrorMessage(formControl: FormControl) {
+    return this.alertService.getErrorMessage(formControl);
+  }
+
 }

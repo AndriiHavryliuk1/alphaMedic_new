@@ -19,11 +19,11 @@ exports.signupValidator = () => {
             .trim()
             .isLength({ min: 6 })
             .isAlphanumeric(),
-        body('firstName')
+        body('name')
             .trim()
             .not()
             .isEmpty(),
-        body('lastName')
+        body('surname')
             .trim()
             .not()
             .isEmpty()

@@ -12,10 +12,10 @@ export class AuthResource {
   constructor(private http: HttpClient) { }
 
   register(data: any) {
-    return this.http.post(CONSTANTS.SERVER_URL + 'auth/signup', data);
+    return this.http.post(CONSTANTS.SERVER_URL + '/auth/signup', data);
   }
 
   login(data: any) {
-    return this.http.post<{user: User, token: string}>(CONSTANTS.SERVER_URL + 'auth/login', data);
+    return this.http.post<{user: User, token: string}>(CONSTANTS.SERVER_URL + '/auth/login', data);
   }
 }

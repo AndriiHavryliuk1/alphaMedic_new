@@ -4,8 +4,8 @@ export class User {
   private readonly expirationDate: Date;
 
   private id: string;
-  private firstName: string;
-  private lastName: string;
+  private name: string;
+  private surname: string;
   private email: string;
   private imageSrc: string;
   private birthday: Date;
@@ -16,8 +16,8 @@ export class User {
   constructor(user,
               private token) {
     this.id = user._id;
-    this.firstName = user.firstName;
-    this.lastName = user.lastName;
+    this.name = user.name;
+    this.surname = user.surname;
     this.email = user.email;
     this.imageSrc = user.imageSrc;
     this.birthday = user.birthday;
@@ -48,17 +48,17 @@ export class User {
   }
 
   /**
-   * Getter for firstName property
+   * Getter for name property
    */
   public getFirstName() {
-    return this.firstName;
+    return this.name;
   }
 
   /**
-   * Getter for lastName property
+   * Getter for surname property
    */
   public getLastName() {
-    return this.lastName;
+    return this.surname;
   }
 
   /**
