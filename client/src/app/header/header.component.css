@@ -7,8 +7,21 @@
 .header-label {
   margin: 0 10px;
   text-decoration: none;
+  cursor: pointer;
 }
 
-.header-label :hover {
+.brand {
+  display: flex;
   cursor: pointer;
+}
+
+.brand-icon {
+  width: 24px;
+  height: 30px;
+  margin: 0 8px;
+}
+
+.brand-label {
+  margin: 0;
+  line-height: normal;
 }

@@ -1,16 +1,29 @@
-<mat-toolbar>
-  <app-svg-icon svgSrc="assets/images/tooth.svg"></app-svg-icon>
-  <h4 routerLink="/" style="cursor: pointer">Xdent</h4>
-  <button mat-button class="header-label" routerLinkActive="active-link" routerLink="/patients">Пацієнти</button>
-  <button mat-button class="header-label" routerLinkActive="active-link" routerLink="/sign-to-appointment">Реєстратура</button>
-
-  <div class="auth-div" *ngIf="!isAuthenticated">
-    <a class="header-label" routerLink="/sign-in">Sign in</a>
-    <a class="header-label" routerLink="/sign-up">Sign up</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="navbar-brand brand" routerLink="/">
+    <img class="brand-icon" src="assets/images/tooth.svg"/>
+    <h4 class="brand-label">Xdent</h4>
   </div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse bg-light" id="navbarCollapse">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link header-label" routerLinkActive="active" routerLink="/patients">Пацієнти</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link header-label" routerLinkActive="active" routerLink="/sign-to-appointment">Реєстратура</a>
+      </li>
+    </ul>
 
-  <div class="auth-div" *ngIf="isAuthenticated">
-    <a class="header-label" routerLink="/user">Profile</a>
-    <span class="header-label" (click)="signOut()">Sign out</span>
+    <form class="form-inline mt-2 mt-md-0" *ngIf="!isAuthenticated">
+      <a class="my-2 my-sm-0 header-label" routerLink="/sign-in">Sign in</a>
+      <a class="my-2 my-sm-0 header-label" routerLink="/sign-up">Sign up</a>
+    </form>
+
+    <form class="form-inline mt-2 mt-md-0" *ngIf="isAuthenticated">
+      <a class="my-2 my-sm-0 header-label" routerLink="/user">Profile</a>
+      <span class="my-2 my-sm-0 header-label" (click)="signOut()">Sign out</span>
+    </form>
   </div>
-</mat-toolbar>
+</nav>

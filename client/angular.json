@@ -27,7 +27,10 @@
               "./node_modules/bootstrap/dist/css/bootstrap.css",
               "src/styles.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "./node_modules/jquery-slim/dist/jquery.slim.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.js"
+            ],
             "es5BrowserSupport": true
           },
           "configurations": {
@@ -86,7 +89,10 @@
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "src/styles.css"
             ],
-            "scripts": [],
+            "scripts": [
+              "./node_modules/jquery-slim/dist/jquery.slim.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.js"
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"
