@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth/auth.service';
 import {HttpClient} from '@angular/common/http';
@@ -6,6 +6,8 @@ import {sha256} from 'js-sha256';
 import CONSTANTS from '../../utils/constants';
 import {AlertService} from '../../services/alert.service';
 import {Router} from '@angular/router';
+import {setLoading} from '../../utils/utils';
+import {finalize} from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -26,17 +28,23 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  @HostListener('window:keydown.enter')
+  onButtonEnter() {
+    this.login();
+  }
+
   login() {
+    setLoading();
     if (this.email.invalid) {
-      if (this.email.hasError('required')) {
-        this.alertService.showAlert('Email is required', CONSTANTS.ALERT_DURATION.ERROR, CONSTANTS.ALERT_TYPES.ERROR);
-      } else {
-        this.alertService.showAlert('Email is invalid', CONSTANTS.ALERT_DURATION.ERROR, CONSTANTS.ALERT_TYPES.ERROR);
-      }
-      return;
+      const errorMessage = this.email.hasError('required') ? 'Email is required' : 'Email is invalid';
+      this.alertService.showAlert(errorMessage, CONSTANTS.ALERT_DURATION.ERROR, CONSTANTS.ALERT_TYPES.ERROR);
     }
     if (this.password.invalid) {
       this.alertService.showAlert('Password is required', CONSTANTS.ALERT_DURATION.ERROR, CONSTANTS.ALERT_TYPES.ERROR);
+    }
+
+    if (this.email.invalid || this.password.invalid) {
+      setLoading(false);
       return;
     }
 
@@ -45,7 +53,7 @@ export class LoginComponent implements OnInit {
       password: sha256(this.password.value)
     };
 
-    this.authService.login(userData).subscribe((data) => {
+    this.authService.login(userData).pipe(finalize(() => setLoading(false))).subscribe((data) => {
       this.router.navigate(['user']);
     }, (error: Error) => {
       this.alertService.showAlert(error.message, CONSTANTS.ALERT_DURATION.ERROR, CONSTANTS.ALERT_TYPES.ERROR);

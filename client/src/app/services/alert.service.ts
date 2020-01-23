@@ -11,9 +11,7 @@ export class AlertService {
 
   showAlert(message: string, timeout: number, type: string) {
     this.snackBar.open(message, null, {
-      duration: timeout,
-      horizontalPosition: 'right',
-      verticalPosition: 'top'
+      duration: timeout
     });
   }
 
@@ -27,6 +25,6 @@ export class AlertService {
     } else if (formControl.hasError('minlength')) {
       return 'Value must has more then 6 length';
     }
-    return '';
+    return 'Невідома помилка';
   }
 }

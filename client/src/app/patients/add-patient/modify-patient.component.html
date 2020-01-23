@@ -37,6 +37,14 @@
     </div>
     <div>
       <mat-form-field>
+        <input matInput #emailInput maxlength="{{TEXT_MAX_LENGTH}}" placeholder="Email"
+               formControlName="email">
+        <mat-hint align="end">{{emailInput.value?.length || 0}}/{{TEXT_MAX_LENGTH}}</mat-hint>
+        <mat-error *ngIf="patientForm.get('email').invalid">{{getErrorMessage(patientForm.get('email'))}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
         <input matInput #firstPhoneNumberInput maxlength="12" placeholder="Номер телефону"
                formControlName="firstPhoneNumber">
         <mat-hint align="end">{{firstPhoneNumberInput.value?.length || 0}}/12</mat-hint>

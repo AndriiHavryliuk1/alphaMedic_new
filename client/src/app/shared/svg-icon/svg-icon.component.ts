@@ -14,7 +14,6 @@ export class SvgIconComponent implements OnInit {
   constructor(private matIconRegistry: MatIconRegistry, private sanitizer: DomSanitizer) {  }
 
   ngOnInit(): void {
-    debugger;
     this.matIconRegistry.addSvgIcon(
       'xd-svg-icon',
       this.sanitizer.bypassSecurityTrustResourceUrl(this.svgSrc)

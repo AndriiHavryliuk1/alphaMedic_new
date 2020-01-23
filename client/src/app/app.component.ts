@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import {AfterContentInit, AfterViewChecked, Component} from '@angular/core';
+
+import {setLoading} from './utils/utils';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'client';
-  viewType = 'home';
+export class AppComponent implements AfterContentInit {
+  public waitingText = 'Будь ласка зачекайте';
 
-  public changeViewCallback(newViewType) {
-    this.viewType = newViewType;
+  ngAfterContentInit(): void {
+    setLoading(false);
   }
 }
