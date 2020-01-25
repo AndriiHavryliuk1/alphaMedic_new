@@ -104,7 +104,7 @@
 
   <mat-dialog-actions>
     <button class="mat-raised-button" (click)="closeDialog()">Відмінити</button>
-    <button class="mat-raised-button mat-primary" [disabled]="patientForm.invalid">Зберегти</button>
+    <button class="mat-raised-button mat-primary" [disabled]="patientForm.invalid" (click)="createPatient()">Зберегти</button>
   </mat-dialog-actions>
 
 </div>

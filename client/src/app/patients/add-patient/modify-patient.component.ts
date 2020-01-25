@@ -2,9 +2,11 @@ import {Component, HostListener, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 import Constants from '../../utils/constants';
-import {DateAdapter, MAT_DATE_FORMATS, MatDialogRef} from '@angular/material';
+import { MatDialogRef} from '@angular/material';
 import {AlertService} from '../../services/alert.service';
-import {APP_DATE_FORMATS, AppDateAdapter} from '../../utils/format-datapicker';
+import {PatientsService} from '../../services/patients/patients.service';
+import {Patient} from '../../models/patient';
+import CONSTANTS from  '../../utils/constants';
 
 @Component({
   selector: 'app-modify-patient',
@@ -18,18 +20,20 @@ export class ModifyPatientComponent implements OnInit {
   public minDate = new Date('01-01-1900');
   public maxDate = new Date();
 
-  constructor(public dialogRef: MatDialogRef<ModifyPatientComponent>, private alertService: AlertService) {
+  constructor(public dialogRef: MatDialogRef<ModifyPatientComponent>,
+              private alertService: AlertService,
+              private patientsService: PatientsService) {
     this.TEXT_MAX_LENGTH = Constants.TEXT_MAX_LENGTH;
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.patientForm = new FormGroup({
       name: new FormControl('', [Validators.maxLength(Constants.TEXT_MAX_LENGTH), Validators.required]),
       surname: new FormControl('', [Validators.maxLength(Constants.TEXT_MAX_LENGTH), Validators.required]),
       fatherName: new FormControl('', [Validators.maxLength(Constants.TEXT_MAX_LENGTH)]),
-      birthday: new FormControl(null),
+      birthday: new FormControl(null, [Validators.required]),
       email: new FormControl('', [Validators.email]),
-      firstPhoneNumber: new FormControl('', [Validators.pattern('[0-9]{0-10}')]),
+      firstPhoneNumber: new FormControl('', [Validators.required]),
       secondPhoneNumber: new FormControl('', [Validators.pattern('[0-9]{0-10}')]),
       region: new FormControl('', [Validators.maxLength(Constants.TEXT_MAX_LENGTH)]),
       city: new FormControl('', [Validators.maxLength(Constants.TEXT_MAX_LENGTH)]),
@@ -39,16 +43,27 @@ export class ModifyPatientComponent implements OnInit {
   }
 
   @HostListener('window:keyup.esc')
-  onKeyUp() {
+  public onKeyUp() {
     this.closeDialog();
   }
 
-  getErrorMessage(formControl) {
+  public getErrorMessage(formControl) {
     return this.alertService.getErrorMessage(formControl);
   }
 
-  closeDialog() {
+  public closeDialog() {
     this.dialogRef.close();
+  }
+
+  public async createPatient() {
+    try {
+      const patientForCreate = new Patient(this.patientForm.value);
+      await this.patientsService.createPatient(patientForCreate);
+      this.alertService.showAlert('Користувач доданий', CONSTANTS.ALERT_DURATION.ERROR, CONSTANTS.ALERT_TYPES.ERROR);
+      this.closeDialog();
+    } catch (error) {
+      this.alertService.showAlert(error.errorMessage, CONSTANTS.ALERT_DURATION.ERROR, CONSTANTS.ALERT_TYPES.ERROR);
+    }
   }
 
 }

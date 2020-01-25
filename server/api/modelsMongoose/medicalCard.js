@@ -18,6 +18,6 @@ const medicalCardSchema = mongoose.Schema({
     hygieneTrainingData: String,
     hygieneControlDate: String,
     lastModificationUser: { type: String, default: null }
-}, { timestamps: true });
+}, { timestamps: true, collection: 'medicalCards' });
 
 module.exports = mongoose.model('MedicalCard', medicalCardSchema);

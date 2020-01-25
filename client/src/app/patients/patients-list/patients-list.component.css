@@ -1,0 +1,8 @@
+.patient-photo {
+  width: 100px;
+  height: 100px;
+}
+
+.patients-list mat-card.mat-card {
+  margin: 15px 0;
+}

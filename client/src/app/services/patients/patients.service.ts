@@ -1,35 +1,38 @@
 import {Injectable} from '@angular/core';
 import {catchError, take} from 'rxjs/operators';
 import {PatientsResource} from './patients.resource';
-import {throwError} from 'rxjs';
+import {BehaviorSubject, Subject, throwError} from 'rxjs';
+import {Patient} from '../../models/patient';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class DoctorsService {
+export class PatientsService {
 
-  private patients;
+  public patientsObserver = new Subject<Patient[]>();
+  private cachedPatients;
 
   constructor(private patientResource: PatientsResource) { }
 
   public getPatients() {
-    return new Promise((resolve, reject) => {
+    return new Promise<Patient[]>((resolve, reject) => {
       this.patientResource.getPatients().pipe(take(1), catchError((error) => {
         return throwError(reject(error));
-      })).subscribe(patients => {
-        this.patients = patients;
+      })).subscribe((patients: Patient[]) => {
+        this.cachedPatients = patients;
         resolve(patients);
       });
     });
   }
 
   public createPatient(patientData) {
-    return new Promise((resolve, reject) => {
+    return new Promise<Patient>((resolve, reject) => {
       this.patientResource.createPatient(patientData).pipe(take(1), catchError((error) => {
         return throwError(reject(error));
-      })).subscribe(patient => {
-        this.patients.push(patient);
+      })).subscribe((patient: Patient) => {
+        this.cachedPatients.push(patient);
+        this.patientsObserver.next(this.cachedPatients);
         resolve(patient);
       });
     });

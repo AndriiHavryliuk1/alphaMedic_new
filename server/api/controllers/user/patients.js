@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const {ROLES} = require('../../../utils/utils');
+const Patient = require('../../models/user/Patient');
 
 const User = require('../../modelsMongoose/user');
 
@@ -13,7 +14,7 @@ const User = require('../../modelsMongoose/user');
 exports.getAllPatients = async (req, res, next) => {
     try {
         const patients = await User.find({type: ROLES.PATIENT}).exec();
-        res.status(200).json(patients);
+        res.status(200).json(patients.map(pat => new Patient(pat)));
     } catch (error) {
         next(error);
     }
@@ -50,26 +51,34 @@ exports.createPatient = async (req, res, next) => {
         return;
     }
 
+    const currentUser = await User.findOne({_id: req.userId, active: true});
+
     const newUser = new User({
         _id: mongoose.Types.ObjectId(),
         name: req.body.name,
         surname: req.body.surname,
         fatherName: req.body.fatherName,
         phoneNumbers: req.body.phoneNumbers,
-        email: req.body.email,
-        password: req.body.password,
+        email: " ",
+        password: " ",
+        doctor: {
+            id: currentUser.id,
+            name: currentUser.name,
+            surname: currentUser.surname
+        },
         imageURL: req.body.imageURL,
         birthday: req.body.birthday,
         gender: req.body.gender,
-        role: req.body.role || ROLES.PATIENT,
+        type: ROLES.PATIENT,
+        roles: req.body.roles || [ROLES.PATIENT],
         medicalCard: req.body.medicalCard,
         address: req.body.address,
         workPlace: req.body.workPlace
     });
 
     try {
-        const savedUser = await newUser.save().exec();
-        res.status(200).json(savedUser);
+        const savedUser = await newUser.save();
+        res.status(200).json(new Patient(savedUser));
     } catch (error) {
         next(error);
     }

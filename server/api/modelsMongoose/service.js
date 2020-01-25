@@ -7,6 +7,6 @@ const serviceSchema = mongoose.Schema({
     type: String,
     price: Number,
     lastModificationUser: { type: String, default: null }
-}, { timestamps: true });
+}, { timestamps: true, collection: 'services' });
 
 module.exports = mongoose.model('Service', serviceSchema);

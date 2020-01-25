@@ -41,7 +41,7 @@ exports.createUser = async (req, res, next) => {
         imageURL: req.body.imageURL,
         birthday: req.body.birthday,
         gender: req.body.gender, 
-        role: req.body.role || [ROLES.PATIENT],
+        roles: req.body.roles || [ROLES.PATIENT],
         education: req.body.education,
         medicalCard: req.body.medicalCard
     });

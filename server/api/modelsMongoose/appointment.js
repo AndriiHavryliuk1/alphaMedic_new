@@ -30,7 +30,7 @@ const appointmentSchema = mongoose.Schema({
         diagnosis: String
     }],
     lastModificationUser: { type: String, default: null }
-}, { timestamps: true });
+}, { timestamps: true, collection: 'appointments' });
 
 
 module.exports = mongoose.model('Appointment', appointmentSchema);

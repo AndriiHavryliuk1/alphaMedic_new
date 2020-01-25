@@ -1,13 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatButtonModule, MatDatepickerModule, MatDialogModule, MatFormFieldModule, MatIconModule, MatInputModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule
+} from '@angular/material';
 import {PatientsListComponent} from './patients-list/patients-list.component';
 import { ModifyPatientComponent } from './add-patient/modify-patient.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import {PatientsService} from '../services/patients/patients.service';
+import {BrowserModule} from '@angular/platform-browser';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   declarations: [PatientsListComponent, ModifyPatientComponent],
   imports: [
+    BrowserModule,
     CommonModule,
     MatIconModule,
     MatButtonModule,
@@ -15,8 +27,11 @@ import {ReactiveFormsModule} from '@angular/forms';
     MatInputModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    RouterModule,
+    MatCardModule
   ],
+  providers: [PatientsService],
   exports: [PatientsListComponent],
   entryComponents: [ModifyPatientComponent]
 })

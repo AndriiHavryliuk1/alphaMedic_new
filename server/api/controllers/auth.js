@@ -51,8 +51,7 @@ exports.login = (req, res, next) => {
 
 function generateToken(user) {
     return jwt.sign({
-        email: user.email,
         userId: user._id.toString(),
-        role: user.role
-    }, SECRET_TOKEN_KEY, { expiresIn: '5h' });
+        roles: user.roles
+    }, SECRET_TOKEN_KEY, { expiresIn: '7d' });
 }

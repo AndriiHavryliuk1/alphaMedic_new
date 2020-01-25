@@ -6,6 +6,6 @@ const treatmentSchema = mongoose.Schema({
     procedures: { type: Array },
     cares: Array,
     lastModificationUser: { type: String, default: null }
-}, { timestamps: true });
+}, { timestamps: true, collection: 'treatments' });
 
 module.exports = mongoose.model('Treatment', treatmentSchema);

@@ -1,4 +1,42 @@
 <div class="container body-2">
   <h1>Список пацієнтів</h1>
   <button mat-raised-button color="primary" (click)="addNewPatient()">Додати пацієнта</button>
+
+  <div class="patients-list">
+    <mat-card *ngFor="let patient of patients">
+      <div class="row">
+        <div class="col">
+          <a routerLink="#/patient/{{patient.id}}">
+            <img src="{{patient.imageSrc || 'assets/images/no-avatar.png'}}" class="patient-photo"
+                 alt="Patient`s photo">
+          </a>
+        </div>
+        <div class="col">
+          <div>
+            <div>Ініціали:</div>
+            <div><a routerLink="#/patients/{{patient.id}}">{{patient.fullName}}</a></div>
+          </div>
+        </div>
+        <div class="col">
+          <div>
+            <div>Контакти:</div>
+            <div *ngIf="patient.phoneNumbers.length">{{patient.phoneNumbers[0]}}</div>
+          </div>
+        </div>
+        <div class="col">
+          <div>
+            <div>Лікар:</div>
+            <div *ngIf="patient.doctor"><a
+              routerLink="#/doctors/{{patient.doctor.id}}">{{patient.doctor.surname + " " + patient.doctor.surname}}</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div><span class="link-style">Записати на прийом</span></div>
+          <div><span class="link-style">Відправити нагадування</span></div>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+
 </div>

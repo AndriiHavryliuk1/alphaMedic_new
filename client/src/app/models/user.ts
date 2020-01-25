@@ -6,6 +6,7 @@ export class User {
   private id: string;
   private name: string;
   private surname: string;
+  private fatherName: string;
   private email: string;
   private imageSrc: string;
   private birthday: Date;
@@ -15,9 +16,13 @@ export class User {
 
   constructor(user,
               private token) {
+    if (!user) {
+      return;
+    }
     this.id = user._id;
     this.name = user.name;
     this.surname = user.surname;
+    this.fatherName = user.fatherName;
     this.email = user.email;
     this.imageSrc = user.imageSrc;
     this.birthday = user.birthday;

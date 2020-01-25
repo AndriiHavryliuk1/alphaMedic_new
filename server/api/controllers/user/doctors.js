@@ -62,7 +62,8 @@ exports.createDoctor = async (req, res, next) => {
         imageURL: req.body.imageURL,
         birthday: req.body.birthday,
         gender: req.body.gender,
-        role: req.body.role || ROLES.DOCTOR,
+        type: req.body.type || ROLES.DOCTOR,
+        roles: req.body.roles || [ROLES.DOCTOR],
         education: req.body.education,
         address: req.body.address,
         schedule: req.body.schedule || new Schedule()

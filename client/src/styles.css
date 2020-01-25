@@ -129,3 +129,12 @@ body.is-loading .main-content {
 mat-dialog-actions.mat-dialog-actions {
   float: right;
 }
+
+.link-style {
+  color: #007bff;
+  cursor: pointer;
+}
+
+.link-style:hover {
+  color: #0056b3;
+}

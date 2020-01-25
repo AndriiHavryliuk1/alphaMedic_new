@@ -5,6 +5,6 @@ const toothSchema = mongoose.Schema({
     number: Number,
     name: String,
     lastModificationUser: { type: String, default: null }
-}, { timestamps: true });
+}, { timestamps: true, collection: 'teeth' });
 
 module.exports = mongoose.model('Tooth', toothSchema);

@@ -1,22 +1,47 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {ModifyPatientComponent} from '../add-patient/modify-patient.component';
+import {ActivatedRoute} from '@angular/router';
+import {Patient} from '../../models/patient';
+import {PatientsService} from '../../services/patients/patients.service';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-patients-list',
   templateUrl: './patients-list.component.html',
   styleUrls: ['./patients-list.component.css']
 })
-export class PatientsListComponent implements OnInit {
+export class PatientsListComponent implements OnInit, OnDestroy{
+  public patients: Patient[];
+  private subscriptions: Subscription[] = [];
 
-  constructor(private matDialog: MatDialog) { }
+  constructor(private matDialog: MatDialog,
+              private activatedRoute: ActivatedRoute,
+              private patientsService: PatientsService,
+              private ngZone: NgZone) {
+  }
 
   ngOnInit() {
+    console.log(this.activatedRoute.data);
+    const activatedRouteSub = this.activatedRoute.data.subscribe((data) => {
+      this.patients = data.patients.slice();
+      console.log(this.patients);
+    });
+
+    const patientsObserverSub = this.patientsService.patientsObserver.subscribe((patients) => {
+      this.patients = patients.slice();
+      console.log(this.patients);
+    });
+    this.subscriptions = [activatedRouteSub, patientsObserverSub];
   }
 
   addNewPatient() {
     this.matDialog.open(ModifyPatientComponent, { disableClose: true });
 
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
 }
