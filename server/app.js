@@ -14,6 +14,7 @@ const externalAPIRouter = require('./api/routes/externalAPI');
 const isAuthorized = require('./middleware/is-authorized');
 const isAuth = require('./middleware/is-auth');
 const {ROLES} = require('./utils/utils');
+const dbGenerator = require('./services/dbGenerator');
 
 const app = express();
 const PORT = 3000;
@@ -43,5 +44,6 @@ app.use((error, req, res, next) => {
     });
 });
 
+dbGenerator.generateDb();
 
 app.listen(PORT);
