@@ -14,6 +14,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
 import {NewAppointmentComponent} from './new-appointment/new-appointment.component';
 import {AppointmentComponent} from './appointment/appointment.component';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   declarations: [NewAppointmentComponent, AppointmentComponent],
@@ -28,7 +29,8 @@ import {AppointmentComponent} from './appointment/appointment.component';
     ReactiveFormsModule,
     MatDatepickerModule,
     RouterModule,
-    MatCardModule
+    MatCardModule,
+    SharedModule
   ],
   providers: [],
   exports: [NewAppointmentComponent, AppointmentComponent],

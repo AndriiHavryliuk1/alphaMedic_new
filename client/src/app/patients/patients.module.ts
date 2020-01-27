@@ -15,6 +15,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {PatientsService} from '../services/patients/patients.service';
 import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
+import {AppointmentsModule} from '../appointments/appointments.module';
 
 @NgModule({
   declarations: [PatientsListComponent, ModifyPatientComponent],
@@ -30,7 +31,8 @@ import {RouterModule} from '@angular/router';
     MatDatepickerModule,
     RouterModule,
     MatCardModule,
-    MatRadioModule
+    MatRadioModule,
+    AppointmentsModule
   ],
   providers: [PatientsService],
   exports: [PatientsListComponent],

@@ -1,110 +1,41 @@
 <div class="dialog-width">
-  <h2 mat-dialog-title>Додати пацієнта</h2>
+  <h2 mat-dialog-title>Відвідування</h2>
 
-  <mat-dialog-content [formGroup]="patientForm">
+  <mat-dialog-content [formGroup]="visitForm">
 
     <div>
       <mat-form-field class="first-field">
-        <input matInput #nameInput maxlength="{{TEXT_MAX_LENGTH}}" placeholder="Ім'я пацієнта*" formControlName="name">
-        <mat-hint align="end">{{nameInput.value?.length || 0}}/{{TEXT_MAX_LENGTH}}</mat-hint>
-        <mat-error *ngIf="patientForm.get('name').invalid">{{getErrorMessage(patientForm.get('name'))}}</mat-error>
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field>
-        <input matInput #surnameInput maxlength="{{TEXT_MAX_LENGTH}}" placeholder="Прізвище пацієнта*"
-               formControlName="surname">
-        <mat-hint align="end">{{surnameInput.value?.length || 0}}/{{TEXT_MAX_LENGTH}}</mat-hint>
-        <mat-error *ngIf="patientForm.get('surname').invalid">{{getErrorMessage(patientForm.get('surname'))}}</mat-error>
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field>
-        <input matInput #fatherNameInput maxlength="{{TEXT_MAX_LENGTH}}" placeholder="По-батькові"
-               formControlName="fatherName">
-        <mat-hint align="end">{{fatherNameInput.value?.length || 0}}/{{TEXT_MAX_LENGTH}}</mat-hint>
-        <mat-error *ngIf="patientForm.get('fatherName').invalid">{{getErrorMessage(patientForm.get('fatherName'))}}</mat-error>
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field>
-        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Дата народження"
-               formControlName="birthday">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-        <mat-error *ngIf="patientForm.get('birthday').invalid">{{getErrorMessage(patientForm.get('birthday'))}}</mat-error>
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field>
-        <input matInput #emailInput maxlength="{{TEXT_MAX_LENGTH}}" placeholder="Email"
-               formControlName="email">
-        <mat-hint align="end">{{emailInput.value?.length || 0}}/{{TEXT_MAX_LENGTH}}</mat-hint>
-        <mat-error *ngIf="patientForm.get('email').invalid">{{getErrorMessage(patientForm.get('email'))}}</mat-error>
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field>
-        <input matInput #firstPhoneNumberInput maxlength="12" placeholder="Номер телефону"
-               formControlName="firstPhoneNumber">
-        <mat-hint align="end">{{firstPhoneNumberInput.value?.length || 0}}/12</mat-hint>
-        <mat-error
-          *ngIf="patientForm.get('firstPhoneNumber').invalid">{{getErrorMessage(patientForm.get('firstPhoneNumber'))}}</mat-error>
-      </mat-form-field>
-    </div>
-    <div>
-      <mat-form-field>
-        <input matInput #firstPhoneNumberInput maxlength="{{TEXT_MAX_LENGTH}}" placeholder="Другий номер телефону"
-               formControlName="secondPhoneNumber">
-        <mat-hint align="end">{{firstPhoneNumberInput.value?.length || 0}}/{{TEXT_MAX_LENGTH}}</mat-hint>
-        <mat-error
-          *ngIf="patientForm.get('secondPhoneNumber').invalid">{{getErrorMessage(patientForm.get('secondPhoneNumber'))}}</mat-error>
+        <input matInput #nameInput placeholder="Пацієнт*" formControlName="patientText">
       </mat-form-field>
     </div>
 
     <div>
-      <mat-form-field>
-        <input matInput #regionInput maxlength="{{TEXT_MAX_LENGTH}}" placeholder="Область"
-               formControlName="region">
-        <mat-hint align="end">{{regionInput.value?.length || 0}}/{{TEXT_MAX_LENGTH}}</mat-hint>
-        <mat-error *ngIf="patientForm.get('region').invalid">{{getErrorMessage(patientForm.get('region'))}}</mat-error>
-      </mat-form-field>
-    </div>
+      <app-autocomplete [items]="diagnosis"
+                        (valueChanged)="onDiagnosisChanged($event)"
+                        placeholder="Виберіть попередній діагноз">
 
-    <div>
-      <mat-form-field>
-        <input matInput #cityInput maxlength="{{TEXT_MAX_LENGTH}}" placeholder="Місто"
-               formControlName="city">
-        <mat-hint align="end">{{cityInput.value?.length || 0}}/{{TEXT_MAX_LENGTH}}</mat-hint>
-        <mat-error *ngIf="patientForm.get('city').invalid">{{getErrorMessage(patientForm.get('city'))}}</mat-error>
-      </mat-form-field>
-    </div>
-
-    <div>
-      <mat-form-field>
-        <input matInput #addressInput maxlength="{{TEXT_MAX_LENGTH}}" placeholder="Адреса"
-               formControlName="address">
-        <mat-hint align="end">{{addressInput.value?.length || 0}}/{{TEXT_MAX_LENGTH}}</mat-hint>
-        <mat-error *ngIf="patientForm.get('address').invalid">{{getErrorMessage(patientForm.get('address'))}}</mat-error>
-      </mat-form-field>
-    </div>
+      </app-autocomplete>
 
 
-    <div>
-      <mat-form-field>
-        <input matInput #workPlaceInput maxlength="{{TEXT_MAX_LENGTH}}" placeholder="Місце праці"
-               formControlName="workPlace">
-        <mat-hint align="end">{{workPlaceInput.value?.length || 0}}/{{TEXT_MAX_LENGTH}}</mat-hint>
-        <mat-error *ngIf="patientForm.get('workPlace').invalid">{{getErrorMessage(patientForm.get('workPlace'))}}</mat-error>
-      </mat-form-field>
     </div>
+
+<!--    <div>-->
+<!--      <mat-form-field>-->
+<!--        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Дата народження"-->
+<!--               formControlName="birthday">-->
+<!--        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
+<!--        <mat-datepicker #picker></mat-datepicker>-->
+<!--        <mat-error *ngIf="patientForm.get('birthday').invalid">{{getErrorMessage(patientForm.get('birthday'))}}</mat-error>-->
+<!--      </mat-form-field>-->
+<!--    </div>-->
+
 
 
   </mat-dialog-content>
 
   <mat-dialog-actions>
     <button class="mat-raised-button" (click)="closeDialog()">Відмінити</button>
-    <button class="mat-raised-button mat-primary" [disabled]="patientForm.invalid" (click)="createPatient()">Зберегти</button>
+    <button class="mat-raised-button mat-primary" >Зберегти</button>
   </mat-dialog-actions>
 
 </div>

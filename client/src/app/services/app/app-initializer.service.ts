@@ -1,40 +1,46 @@
 import {Injectable} from '@angular/core';
-import {Constants} from '../../utils/constants';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {catchError, take} from 'rxjs/operators';
-import {throwError} from 'rxjs';
-import {AuthService} from '../auth/auth.service';
-import {User} from '../../models/user';
-
-interface IUserSettings {
-  user: User;
-  token: string;
-}
+import {UserSettingsService} from '../user-settings/user-settings.service';
+import {TeethService} from '../teeth/teeth.service';
+import {ServicesService} from '../services/services.service';
+import {DiagnosisService} from '../diagnosis/diagnosis.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppInitializerService {
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(private userSettingsService: UserSettingsService,
+              private teethService: TeethService,
+              private servicesService: ServicesService,
+              private diagnosisService: DiagnosisService) {
   }
 
-  public getUserSettings() {
-    return new Promise((resolve) => {
-      this.http.get<IUserSettings>(Constants.SERVER_URL + '/userSettings', {
-        headers: new HttpHeaders({
-          Authorization: 'Bearer ' + localStorage.getItem('jwt')
-        })
-      }).pipe(take(1), catchError(error => {
-        return throwError(resolve(error));
-      })).subscribe((userSettings: IUserSettings) => {
-        this.authService.user.next(new User(userSettings.user, userSettings.token));
-        resolve(userSettings);
-      });
+  public async getAppData() {
+    const userSettings = await this.userSettingsService.getUserSettings() as any;
+    if (userSettings.error) {
+      return Promise.resolve();
+    }
+    const promises = [
+      this.teethService.getTeeth(),
+      this.servicesService.getServices(),
+      this.diagnosisService.getDiagnosis()
+    ];
+
+    return Promise.all(promises.map(this.reflect));
+  }
+
+  /**
+   * Differentiate resolved result from rejected
+   */
+  private reflect(promise) {
+    return promise.then((v) => {
+      return {data: v, status: 'fulfilled'};
+    }, (e) => {
+      return {err: e, status: 'rejected'};
     });
   }
 }
 
 export function appInitializerFactory(appInitializerService: AppInitializerService) {
-  return () => appInitializerService.getUserSettings();
+  return () => appInitializerService.getAppData();
 }

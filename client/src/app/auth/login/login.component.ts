@@ -8,6 +8,7 @@ import {AlertService} from '../../services/alert.service';
 import {Router} from '@angular/router';
 import {setLoading} from '../../utils/utils';
 import {finalize} from 'rxjs/operators';
+import {AppInitializerService} from '../../services/app/app-initializer.service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
   constructor(private http: HttpClient,
               private router: Router,
               private authService: AuthService,
-              private alertService: AlertService) {
+              private alertService: AlertService,
+              private appInitializerService: AppInitializerService) {
   }
 
   ngOnInit() {
@@ -53,7 +55,8 @@ export class LoginComponent implements OnInit {
       password: sha256(this.password.value)
     };
 
-    this.authService.login(userData).pipe(finalize(() => setLoading(false))).subscribe((data) => {
+    this.authService.login(userData).pipe(finalize(() => setLoading(false))).subscribe(async (data) => {
+      await this.appInitializerService.getAppData();
       this.router.navigate(['user']);
     }, (error: Error) => {
       this.alertService.showAlert(error.message, Constants.ALERT_DURATION.ERROR, Constants.ALERT_TYPES.ERROR);

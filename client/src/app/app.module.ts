@@ -34,6 +34,9 @@ import {appInitializerFactory, AppInitializerService} from './services/app/app-i
 import {SharedModule} from './shared/shared.module';
 import {PatientsModule} from './patients/patients.module';
 import {AppointmentsModule} from './appointments/appointments.module';
+import {ServicesService} from './services/services/services.service';
+import {DiagnosisService} from './services/diagnosis/diagnosis.service';
+import {TeethService} from './services/teeth/teeth.service';
 
 @NgModule({
   declarations: [
@@ -73,6 +76,9 @@ import {AppointmentsModule} from './appointments/appointments.module';
     DepartmentsService,
     DoctorsService,
     DoctorsListResolver,
+    ServicesService,
+    DiagnosisService,
+    TeethService,
     AuthService,
     AppInitializerService, {
       provide: HTTP_INTERCEPTORS,

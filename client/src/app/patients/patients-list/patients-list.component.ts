@@ -5,6 +5,8 @@ import {ActivatedRoute} from '@angular/router';
 import {Patient} from '../../models/patient';
 import {PatientsService} from '../../services/patients/patients.service';
 import {Subscription} from 'rxjs';
+import {DiagnosisService} from '../../services/diagnosis/diagnosis.service';
+import {NewAppointmentComponent} from '../../appointments/new-appointment/new-appointment.component';
 
 @Component({
   selector: 'app-patients-list',
@@ -17,27 +19,26 @@ export class PatientsListComponent implements OnInit, OnDestroy{
 
   constructor(private matDialog: MatDialog,
               private activatedRoute: ActivatedRoute,
-              private patientsService: PatientsService,
-              private ngZone: NgZone) {
+              private patientsService: PatientsService) {
   }
 
   ngOnInit() {
-    console.log(this.activatedRoute.data);
     const activatedRouteSub = this.activatedRoute.data.subscribe((data) => {
       this.patients = data.patients.slice();
-      console.log(this.patients);
     });
 
     const patientsObserverSub = this.patientsService.patientsObserver.subscribe((patients) => {
       this.patients = patients.slice();
-      console.log(this.patients);
     });
     this.subscriptions = [activatedRouteSub, patientsObserverSub];
   }
 
   addNewPatient() {
     this.matDialog.open(ModifyPatientComponent, { disableClose: true });
+  }
 
+  addToVisit(currentPatient) {
+    this.matDialog.open(NewAppointmentComponent, { disableClose: true });
   }
 
   ngOnDestroy(): void {
