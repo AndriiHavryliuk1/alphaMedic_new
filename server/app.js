@@ -11,9 +11,11 @@ const apointmentsRouter = require('./api/routes/appointments');
 const configuration = require('./config/configuration');
 const authRouter = require('./api/routes/auth');
 const externalAPIRouter = require('./api/routes/externalAPI');
-const isAuthorized = require('./middleware/is-authorized');
+const servicesRouter = require('./api/routes/services');
+const teethRouter = require('./api/routes/teeth');
+const diagnosisRouter = require('./api/routes/diagnosis');
+
 const isAuth = require('./middleware/is-auth');
-const {ROLES} = require('./utils/utils');
 const dbGenerator = require('./services/dbGenerator');
 
 const app = express();
@@ -31,7 +33,10 @@ app.use('/users', isAuth, usersRouter);
 app.use('/userSettings', isAuth, userSettingsRouter);
 app.use('/appointments', isAuth, apointmentsRouter);
 app.use('/doctors', isAuth, doctorsRouter);
-app.use('/patients', isAuth, isAuthorized([ROLES.DOCTOR]), patientsRouter);
+app.use('/patients', isAuth, patientsRouter);
+app.use('/services', isAuth, servicesRouter);
+app.use('/teeth', isAuth, teethRouter);
+app.use('/diagnosis', isAuth, diagnosisRouter);
 app.use('/auth', authRouter);
 app.use('/external-api', externalAPIRouter);
 

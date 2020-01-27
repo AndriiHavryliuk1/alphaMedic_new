@@ -3,8 +3,7 @@ import {FormControl, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth/auth.service';
 import {sha256} from 'js-sha256';
 import {AlertService} from '../../services/alert.service';
-import CONSTANTS from '../../utils/constants';
-import {HttpClient} from '@angular/common/http';
+import {Constants} from '../../utils/constants';
 
 @Component({
   selector: 'app-registration',
@@ -20,7 +19,8 @@ export class RegistrationComponent implements OnInit {
   public password = new FormControl('', [Validators.required]);
   public confirmedPassword = new FormControl('', [Validators.required]);
   public birthday = new FormControl(null);
-  public gender = new FormControl('male');
+  public gender = new FormControl(Constants.GENDER.MALE);
+  public genderValues = Constants.GENDER;
 
   constructor(private authService: AuthService, private alertService: AlertService) {
   }
@@ -37,7 +37,7 @@ export class RegistrationComponent implements OnInit {
     if (this.name.invalid || this.surname.invalid
       || this.email.invalid || this.password.invalid
       || this.confirmedPassword.invalid || this.birthday.invalid) {
-      this.alertService.showAlert('Registration data is not valid', CONSTANTS.ALERT_DURATION.ERROR, CONSTANTS.ALERT_TYPES.ERROR);
+      this.alertService.showAlert('Registration data is not valid', Constants.ALERT_DURATION.ERROR, Constants.ALERT_TYPES.ERROR);
       return;
     }
 
@@ -52,7 +52,7 @@ export class RegistrationComponent implements OnInit {
     };
 
     this.authService.register(newUser).subscribe((data) => {
-      this.alertService.showAlert('Registered successfully', CONSTANTS.ALERT_DURATION.ERROR, CONSTANTS.ALERT_TYPES.SUCCESS);
+      this.alertService.showAlert('Registered successfully', Constants.ALERT_DURATION.ERROR, Constants.ALERT_TYPES.SUCCESS);
       console.log(data);
       this.initFields();
     }, (error) => {

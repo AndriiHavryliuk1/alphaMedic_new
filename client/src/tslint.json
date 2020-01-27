@@ -1,6 +1,7 @@
 {
     "extends": "../tslint.json",
     "rules": {
+      "quotemark": [false, "single", "double"],
       "max-line-length": [true, 160],
         "directive-selector": [
             true,

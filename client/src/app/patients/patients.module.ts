@@ -7,7 +7,7 @@ import {
   MatDialogModule,
   MatFormFieldModule,
   MatIconModule,
-  MatInputModule
+  MatInputModule, MatRadioModule
 } from '@angular/material';
 import {PatientsListComponent} from './patients-list/patients-list.component';
 import { ModifyPatientComponent } from './add-patient/modify-patient.component';
@@ -29,7 +29,8 @@ import {RouterModule} from '@angular/router';
     ReactiveFormsModule,
     MatDatepickerModule,
     RouterModule,
-    MatCardModule
+    MatCardModule,
+    MatRadioModule
   ],
   providers: [PatientsService],
   exports: [PatientsListComponent],

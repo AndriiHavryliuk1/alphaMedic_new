@@ -1,12 +1,11 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
-import Constants from '../../utils/constants';
-import { MatDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 import {AlertService} from '../../services/alert.service';
 import {PatientsService} from '../../services/patients/patients.service';
 import {Patient} from '../../models/patient';
-import CONSTANTS from  '../../utils/constants';
+import {Constants} from '../../utils/constants';
 
 @Component({
   selector: 'app-modify-patient',
@@ -19,6 +18,7 @@ export class ModifyPatientComponent implements OnInit {
   public TEXT_MAX_LENGTH: number;
   public minDate = new Date('01-01-1900');
   public maxDate = new Date();
+  public genderValues = Constants.GENDER;
 
   constructor(public dialogRef: MatDialogRef<ModifyPatientComponent>,
               private alertService: AlertService,
@@ -39,6 +39,7 @@ export class ModifyPatientComponent implements OnInit {
       city: new FormControl('', [Validators.maxLength(Constants.TEXT_MAX_LENGTH)]),
       address: new FormControl('', [Validators.maxLength(Constants.TEXT_MAX_LENGTH)]),
       workPlace: new FormControl('', [Validators.maxLength(Constants.TEXT_MAX_LENGTH)]),
+      gender: new FormControl(Constants.GENDER.MALE)
     });
   }
 
@@ -59,10 +60,10 @@ export class ModifyPatientComponent implements OnInit {
     try {
       const patientForCreate = new Patient(this.patientForm.value);
       await this.patientsService.createPatient(patientForCreate);
-      this.alertService.showAlert('Користувач доданий', CONSTANTS.ALERT_DURATION.ERROR, CONSTANTS.ALERT_TYPES.ERROR);
+      this.alertService.showAlert('Користувач доданий', Constants.ALERT_DURATION.ERROR, Constants.ALERT_TYPES.ERROR);
       this.closeDialog();
     } catch (error) {
-      this.alertService.showAlert(error.errorMessage, CONSTANTS.ALERT_DURATION.ERROR, CONSTANTS.ALERT_TYPES.ERROR);
+      this.alertService.showAlert(error.errorMessage, Constants.ALERT_DURATION.ERROR, Constants.ALERT_TYPES.ERROR);
     }
   }
 

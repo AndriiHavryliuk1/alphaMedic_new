@@ -24,8 +24,8 @@
     <div class="gender-field">
       <span class="gender-field-item">Select your gender:</span>
       <mat-radio-group aria-label="Select your gender" [formControl]="gender">
-        <mat-radio-button value="male" class="gender-field-item">Male</mat-radio-button>
-        <mat-radio-button value="female">Female</mat-radio-button>
+        <mat-radio-button value="{{genderValues.MALE}}" class="gender-field-item">Male</mat-radio-button>
+        <mat-radio-button value="{{genderValues.FEMALE}}">Female</mat-radio-button>
       </mat-radio-group>
     </div>
 

@@ -59,8 +59,8 @@ exports.createPatient = async (req, res, next) => {
         surname: req.body.surname,
         fatherName: req.body.fatherName,
         phoneNumbers: req.body.phoneNumbers,
-        email: " ",
-        password: " ",
+        email: "email",
+        password: "password",
         doctor: {
             id: currentUser.id,
             name: currentUser.name,

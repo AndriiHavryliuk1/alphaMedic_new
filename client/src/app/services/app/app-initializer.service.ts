@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import CONSTANTS from '../../utils/constants';
+import {Injectable} from '@angular/core';
+import {Constants} from '../../utils/constants';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {catchError, take} from 'rxjs/operators';
 import {throwError} from 'rxjs';
@@ -16,17 +16,18 @@ interface IUserSettings {
 })
 export class AppInitializerService {
 
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  constructor(private http: HttpClient, private authService: AuthService) {
+  }
 
   public getUserSettings() {
     return new Promise((resolve) => {
-      this.http.get<IUserSettings>(CONSTANTS.SERVER_URL + '/userSettings', {
+      this.http.get<IUserSettings>(Constants.SERVER_URL + '/userSettings', {
         headers: new HttpHeaders({
           Authorization: 'Bearer ' + localStorage.getItem('jwt')
         })
       }).pipe(take(1), catchError(error => {
         return throwError(resolve(error));
-      })).subscribe((userSettings) => {
+      })).subscribe((userSettings: IUserSettings) => {
         this.authService.user.next(new User(userSettings.user, userSettings.token));
         resolve(userSettings);
       });

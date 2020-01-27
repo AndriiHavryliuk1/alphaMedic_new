@@ -1,4 +1,4 @@
-export default {
+export const Constants = {
   SERVER_URL: 'http://localhost:3000',
   ALERT_TYPES: {
     INFO: 'INFO',
@@ -11,5 +11,9 @@ export default {
     INFO: 5000
   },
   TEXT_MAX_LENGTH: 255,
-  TEXT_AREA_MAX_LENGTH: 4000
+  TEXT_AREA_MAX_LENGTH: 4000,
+  GENDER: {
+    MALE: 'MALE',
+    FEMALE: 'FEMALE'
+  }
 };

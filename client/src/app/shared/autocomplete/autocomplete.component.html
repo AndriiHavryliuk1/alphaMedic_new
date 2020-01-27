@@ -1,0 +1,12 @@
+<form class="mat-autocomplete-form" [ngClass]="{'dropdown-icon': !selectedItem}">
+  <div>
+    <mat-icon *ngIf="materialIcon">{{materialIcon}}</mat-icon>
+    <input name="autoComplete" type="text" [placeholder]="placeholder" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (blur)="onBlur(auto)">
+    <mat-icon *ngIf="selectedItem" class="mat-clear-icon" (click)="onOptionChanged(null)">clear</mat-icon>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionChanged($event.option.value)" (opened)="onAutoCompleteOpened()" (closed)="onAutoCompleteClosed()" class="{{menuClass}}">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option" [ngClass]="option.ngClass ? option.ngClass : ''">
+        <span [innerHTML]="option.text | highlight: searchText" title="{{option.text}}"></span>
+      </mat-option>
+    </mat-autocomplete>
+  </div>
+</form>

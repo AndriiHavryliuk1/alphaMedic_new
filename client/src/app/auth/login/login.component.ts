@@ -3,7 +3,7 @@ import {FormControl, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth/auth.service';
 import {HttpClient} from '@angular/common/http';
 import {sha256} from 'js-sha256';
-import CONSTANTS from '../../utils/constants';
+import {Constants} from '../../utils/constants';
 import {AlertService} from '../../services/alert.service';
 import {Router} from '@angular/router';
 import {setLoading} from '../../utils/utils';
@@ -37,10 +37,10 @@ export class LoginComponent implements OnInit {
     setLoading();
     if (this.email.invalid) {
       const errorMessage = this.email.hasError('required') ? 'Email is required' : 'Email is invalid';
-      this.alertService.showAlert(errorMessage, CONSTANTS.ALERT_DURATION.ERROR, CONSTANTS.ALERT_TYPES.ERROR);
+      this.alertService.showAlert(errorMessage, Constants.ALERT_DURATION.ERROR, Constants.ALERT_TYPES.ERROR);
     }
     if (this.password.invalid) {
-      this.alertService.showAlert('Password is required', CONSTANTS.ALERT_DURATION.ERROR, CONSTANTS.ALERT_TYPES.ERROR);
+      this.alertService.showAlert('Password is required', Constants.ALERT_DURATION.ERROR, Constants.ALERT_TYPES.ERROR);
     }
 
     if (this.email.invalid || this.password.invalid) {
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(userData).pipe(finalize(() => setLoading(false))).subscribe((data) => {
       this.router.navigate(['user']);
     }, (error: Error) => {
-      this.alertService.showAlert(error.message, CONSTANTS.ALERT_DURATION.ERROR, CONSTANTS.ALERT_TYPES.ERROR);
+      this.alertService.showAlert(error.message, Constants.ALERT_DURATION.ERROR, Constants.ALERT_TYPES.ERROR);
     });
 
   }

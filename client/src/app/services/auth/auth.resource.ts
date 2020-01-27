@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
-import CONSTANTS from '../../utils/constants';
+import {Constants} from '../../utils/constants';
 import {User} from '../../models/user';
 
 @Injectable({
@@ -12,10 +12,10 @@ export class AuthResource {
   constructor(private http: HttpClient) { }
 
   register(data: any) {
-    return this.http.post(CONSTANTS.SERVER_URL + '/auth/signup', data);
+    return this.http.post(Constants.SERVER_URL + '/auth/signup', data);
   }
 
   login(data: any) {
-    return this.http.post<{user: User, token: string}>(CONSTANTS.SERVER_URL + '/auth/login', data);
+    return this.http.post<{user: User, token: string}>(Constants.SERVER_URL + '/auth/login', data);
   }
 }

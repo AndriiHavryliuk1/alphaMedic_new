@@ -13,3 +13,21 @@ export function setLoading(status?) {
     document.body.classList.add('is-loading');
   }
 }
+
+/**
+ * Escape some html symbol to html numbers
+ * @param html - incoming html
+ */
+export function escapeHTML(html: string) {
+  const __entityMap = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': '&quot;',
+    "'": '&#39;'
+  };
+
+  return String(html).replace(/[&<>"']/g, (s) => {
+    return __entityMap[s];
+  });
+}

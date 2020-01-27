@@ -35,6 +35,13 @@
         <mat-error *ngIf="patientForm.get('birthday').invalid">{{getErrorMessage(patientForm.get('birthday'))}}</mat-error>
       </mat-form-field>
     </div>
+    <div class="gender-field">
+      <span class="gender-field-item">Виберіть стать:</span>
+      <mat-radio-group aria-label="Виберіть стать" formControlName="gender">
+        <mat-radio-button value="{{genderValues.MALE}}" class="gender-field-item">Чоловіча</mat-radio-button>
+        <mat-radio-button value="{{genderValues.FEMALE}}">Жіноча</mat-radio-button>
+      </mat-radio-group>
+    </div>
     <div>
       <mat-form-field>
         <input matInput #emailInput maxlength="{{TEXT_MAX_LENGTH}}" placeholder="Email"

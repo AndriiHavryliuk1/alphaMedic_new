@@ -1,0 +1,8 @@
+.not-found {
+  pointer-events: none;
+}
+
+
+.mat-autocomplete-form {
+  position: relative;
+}
