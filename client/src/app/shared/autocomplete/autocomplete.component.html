@@ -1,5 +1,5 @@
-<form class="mat-autocomplete-form" [ngClass]="{'dropdown-icon': !selectedItem}">
-  <div>
+<form class="mat-autocomplete-form" >
+  <mat-form-field [ngClass]="{'dropdown-icon': !selectedItem}">
     <mat-icon *ngIf="materialIcon">{{materialIcon}}</mat-icon>
     <input name="autoComplete" type="text" [placeholder]="placeholder" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" (blur)="onBlur(auto)">
     <mat-icon *ngIf="selectedItem" class="mat-clear-icon" (click)="onOptionChanged(null)">clear</mat-icon>
@@ -8,5 +8,5 @@
         <span [innerHTML]="option.text | highlight: searchText" title="{{option.text}}"></span>
       </mat-option>
     </mat-autocomplete>
-  </div>
+  </mat-form-field>
 </form>

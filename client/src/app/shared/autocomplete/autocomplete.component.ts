@@ -77,7 +77,7 @@ export class AutocompleteComponent implements OnInit, OnChanges {
    * Handler for onAutoCompleteOpened callback
    */
   public onAutoCompleteOpened() {
-    this.elementRef.nativeElement.classList.add("menu-showing");
+    this.elementRef.nativeElement.children[0].classList.add("menu-showing");
     const cdkOverlayContainer = document.getElementsByClassName("cdk-overlay-container")[0];
     if (cdkOverlayContainer) {
       cdkOverlayContainer.addEventListener('keydown', this.onKeyDown.bind(this), true);
@@ -88,7 +88,7 @@ export class AutocompleteComponent implements OnInit, OnChanges {
    * onAutoCompleteClosed callback
    */
   public onAutoCompleteClosed() {
-    this.elementRef.nativeElement.classList.remove('menu-showing');
+    this.elementRef.nativeElement.children[0].classList.remove('menu-showing');
   }
 
   /**
@@ -108,7 +108,7 @@ export class AutocompleteComponent implements OnInit, OnChanges {
    * Filter function to show correct result in dropdown
    */
   private filter(value: string | IAutoCompleteItem): IAutoCompleteItem[] {
-    this.searchText = typeof value === 'string' ? value.toLowerCase() : value.text;
+    this.searchText = typeof value === 'string' ? value.toLowerCase() : (!value ? "" : value.text.toLowerCase());
     if (this.selectedItem && this.selectedItem.text === this.searchText) {
       return [];
     }

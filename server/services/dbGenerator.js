@@ -433,8 +433,7 @@ exports.generateDb = async () => {
             "treatment": "Послідовне відновлення висоти клінічних коронок."
         }
     ].reduce((u, i) => {
-        return u.name === i.name ? u : [...u, i]
-
+        return u.find(k => k.name === i.name) ? u : [...u, i]
     }, []).map(c => {
         return {
             "name": c.name,

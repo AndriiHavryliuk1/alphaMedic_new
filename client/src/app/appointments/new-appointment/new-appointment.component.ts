@@ -1,7 +1,8 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, HostListener, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {DiagnosisService} from '../../services/diagnosis/diagnosis.service';
-import {MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {PatientsService} from '../../services/patients/patients.service';
 
 @Component({
   selector: 'app-new-appointment',
@@ -12,12 +13,28 @@ export class NewAppointmentComponent implements OnInit {
 
   public visitForm;
   public diagnosis;
+  public patients;
+  public selectedDiagnosis;
+  public selectedPatient;
+  public patient: FormControl;
 
   constructor(public dialogRef: MatDialogRef<NewAppointmentComponent>,
-              diagnosisService: DiagnosisService) {
+              @Inject(MAT_DIALOG_DATA) public data,
+              diagnosisService: DiagnosisService,
+              patientsService: PatientsService) {
+
+    this.selectedPatient = data.selectedPatient;
+    if (this.selectedPatient) {
+      this.patient = new FormControl({value: this.selectedPatient.fullName, disabled: true});
+    }
     this.diagnosis = diagnosisService.getCachedDiagnosis().map(value => ({
       id: value._id,
       text: value.name
+    }));
+
+    this.patients = patientsService.getCachedPatients().map(value => ({
+      id: value._id,
+      text: value.fullName
     }));
   }
 
@@ -29,6 +46,8 @@ export class NewAppointmentComponent implements OnInit {
       visitTime: new FormControl(null),
       duration: new FormControl(null)
     });
+
+    this.selectedDiagnosis = null;
   }
 
 
@@ -43,7 +62,7 @@ export class NewAppointmentComponent implements OnInit {
   }
 
   onDiagnosisChanged(value) {
-    console.log(value);
+    this.selectedDiagnosis = value;
   }
 
 }

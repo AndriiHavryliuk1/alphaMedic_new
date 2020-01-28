@@ -13,7 +13,7 @@ import {NewAppointmentComponent} from '../../appointments/new-appointment/new-ap
   templateUrl: './patients-list.component.html',
   styleUrls: ['./patients-list.component.css']
 })
-export class PatientsListComponent implements OnInit, OnDestroy{
+export class PatientsListComponent implements OnInit, OnDestroy {
   public patients: Patient[];
   private subscriptions: Subscription[] = [];
 
@@ -34,11 +34,16 @@ export class PatientsListComponent implements OnInit, OnDestroy{
   }
 
   addNewPatient() {
-    this.matDialog.open(ModifyPatientComponent, { disableClose: true });
+    this.matDialog.open(ModifyPatientComponent, {disableClose: true});
   }
 
   addToVisit(currentPatient) {
-    this.matDialog.open(NewAppointmentComponent, { disableClose: true });
+    this.matDialog.open(NewAppointmentComponent, {
+      data: {
+        selectedPatient: currentPatient
+      },
+      disableClose: true
+    });
   }
 
   ngOnDestroy(): void {

@@ -10,6 +10,11 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.app-dialog-width {
+  min-width: 500px;
+  max-width: 600px;
+}
+
 #loading-overlay {
   position: fixed;
   top: 0;
@@ -137,38 +142,6 @@ mat-dialog-actions.mat-dialog-actions {
 
 .link-style:hover {
   color: #0056b3;
-}
-
-/*  input component e.g. quicksearch for clear button
- *   md-autocomplete component to show drop_down and drop_up icon
- */
-app-autocomplete .dropdown-icon:after {
-  text-align: center;
-  vertical-align: middle;
-  width: 30px !important;
-  min-width: 30px !important;
-  height: 30px;
-  margin: auto 5px;
-  padding: 0;
-  right: 0;
-  top: 0;
-  content: "\e5c5";
-  font-family: "Material Icons";
-  font-size: 24px;
-  line-height: 30px;
-  transition: transform 0.2s linear;
-  position: relative;
-}
-
-/*  only for md-autocomplete component e.g. add column
- *   show drop_down and drop_up icon
- */
-app-autocomplete .dropdown-icon:after {
-  pointer-events: none;
-}
-
-app-autocomplete.menu-showing .dropdown-icon:after {
-  transform: scaleY(-1);
 }
 
 .gender-field {

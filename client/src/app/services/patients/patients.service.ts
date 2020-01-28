@@ -38,4 +38,8 @@ export class PatientsService {
     });
   }
 
+  public getCachedPatients() {
+    return this.cachedPatients;
+  }
+
 }

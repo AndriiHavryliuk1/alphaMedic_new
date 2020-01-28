@@ -6,3 +6,40 @@
 .mat-autocomplete-form {
   position: relative;
 }
+
+.mat-clear-icon {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+  z-index: 100;
+}
+
+/*  input component e.g. quicksearch for clear button
+ *   md-autocomplete component to show drop_down and drop_up icon
+ */
+.dropdown-icon:after {
+  text-align: center;
+  vertical-align: middle;
+  margin: auto 5px;
+  padding: 0;
+  right: 0;
+  top: 18px;
+  content: "\e5c5";
+  font-family: "Material Icons";
+  font-size: 24px;
+  line-height: 24px;
+  transition: transform 0.2s linear;
+  position: relative;
+}
+
+/*  only for md-autocomplete component e.g. add column
+ *   show drop_down and drop_up icon
+ */
+.dropdown-icon:after {
+  pointer-events: none;
+  position: absolute;
+}
+
+.menu-showing .dropdown-icon:after {
+  transform: scaleY(-1);
+}
