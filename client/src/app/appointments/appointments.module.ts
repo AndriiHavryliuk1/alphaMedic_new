@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   MatButtonModule,
-  MatCardModule,
-  MatDatepickerModule,
+  MatCardModule, MatDatepickerModule,
   MatDialogModule,
   MatFormFieldModule,
   MatIconModule,
@@ -15,6 +14,7 @@ import {RouterModule} from '@angular/router';
 import {NewAppointmentComponent} from './new-appointment/new-appointment.component';
 import {AppointmentComponent} from './appointment/appointment.component';
 import {SharedModule} from '../shared/shared.module';
+import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule} from '@angular/material-moment-adapter';
 
 @NgModule({
   declarations: [NewAppointmentComponent, AppointmentComponent],
@@ -28,11 +28,14 @@ import {SharedModule} from '../shared/shared.module';
     MatFormFieldModule,
     ReactiveFormsModule,
     MatDatepickerModule,
+    MatMomentDateModule,
     RouterModule,
     MatCardModule,
     SharedModule
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}}
+  ],
   exports: [NewAppointmentComponent, AppointmentComponent],
   entryComponents: [NewAppointmentComponent]
 })

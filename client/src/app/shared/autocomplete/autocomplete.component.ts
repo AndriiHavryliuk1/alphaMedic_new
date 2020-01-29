@@ -105,6 +105,16 @@ export class AutocompleteComponent implements OnInit, OnChanges {
   }
 
   /**
+   *
+   * @param autocomplete - current mat-autocomplete object
+   */
+  public openAutocomplete(autocomplete: MatAutocomplete) {
+    if (!autocomplete.isOpen) {
+      this.autocompleteTrigger.openPanel();
+    }
+  }
+
+  /**
    * Filter function to show correct result in dropdown
    */
   private filter(value: string | IAutoCompleteItem): IAutoCompleteItem[] {
