@@ -3,6 +3,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DiagnosisService} from '../../services/diagnosis/diagnosis.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {PatientsService} from '../../services/patients/patients.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-new-appointment',
@@ -40,7 +41,7 @@ export class NewAppointmentComponent implements OnInit {
 
   ngOnInit() {
     this.visitForm = new FormGroup({
-      patientText: new FormControl('', [Validators.required]),
+      patientText: new FormControl(this.selectedPatient ? this.selectedPatient.fullName : '', [Validators.required]),
       doctorText: new FormControl(''),
       visitDate: new FormControl(null, [Validators.required]),
       visitTime: new FormControl(null, [Validators.required]),
@@ -69,7 +70,18 @@ export class NewAppointmentComponent implements OnInit {
       return;
     }
 
-    const visitStartDate = new Date(this.visitForm.get('visitDate').value.toDateString() + " " + this.visitForm.get('visitTime').value + ":00");
+    const visitStartDate = moment(this.visitForm.get('visitDate').value.toDate().toDateString()).add(this.getDurationFromTime(this.visitForm.get('visitTime').value), "seconds").toDate();
+    const duration = this.getDurationFromTime(this.visitForm.get('duration').value);
+    console.log("duration: " + duration);
+    console.log("visitStartDate: " + visitStartDate);
+  }
+
+  /**
+   * Return duration in sec
+   */
+  private getDurationFromTime(timeValue: string): number {
+    const separatedDuration = timeValue.split(":");
+    return +separatedDuration[0] * 3600 + +separatedDuration[1] * 60;
   }
 
 

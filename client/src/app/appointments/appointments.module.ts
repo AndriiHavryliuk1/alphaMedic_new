@@ -15,6 +15,7 @@ import {NewAppointmentComponent} from './new-appointment/new-appointment.compone
 import {AppointmentComponent} from './appointment/appointment.component';
 import {SharedModule} from '../shared/shared.module';
 import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule} from '@angular/material-moment-adapter';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 @NgModule({
   declarations: [NewAppointmentComponent, AppointmentComponent],
@@ -31,10 +32,11 @@ import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule} from '@angular/mat
     MatMomentDateModule,
     RouterModule,
     MatCardModule,
-    SharedModule
+    SharedModule,
+    NgxMaterialTimepickerModule.setLocale('uk-UA')
   ],
   providers: [
-    {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true}}
+    {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true, useValue: 'uk-UA' }}
   ],
   exports: [NewAppointmentComponent, AppointmentComponent],
   entryComponents: [NewAppointmentComponent]
