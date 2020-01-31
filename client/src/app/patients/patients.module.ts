@@ -16,9 +16,10 @@ import {PatientsService} from '../services/patients/patients.service';
 import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
 import {AppointmentsModule} from '../appointments/appointments.module';
+import { PatientComponent } from './patient/patient.component';
 
 @NgModule({
-  declarations: [PatientsListComponent, ModifyPatientComponent],
+  declarations: [PatientsListComponent, ModifyPatientComponent, PatientComponent],
   imports: [
     BrowserModule,
     CommonModule,
@@ -35,7 +36,7 @@ import {AppointmentsModule} from '../appointments/appointments.module';
     AppointmentsModule
   ],
   providers: [PatientsService],
-  exports: [PatientsListComponent],
+  exports: [PatientsListComponent, PatientComponent],
   entryComponents: [ModifyPatientComponent]
 })
 export class PatientsModule { }

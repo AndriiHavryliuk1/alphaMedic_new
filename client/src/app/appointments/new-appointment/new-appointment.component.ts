@@ -4,6 +4,9 @@ import {DiagnosisService} from '../../services/diagnosis/diagnosis.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {PatientsService} from '../../services/patients/patients.service';
 import * as moment from 'moment';
+import {UserSettingsService} from '../../services/user-settings/user-settings.service';
+import {AuthService} from '../../services/auth/auth.service';
+import {AppointmentsService} from '../../services/appointments/appointments.service';
 
 @Component({
   selector: 'app-new-appointment',
@@ -22,7 +25,9 @@ export class NewAppointmentComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<NewAppointmentComponent>,
               @Inject(MAT_DIALOG_DATA) public data,
               diagnosisService: DiagnosisService,
-              patientsService: PatientsService) {
+              patientsService: PatientsService,
+              private authService: AuthService,
+              private appointmentsService: AppointmentsService) {
 
     this.selectedPatient = data.selectedPatient;
     if (this.selectedPatient) {
@@ -65,22 +70,44 @@ export class NewAppointmentComponent implements OnInit {
     console.log(this.visitForm.get('visitDate').value.toDate());
   }
 
-  createVisit() {
+  async createVisit() {
     if (!this.visitForm.valid) {
       return;
     }
 
-    const visitStartDate = moment(this.visitForm.get('visitDate').value.toDate().toDateString()).add(this.getDurationFromTime(this.visitForm.get('visitTime').value), "seconds").toDate();
+    const visitStartDate = moment(this.visitForm.get('visitDate').value.toDate().toDateString()).add(this.getDurationFromTime(this.visitForm.get('visitTime').value), 'seconds').toDate();
     const duration = this.getDurationFromTime(this.visitForm.get('duration').value);
-    console.log("duration: " + duration);
-    console.log("visitStartDate: " + visitStartDate);
+    console.log('duration: ' + duration);
+    console.log('visitStartDate: ' + visitStartDate);
+
+    const dataForSave = {
+      dateStart: visitStartDate,
+      duration, // sec
+      dateEnd: moment(visitStartDate).add(duration, "seconds").toDate(),
+      doctor: {
+        _id: this.authService.user.value.getId(),
+        fullName: this.authService.user.value.getFullName()
+      },
+      patient: {
+        _id: this.selectedPatient.id,
+        fullName: this.selectedPatient.fullName
+      }
+    };
+
+    try {
+      const appointment = await this.appointmentsService.createAppointment(dataForSave);
+      console.log(appointment);
+    } catch (e) {
+      console.log(e);
+    }
+
   }
 
   /**
    * Return duration in sec
    */
   private getDurationFromTime(timeValue: string): number {
-    const separatedDuration = timeValue.split(":");
+    const separatedDuration = timeValue.split(':');
     return +separatedDuration[0] * 3600 + +separatedDuration[1] * 60;
   }
 

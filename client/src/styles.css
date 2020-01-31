@@ -156,3 +156,8 @@ mat-dialog-actions.mat-dialog-actions {
 .gender-field-item {
   margin-right: 15px;
 }
+
+.patient-photo {
+  width: 100px;
+  height: 100px;
+}

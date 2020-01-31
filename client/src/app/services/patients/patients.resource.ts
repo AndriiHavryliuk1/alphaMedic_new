@@ -14,6 +14,10 @@ export class PatientsResource {
     return this.http.get(Constants.SERVER_URL + '/patients');
   }
 
+  getPatient(id) {
+    return this.http.get(Constants.SERVER_URL + '/patients/' + id);
+  }
+
   createPatient(data) {
     return this.http.post(Constants.SERVER_URL + '/patients', data);
   }

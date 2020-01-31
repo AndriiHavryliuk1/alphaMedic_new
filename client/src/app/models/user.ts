@@ -7,6 +7,7 @@ export class User {
   private name: string;
   private surname: string;
   private fatherName: string;
+  private fullName: string;
   private email: string;
   private imageSrc: string;
   private birthday: Date;
@@ -22,6 +23,7 @@ export class User {
     this.id = user._id;
     this.name = user.name;
     this.surname = user.surname;
+    this.fullName = this.surname + ' ' + this.name;
     this.fatherName = user.fatherName;
     this.email = user.email;
     this.imageSrc = user.imageSrc;
@@ -64,6 +66,13 @@ export class User {
    */
   public getLastName() {
     return this.surname;
+  }
+
+  /**
+   * Getter for name property
+   */
+  public getFullName() {
+    return this.fullName;
   }
 
   /**

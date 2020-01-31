@@ -8,16 +8,14 @@ const appointmentSchema = mongoose.Schema({
     doctor: {
         type: {
             _id: mongoose.Schema.Types.ObjectId,
-            name: { type: String, required: true },
-            surname: { type: String, required: true },
+            fullName: { type: String },
         },
         required: true
     },
     patient: {
         type: {
             _id: mongoose.Schema.Types.ObjectId,
-            name: { type: String, required: true },
-            surname: { type: String, required: true },
+            fullName: { type: String },
         }, 
         required: true
     },

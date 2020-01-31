@@ -1,0 +1,26 @@
+<div class="container body-2">
+  <h2>Пацієнт</h2>
+  <mat-card>
+    <div class="image-section">
+      <img src="{{patient.imageSrc || 'assets/images/no-avatar.png'}}" class="patient-photo"
+           alt="Patient`s photo">
+      <div class="container">
+        <div>{{fullFullName}}</div>
+        <div>{{formattedBirthday}}</div>
+        <div>{{patient.phoneNumbers[0]}}</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-2">Лікар:</div>
+      <div class="col">
+        <a routerLink="/doctors/{{patient.doctor.id}}">{{patient.doctor.surname  + " " + patient.doctor.name}}</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-2">Діагноз:</div>
+      <div class="col">-</div>
+    </div>
+
+  </mat-card>
+
+</div>

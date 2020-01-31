@@ -9,6 +9,9 @@ const patientsController = require('../../controllers/user/patients');
 // GET users get all patients
 router.get('/', isAuthorized([ROLES.DOCTOR]), patientsController.getAllPatients);
 
+// GET patient
+router.get('/:id', isAuthorized([ROLES.DOCTOR, ROLES.PATIENT]), patientsController.getPatient);
+
 // POST create user
 router.post('/', isAuthorized([ROLES.DOCTOR]), patientsController.createPatient);
 

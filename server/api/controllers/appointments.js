@@ -34,14 +34,15 @@ exports.registerNewAppointment = async (req, res, next) => {
     }
 
     const startDate = new Date(req.body.dateStart);
-    const endDate = new Date(startDate.getTime() + ((req.body.duration - 1) * 1000));
-    { $or: [ { quantity: { $lt: 20 } }, { price: 10 } ] }
-    const existedAppointment = await Appointment.findOne({ $or: [{dateStart: {$gte: startDate, $lte: endDate}}, {dateEnd: {$gte: startDate, $lte: endDate}},     
+    const endDate = new Date(req.body.dateEnd);
+
+    const doctor = req.body.doctor;
+    const existedAppointments = await Appointment.find({ $or: [{dateStart: {$gte: startDate, $lte: endDate}}, {dateEnd: {$gte: startDate, $lte: endDate}},     
         { $and: [ { dateStart: { $lt: startDate } }, { dateEnd: { $gt: startDate } } ] }, { $and: [ { dateStart: { $lt: endDate } }, { dateEnd: { $gt: endDate } } ] }
     ]}).exec();
     
-    if (existedAppointment) {
-        const error = new Error("Date for this appointment already choosen!")
+    if (existedAppointments.length && existedAppointments.find(appointment => appointment.doctor._id === doctor._id)) {
+        const error = new Error("You already have appointment for this data!")
         error.status = 404;
         next(error);
         return;
@@ -52,7 +53,7 @@ exports.registerNewAppointment = async (req, res, next) => {
         dateStart: startDate,
         duration: req.body.duration, // sec
         dateEnd: endDate,
-        doctor: req.body.doctor,
+        doctor: doctor,
         patient: req.body.patient
     });
 
