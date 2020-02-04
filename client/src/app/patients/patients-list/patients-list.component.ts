@@ -42,7 +42,8 @@ export class PatientsListComponent implements OnInit, OnDestroy {
       data: {
         selectedPatient: currentPatient
       },
-      disableClose: true
+      disableClose: true,
+      autoFocus: false
     });
   }
 

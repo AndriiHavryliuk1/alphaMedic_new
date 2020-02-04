@@ -1,4 +1,4 @@
-<div class="container body-2">
+<div class="container-fluid body-2">
   <h2>Пацієнт</h2>
   <mat-card>
     <div class="image-section">
@@ -6,7 +6,7 @@
            alt="Patient`s photo">
       <div class="container">
         <div>{{fullFullName}}</div>
-        <div>{{formattedBirthday}}</div>
+        <div>{{fullYears}} років. ({{formattedBirthday}})</div>
         <div>{{patient.phoneNumbers[0]}}</div>
       </div>
     </div>
@@ -22,5 +22,21 @@
     </div>
 
   </mat-card>
+
+  <mat-card>
+    <nav mat-tab-nav-bar>
+      <a mat-tab-link class="no-hover"
+         *ngFor="let link of navLinks"
+         [routerLink]="link.path"
+         routerLinkActive #rla="routerLinkActive"
+         [active]="rla.isActive">
+        {{link.label}}
+      </a>
+    </nav>
+
+    <router-outlet></router-outlet>
+  </mat-card>
+
+
 
 </div>

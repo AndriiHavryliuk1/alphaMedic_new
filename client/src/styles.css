@@ -161,3 +161,11 @@ mat-dialog-actions.mat-dialog-actions {
   width: 100px;
   height: 100px;
 }
+
+.clickable {
+  cursor: pointer;
+}
+
+div > mat-card {
+  margin-bottom: 15px;
+}
