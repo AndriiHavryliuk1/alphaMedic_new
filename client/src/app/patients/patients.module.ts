@@ -24,6 +24,7 @@ import {TeethFormulaComponent} from './patient/teeth-formula/teeth-formula.compo
 import {XRayComponent} from './patient/x-ray/x-ray.component';
 import {CarePlanComponent} from './patient/care-plan/care-plan.component';
 import {DoctorsDairyComponent} from './patient/doctors-dairy/doctors-dairy.component';
+import {InlineSVGModule} from 'ng-inline-svg';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {DoctorsDairyComponent} from './patient/doctors-dairy/doctors-dairy.compo
     MatCardModule,
     MatRadioModule,
     AppointmentsModule,
-    MatTabsModule
+    MatTabsModule,
+    InlineSVGModule
   ],
   providers: [PatientsService],
   exports: [PatientsListComponent, PatientComponent],
