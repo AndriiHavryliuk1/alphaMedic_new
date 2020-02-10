@@ -20,8 +20,6 @@ export class TeethFormulaComponent implements OnInit, AfterViewInit{
   }
 
   ngOnInit() {
-    debugger;
-    console.log(this.lowerTeethChildren);
 
   }
 
@@ -33,24 +31,18 @@ export class TeethFormulaComponent implements OnInit, AfterViewInit{
   }
 
   private modifyFormula(svg) {
-
-    if (svg.id === ("tooth_17_crown_normal")) {
-      debugger;
-    }
-
     if (svg.hasChildNodes()) {
-      for (let i = 0; i < svg.children.length; i++) {
-        if (svg.children[i].id && this.teethForDelete.some((value) => svg.children[i].id && svg.children[i].id.startsWith(value))) {
-          svg.children[i].remove();
-          --i;
-        } else if (svg.children[i].hasChildNodes() && !svg.children[i].id.startsWith("tooth")) {
-          this.modifyFormula(svg.children[i]);
+      for (const tooth of svg.children) {
+        if (tooth.id && tooth.id.indexOf("tooth") > -1 && tooth.id.indexOf("normal") > -1) {
+          tooth.setAttribute("style", "display: inline-block; cursor: pointer;");
+        } else if (tooth.hasChildNodes()) {
+          this.modifyFormula(tooth);
         }
       }
     }
 
-    if (svg.id && this.teethForDelete.some((value) => svg.id && svg.id.startsWith(value))) {
-      svg.remove();
+    if (svg.id && svg.id.indexOf("tooth") > -1 && svg.id.indexOf("normal") > -1) {
+      svg.setAttribute("style", "display: inline-block; cursor: pointer;");
     }
 
     return svg;
