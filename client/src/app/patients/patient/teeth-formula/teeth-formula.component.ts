@@ -35,7 +35,7 @@ export class TeethFormulaComponent implements OnInit, AfterViewInit{
     console.log(getAncestorById("tooth", event.target, ""));
   }
 
-  private modifyFormula(svg) {
+  public modifyFormula(svg) {
     if (svg.hasChildNodes()) {
       for (const tooth of svg.children) {
         if (tooth.id && tooth.id.indexOf("tooth") > -1 && tooth.id.indexOf("normal") > -1) {

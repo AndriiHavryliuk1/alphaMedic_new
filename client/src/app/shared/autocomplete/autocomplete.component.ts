@@ -3,7 +3,7 @@ import {FormControl} from '@angular/forms';
 import {Observable, Subject} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {DOWN_ARROW, ENTER, UP_ARROW} from '@angular/cdk/keycodes';
-import {MatAutocomplete, MatAutocompleteTrigger} from '@angular/material';
+import { MatAutocomplete, MatAutocompleteTrigger } from '@angular/material/autocomplete';
 import {escapeHTML} from '../../utils/utils';
 
 interface IAutoCompleteItem {

@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import {ModifyPatientComponent} from '../add-patient/modify-patient.component';
 import {ActivatedRoute} from '@angular/router';
 import {Patient} from '../../models/patient';
@@ -49,6 +49,10 @@ export class PatientsListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
+  trackByIndexFn(index, item) {
+    return item.id;
   }
 
 }

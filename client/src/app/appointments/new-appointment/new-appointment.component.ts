@@ -1,7 +1,7 @@
 import {Component, HostListener, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DiagnosisService} from '../../services/diagnosis/diagnosis.service';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {PatientsService} from '../../services/patients/patients.service';
 import * as moment from 'moment';
 import {UserSettingsService} from '../../services/user-settings/user-settings.service';

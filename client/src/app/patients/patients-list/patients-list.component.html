@@ -3,7 +3,7 @@
   <button mat-raised-button color="primary" (click)="addNewPatient()">Додати пацієнта</button>
 
   <div class="patients-list">
-    <mat-card *ngFor="let patient of patients">
+    <mat-card *ngFor="let patient of patients; trackBy: trackByIndexFn">
       <div class="row">
         <div class="col">
           <a routerLink="/patients/{{patient.id}}">

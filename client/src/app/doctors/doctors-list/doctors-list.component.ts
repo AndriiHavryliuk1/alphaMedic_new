@@ -20,4 +20,8 @@ export class DoctorsListComponent implements OnInit {
     });
   }
 
+  trackByIndex(index, item) {
+    return item.id;
+  }
+
 }
