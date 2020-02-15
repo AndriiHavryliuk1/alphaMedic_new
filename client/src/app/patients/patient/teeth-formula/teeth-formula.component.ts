@@ -1,5 +1,6 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {LOWER_TEETH, LOWER_TEETH_CHILDREN, UPPER_TEETH, UPPER_TEETH_CHILDREN} from './teeth-helper';
+import {getAncestorById} from '../../../utils/utils';
 
 @Component({
   selector: 'app-teeth-formula',
@@ -24,10 +25,14 @@ export class TeethFormulaComponent implements OnInit, AfterViewInit{
   }
 
   ngAfterViewInit(): void {
-    setTimeout(() => {
-      const teethFormula = document.querySelector('svg');
-      this.modifiedFormula = this.modifyFormula(teethFormula);
-    }, 1000);
+    // setTimeout(() => {
+    //   const teethFormula = document.querySelector('svg');
+    //   this.modifiedFormula = this.modifyFormula(teethFormula);
+    // }, 1000);
+  }
+
+  public onFormulaClickHandler(event) {
+    console.log(getAncestorById("tooth", event.target, ""));
   }
 
   private modifyFormula(svg) {
@@ -35,15 +40,25 @@ export class TeethFormulaComponent implements OnInit, AfterViewInit{
       for (const tooth of svg.children) {
         if (tooth.id && tooth.id.indexOf("tooth") > -1 && tooth.id.indexOf("normal") > -1) {
           tooth.setAttribute("style", "display: inline-block; cursor: pointer;");
+        } else if (tooth.id && tooth.id.indexOf("tooth") > -1 && tooth.id.indexOf("wrapper") > -1 && tooth.tagName !== "rect") {
+          tooth.setAttribute("style", "display: inline-block; cursor: pointer;");
+          tooth.children[0].setAttribute("style", "fill: white;");
+          const parentId = tooth.parentNode.id;
+          tooth.parentNode.id = tooth.id;
+          tooth.id = parentId;
+          tooth.parentNode.setAttribute("style", "display: inline-block; cursor: pointer;");
         } else if (tooth.hasChildNodes()) {
           this.modifyFormula(tooth);
         }
       }
     }
 
-    if (svg.id && svg.id.indexOf("tooth") > -1 && svg.id.indexOf("normal") > -1) {
-      svg.setAttribute("style", "display: inline-block; cursor: pointer;");
-    }
+    // if (svg.id && svg.id.indexOf("tooth") > -1 && svg.id.indexOf("normal") > -1) {
+    //   svg.setAttribute("style", "display: inline-block; cursor: pointer;");
+    // } else if (svg.id && svg.id.indexOf("tooth") > -1 && svg.id.indexOf("wrapper") > -1 && svg.tagName !== "rect") {
+    //   svg.setAttribute("style", "display: inline-block; cursor: pointer;");
+    //   svg.children[0].setAttribute("style", "fill: white;");
+    // }
 
     return svg;
   }

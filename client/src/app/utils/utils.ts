@@ -1,5 +1,3 @@
-
-
 /**
  * Shows/hides the "loading" overlay.
  * @param status - true/false (show/hide)
@@ -20,14 +18,31 @@ export function setLoading(status?) {
  */
 export function escapeHTML(html: string) {
   const __entityMap = {
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
     '"': '&quot;',
-    "'": '&#39;'
+    '\'': '&#39;'
   };
 
   return String(html).replace(/[&<>"']/g, (s) => {
     return __entityMap[s];
   });
+}
+
+
+export function getAncestorById(partialId, currentElem: HTMLElement, finalElemId?) {
+  if (currentElem.id && currentElem.id.indexOf(partialId) > -1) {
+    return currentElem;
+  }
+
+  let parent = currentElem.parentElement;
+  while (parent || (finalElemId && parent.id === finalElemId)) {
+    if (parent.id && parent.id.indexOf(partialId) > -1) {
+      return parent;
+    }
+    parent = parent.parentElement;
+  }
+
+  return null;
 }
