@@ -1,31 +1,8 @@
-<div>
+<div class="row">
 
-  <table class="table table-bordered table-responsive-lg">
-    <tbody>
-    <tr>
-      <td colspan="3"></td>
-      <td *ngFor="let upToothCh of upperTeethChildren" class="clickable">{{upToothCh.number}}</td>
-      <td colspan="3"></td>
-    </tr>
-    <tr>
-      <td *ngFor="let upTooth of upperTeeth" class="clickable">{{upTooth.number}}</td>
-    </tr>
-    <tr>
-      <td *ngFor="let lowTooth of lowerTeeth" class="clickable">{{lowTooth.number}}</td>
-    </tr>
-    <tr>
-      <td colspan="3"></td>
-      <td *ngFor="let lowToothCh of lowerTeethChildren" class="clickable">{{lowToothCh.number}}</td>
-      <td colspan="3"></td>
-    </tr>
-    </tbody>
-  </table>
-
-
-
-  <div id="teeth-formula"
+  <div id="teeth-formula" class="col"
        inlineSVG="assets/images/teeth-formula.svg"
-
-       (click)="onFormulaClickHandler($event)"></div>
+       (click)="onFormulaClickHandler($event)"
+       (onSVGInserted)="modifyFormula($event)"></div>
 
 </div>

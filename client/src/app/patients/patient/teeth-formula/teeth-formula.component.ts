@@ -42,11 +42,7 @@ export class TeethFormulaComponent implements OnInit, AfterViewInit{
           tooth.setAttribute("style", "display: inline-block; cursor: pointer;");
         } else if (tooth.id && tooth.id.indexOf("tooth") > -1 && tooth.id.indexOf("wrapper") > -1 && tooth.tagName !== "rect") {
           tooth.setAttribute("style", "display: inline-block; cursor: pointer;");
-          tooth.children[0].setAttribute("style", "fill: white;");
-          const parentId = tooth.parentNode.id;
-          tooth.parentNode.id = tooth.id;
-          tooth.id = parentId;
-          tooth.parentNode.setAttribute("style", "display: inline-block; cursor: pointer;");
+          tooth.children[0].setAttribute("style", "display: inline-block; cursor: pointer;");
         } else if (tooth.hasChildNodes()) {
           this.modifyFormula(tooth);
         }
