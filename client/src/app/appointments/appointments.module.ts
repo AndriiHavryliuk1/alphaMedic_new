@@ -41,7 +41,6 @@ import {AppointmentsService} from '../services/appointments/appointments.service
     AppointmentsService,
     {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true, useValue: 'uk-UA' }}
   ],
-  exports: [NewAppointmentComponent, AppointmentComponent],
-  entryComponents: [NewAppointmentComponent]
+  exports: [NewAppointmentComponent, AppointmentComponent]
 })
 export class AppointmentsModule { }

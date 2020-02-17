@@ -1,0 +1,7 @@
+.panel-editor {
+  position: absolute;
+  z-index: 10000;
+  border: 1px solid black;
+  padding: 10px;
+  background-color: white;
+}

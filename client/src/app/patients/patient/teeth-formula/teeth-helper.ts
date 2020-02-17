@@ -170,3 +170,20 @@ export const LOWER_TEETH_CHILDREN = [
     imgSrc: ''
   }
 ];
+
+
+export const EMPTY_STATE_QUESTIONS = [
+  {
+    text: "Зуб",
+    nextState: "NATIVE_TOOTH"
+  }, {
+    text: "Відсутній зуб",
+    nextState: "TOOTH_MISSING"
+  }, {
+    text: "Імплант",
+    nextState: "IMPLANT"
+  }, {
+    text: "Проміжна частина протезу",
+    nextState: "TOOTH_BRIDGE"
+  },
+];

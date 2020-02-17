@@ -1,6 +1,8 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ComponentFactoryResolver, OnInit, ViewChild} from '@angular/core';
 import {LOWER_TEETH, LOWER_TEETH_CHILDREN, UPPER_TEETH, UPPER_TEETH_CHILDREN} from './teeth-helper';
 import {getAncestorById} from '../../../utils/utils';
+import {EditPanelComponent} from './edit-panel/edit-panel.component';
+import {PlaceholderDirective} from '../../../shared/placeholder/placeholder.directive';
 
 @Component({
   selector: 'app-teeth-formula',
@@ -15,9 +17,11 @@ export class TeethFormulaComponent implements OnInit, AfterViewInit{
   public lowerTeethChildren = LOWER_TEETH_CHILDREN;
   public modifiedFormula;
 
+  @ViewChild(PlaceholderDirective) panelHost: PlaceholderDirective;
+
   private teethForDelete = ['tooth_16', 'tooth_17', 'tooth_18', 'tooth_26', 'tooth_27', 'tooth_28', 'tooth_36', 'tooth_37', 'tooth_38', 'tooth_46', 'tooth_47', 'tooth_48'];
 
-  constructor() {
+  constructor(private componentFactoryResolver: ComponentFactoryResolver) {
   }
 
   ngOnInit() {
@@ -33,6 +37,10 @@ export class TeethFormulaComponent implements OnInit, AfterViewInit{
 
   public onFormulaClickHandler(event) {
     console.log(getAncestorById("tooth", event.target, ""));
+    const editPanelFactory = this.componentFactoryResolver.resolveComponentFactory(EditPanelComponent);
+    this.panelHost.viewContainerRef.clear();
+    this.panelHost.viewContainerRef.createComponent(editPanelFactory);
+
   }
 
   public modifyFormula(svg) {

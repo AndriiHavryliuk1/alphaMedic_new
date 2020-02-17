@@ -1,14 +1,14 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatTabsModule } from '@angular/material/tabs';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatTabsModule} from '@angular/material/tabs';
 import {PatientsListComponent} from './patients-list/patients-list.component';
 import {ModifyPatientComponent} from './add-patient/modify-patient.component';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -25,6 +25,9 @@ import {XRayComponent} from './patient/x-ray/x-ray.component';
 import {CarePlanComponent} from './patient/care-plan/care-plan.component';
 import {DoctorsDairyComponent} from './patient/doctors-dairy/doctors-dairy.component';
 import {InlineSVGModule} from 'ng-inline-svg';
+import {EditPanelComponent} from './patient/teeth-formula/edit-panel/edit-panel.component';
+import {EditPanelOptionsComponent} from './patient/teeth-formula/edit-panel-options/edit-panel-options.component';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,9 @@ import {InlineSVGModule} from 'ng-inline-svg';
     TeethFormulaComponent,
     XRayComponent,
     CarePlanComponent,
-    DoctorsDairyComponent],
+    DoctorsDairyComponent,
+    EditPanelComponent,
+    EditPanelOptionsComponent],
   imports: [
     BrowserModule,
     CommonModule,
@@ -53,11 +58,11 @@ import {InlineSVGModule} from 'ng-inline-svg';
     MatRadioModule,
     AppointmentsModule,
     MatTabsModule,
-    InlineSVGModule
+    InlineSVGModule,
+    SharedModule
   ],
   providers: [PatientsService],
-  exports: [PatientsListComponent, PatientComponent],
-  entryComponents: [ModifyPatientComponent]
+  exports: [PatientsListComponent, PatientComponent]
 })
 export class PatientsModule {
 }

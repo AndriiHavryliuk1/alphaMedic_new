@@ -24,6 +24,7 @@ const routes: Routes = [
   {path: '', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'doctors', resolve: {doctors: DoctorsListResolver}, component: DoctorsListComponent, canActivate: [AuthGuard]},
   {path: 'appointment', component: AppointmentComponent, canActivate: [AuthGuard]},
+  {path: 'sign-to-appointment', component: AppointmentComponent, canActivate: [AuthGuard]},
   {path: 'patients', resolve: {patients: PatientsListResolver}, component: PatientsListComponent, canActivate: [AuthGuard]},
   {
     path: 'patients/:id', resolve: {patient: PatientResolver}, component: PatientComponent, canActivate: [AuthGuard], children: [
@@ -31,7 +32,7 @@ const routes: Routes = [
       {path: 'photo-protocol', component: PhotoProtocolComponent},
       {path: 'perio-state', component: PerioStateComponent},
       {path: 'teeth-formula', component: TeethFormulaComponent},
-      {path: '', component: TeethFormulaComponent},
+      {path: '', redirectTo: 'teeth-formula', pathMatch: 'full'},
       {path: 'x-ray', component: XRayComponent},
       {path: 'care-plan', component: CarePlanComponent},
       {path: 'doctors-dairy', component: DoctorsDairyComponent}
