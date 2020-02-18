@@ -1,15 +1,16 @@
-import {AfterViewInit, Component, ComponentFactoryResolver, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ComponentFactoryResolver, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {LOWER_TEETH, LOWER_TEETH_CHILDREN, UPPER_TEETH, UPPER_TEETH_CHILDREN} from './teeth-helper';
 import {getAncestorById, retnum} from '../../../utils/utils';
 import {EditPanelComponent} from './edit-panel/edit-panel.component';
 import {PlaceholderDirective} from '../../../shared/placeholder/placeholder.directive';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-teeth-formula',
   templateUrl: './teeth-formula.component.html',
   styleUrls: ['./teeth-formula.component.css']
 })
-export class TeethFormulaComponent implements OnInit, AfterViewInit{
+export class TeethFormulaComponent implements OnInit, OnDestroy, AfterViewInit{
 
   public upperTeeth = UPPER_TEETH;
   public lowerTeeth = LOWER_TEETH;
@@ -20,12 +21,19 @@ export class TeethFormulaComponent implements OnInit, AfterViewInit{
   @ViewChild(PlaceholderDirective) panelHost: PlaceholderDirective;
 
   private teethForDelete = ['tooth_16', 'tooth_17', 'tooth_18', 'tooth_26', 'tooth_27', 'tooth_28', 'tooth_36', 'tooth_37', 'tooth_38', 'tooth_46', 'tooth_47', 'tooth_48'];
+  private closeSub: Subscription;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver) {
   }
 
   ngOnInit() {
 
+  }
+
+  ngOnDestroy(): void {
+    if (this.closeSub) {
+      this.closeSub.unsubscribe();
+    }
   }
 
   ngAfterViewInit(): void {
@@ -38,13 +46,20 @@ export class TeethFormulaComponent implements OnInit, AfterViewInit{
   public onFormulaClickHandler(event) {
     const tooth = getAncestorById("tooth", event.target, "");
     if (tooth) {
-      debugger;
       const editPanelFactory = this.componentFactoryResolver.resolveComponentFactory(EditPanelComponent);
       this.panelHost.viewContainerRef.clear();
       const editPanel = this.panelHost.viewContainerRef.createComponent(editPanelFactory);
       editPanel.instance.state = null;
       editPanel.instance.toothNumber = retnum(tooth.id).toString();
-      editPanel.instance.viewPoint = event.viewPoint;
+      editPanel.instance.viewPoint = {
+        x: event.pageX,
+        y: event.pageY
+      };
+
+      this.closeSub = editPanel.instance.close.subscribe(() => {
+        this.panelHost.viewContainerRef.clear();
+        this.closeSub .unsubscribe();
+      });
     }
 
   }

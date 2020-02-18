@@ -28,6 +28,7 @@ import {InlineSVGModule} from 'ng-inline-svg';
 import {EditPanelComponent} from './patient/teeth-formula/edit-panel/edit-panel.component';
 import {EditPanelOptionsComponent} from './patient/teeth-formula/edit-panel-options/edit-panel-options.component';
 import {SharedModule} from '../shared/shared.module';
+import {ClickOutsideModule} from 'ng-click-outside';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import {SharedModule} from '../shared/shared.module';
     AppointmentsModule,
     MatTabsModule,
     InlineSVGModule,
-    SharedModule
+    SharedModule,
+    ClickOutsideModule
   ],
   providers: [PatientsService],
   exports: [PatientsListComponent, PatientComponent]

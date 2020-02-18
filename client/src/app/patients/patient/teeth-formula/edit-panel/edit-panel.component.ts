@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {EMPTY_STATE_QUESTIONS} from '../teeth-helper';
 
 @Component({
@@ -12,9 +12,9 @@ export class EditPanelComponent implements OnInit, AfterViewInit {
   @Input() viewPoint: {x: number, y: number};
   public questions;
   public title: string;
-  public title: string;
+  @Output() public close = new EventEmitter();
 
-  constructor() {
+  constructor(private elementRef: ElementRef) {
   }
 
   ngOnInit(): void {
@@ -32,11 +32,18 @@ export class EditPanelComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // cxElement.style.left = (event.viewPoint.x - cxElement.clientWidth) + "px";
-    // // need when legend so big and get scrolling
-    // const heightDiff = (legendContainer.clientHeight - Math.abs(scrollBar.scrollTop - e.viewPoint.y));
-    // cxElement.style.top = heightDiff < cxElement.clientHeight ? ((e.viewPoint.y - scrollBar.scrollTop) - Math.abs(heightDiff - cxElement.clientHeight) - 4) + "px"
-    //   : (e.viewPoint.y - scrollBar.scrollTop) + "px";
+    const currentElement = this.elementRef.nativeElement.children[0];
+    currentElement.style.left = this.viewPoint.x + "px";
+    let heightDiff = 0;
+    if (this.viewPoint.y + currentElement.clientHeight > document.body.scrollHeight) {
+      heightDiff = (this.viewPoint.y + currentElement.clientHeight + 15) - document.body.scrollHeight;
+    }
+
+    currentElement.style.top = this.viewPoint.y - heightDiff + "px";
+  }
+
+  public closePanel() {
+    this.close.emit();
   }
 
 }

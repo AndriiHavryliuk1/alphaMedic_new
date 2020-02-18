@@ -7,6 +7,10 @@ a.no-hover {
   text-decoration: none !important;
 }
 
+mat-card.position-initial {
+  position: initial;
+}
+
 /*div.mat-tab-links {*/
 /*  display: table;*/
 /*  width: 100%;*/
