@@ -1,6 +1,6 @@
 <div class="panel-editor">
   <div *ngIf="!state">
-    <div class="card-title"></div>
+    <div class="card-title">{{title}}</div>
     <app-edit-panel-options [questions]="questions" (selected)="emptyStateChanged($event)"></app-edit-panel-options>
 
 

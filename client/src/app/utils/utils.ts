@@ -46,3 +46,8 @@ export function getAncestorById(partialId, currentElem: HTMLElement, finalElemId
 
   return null;
 }
+
+export function retnum(str) {
+  const num = str.replace(/[^0-9]/g, '');
+  return parseInt(num, 10);
+}

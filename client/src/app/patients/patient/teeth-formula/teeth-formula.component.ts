@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, ComponentFactoryResolver, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ComponentFactoryResolver, Input, OnInit, ViewChild} from '@angular/core';
 import {LOWER_TEETH, LOWER_TEETH_CHILDREN, UPPER_TEETH, UPPER_TEETH_CHILDREN} from './teeth-helper';
-import {getAncestorById} from '../../../utils/utils';
+import {getAncestorById, retnum} from '../../../utils/utils';
 import {EditPanelComponent} from './edit-panel/edit-panel.component';
 import {PlaceholderDirective} from '../../../shared/placeholder/placeholder.directive';
 
@@ -36,10 +36,16 @@ export class TeethFormulaComponent implements OnInit, AfterViewInit{
   }
 
   public onFormulaClickHandler(event) {
-    console.log(getAncestorById("tooth", event.target, ""));
-    const editPanelFactory = this.componentFactoryResolver.resolveComponentFactory(EditPanelComponent);
-    this.panelHost.viewContainerRef.clear();
-    this.panelHost.viewContainerRef.createComponent(editPanelFactory);
+    const tooth = getAncestorById("tooth", event.target, "");
+    if (tooth) {
+      debugger;
+      const editPanelFactory = this.componentFactoryResolver.resolveComponentFactory(EditPanelComponent);
+      this.panelHost.viewContainerRef.clear();
+      const editPanel = this.panelHost.viewContainerRef.createComponent(editPanelFactory);
+      editPanel.instance.state = null;
+      editPanel.instance.toothNumber = retnum(tooth.id).toString();
+      editPanel.instance.viewPoint = event.viewPoint;
+    }
 
   }
 
