@@ -1,0 +1,12 @@
+@import "../../../../sass/variables";
+
+.li-option {
+  cursor: pointer;
+  line-height: initial;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.li-option:hover {
+  background-color: map_get($hover-colors, 'light');;
+}

@@ -51,3 +51,14 @@ export function retnum(str) {
   const num = str.replace(/[^0-9]/g, '');
   return parseInt(num, 10);
 }
+
+export function getToothNumberFromNumber(str, isChild?) {
+  let splitedNumber;
+  if (isChild) {
+    const num = retnum(str) + 40;
+    splitedNumber = num.toString().split("");
+  } else {
+    splitedNumber = retnum(str).toString().split("");
+  }
+  return splitedNumber[0] + "." + splitedNumber[1];
+}

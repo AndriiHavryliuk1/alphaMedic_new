@@ -11,7 +11,7 @@ import {NewAppointmentComponent} from '../../appointments/new-appointment/new-ap
 @Component({
   selector: 'app-patients-list',
   templateUrl: './patients-list.component.html',
-  styleUrls: ['./patients-list.component.css']
+  styleUrls: ['./patients-list.component.scss']
 })
 export class PatientsListComponent implements OnInit, OnDestroy {
   public patients: Patient[];

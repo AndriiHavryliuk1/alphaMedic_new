@@ -5,7 +5,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 @Component({
   selector: 'app-svg-icon',
   templateUrl: './svg-icon.component.html',
-  styleUrls: ['./svg-icon.component.css']
+  styleUrls: ['./svg-icon.component.scss']
 })
 export class SvgIconComponent implements OnInit {
   @Input()

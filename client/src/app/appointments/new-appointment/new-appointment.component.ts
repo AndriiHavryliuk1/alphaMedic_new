@@ -11,7 +11,7 @@ import {AppointmentsService} from '../../services/appointments/appointments.serv
 @Component({
   selector: 'app-new-appointment',
   templateUrl: './new-appointment.component.html',
-  styleUrls: ['./new-appointment.component.css']
+  styleUrls: ['./new-appointment.component.scss']
 })
 export class NewAppointmentComponent implements OnInit {
 

@@ -8,7 +8,7 @@ import {Constants} from '../../utils/constants';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css']
+  styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
   public minDate = new Date('01-01-1900');

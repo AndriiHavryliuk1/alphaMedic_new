@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ComponentFactoryResolver, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {LOWER_TEETH, LOWER_TEETH_CHILDREN, UPPER_TEETH, UPPER_TEETH_CHILDREN} from './teeth-helper';
-import {getAncestorById, retnum} from '../../../utils/utils';
+import {getAncestorById, getToothNumberFromNumber} from '../../../utils/utils';
 import {EditPanelComponent} from './edit-panel/edit-panel.component';
 import {PlaceholderDirective} from '../../../shared/placeholder/placeholder.directive';
 import {Subscription} from 'rxjs';
@@ -8,7 +8,7 @@ import {Subscription} from 'rxjs';
 @Component({
   selector: 'app-teeth-formula',
   templateUrl: './teeth-formula.component.html',
-  styleUrls: ['./teeth-formula.component.css']
+  styleUrls: ['./teeth-formula.component.scss']
 })
 export class TeethFormulaComponent implements OnInit, OnDestroy, AfterViewInit{
 
@@ -50,7 +50,7 @@ export class TeethFormulaComponent implements OnInit, OnDestroy, AfterViewInit{
       this.panelHost.viewContainerRef.clear();
       const editPanel = this.panelHost.viewContainerRef.createComponent(editPanelFactory);
       editPanel.instance.state = null;
-      editPanel.instance.toothNumber = retnum(tooth.id).toString();
+      editPanel.instance.toothNumber = getToothNumberFromNumber(tooth.id, tooth.id.indexOf("child") > -1);
       editPanel.instance.viewPoint = {
         x: event.pageX,
         y: event.pageY

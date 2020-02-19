@@ -4,7 +4,7 @@ import {EMPTY_STATE_QUESTIONS} from '../teeth-helper';
 @Component({
   selector: 'app-edit-panel',
   templateUrl: './edit-panel.component.html',
-  styleUrls: ['./edit-panel.component.css']
+  styleUrls: ['./edit-panel.component.scss']
 })
 export class EditPanelComponent implements OnInit, AfterViewInit {
   @Input() state: string;
