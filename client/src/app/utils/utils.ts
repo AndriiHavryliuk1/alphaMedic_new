@@ -47,6 +47,22 @@ export function getAncestorById(partialId, currentElem: HTMLElement, finalElemId
   return null;
 }
 
+export function getAncestorByClass(classForSearch, currentElem: HTMLElement) {
+  if (currentElem.classList.contains(classForSearch)) {
+    return currentElem;
+  }
+
+  let parent = currentElem.parentElement;
+  while (parent) {
+    if (parent.id && parent.classList.contains(classForSearch)) {
+      return parent;
+    }
+    parent = parent.parentElement;
+  }
+
+  return null;
+}
+
 export function retnum(str) {
   const num = str.replace(/[^0-9]/g, '');
   return parseInt(num, 10);

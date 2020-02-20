@@ -1,9 +1,28 @@
-<div class="panel-editor" (clickOutside)="closePanel()" delayClickOutsideInit="true">
-  <div *ngIf="!state">
-    <div class="mat-body-2">{{title}}</div>
-    <app-edit-panel-options [questions]="questions" (selected)="emptyStateChanged($event)"></app-edit-panel-options>
+<div class="panel-editor" (appClickOut)="closePanel()" rootClassForSkip="not-close">
+  <div class="mat-body-2 title">
+    <mat-icon *ngIf="initialState !== state" class="back-icon not-close" (click)="backToPreviousState()">keyboard_backspace</mat-icon>
+    <span>{{title}}</span>
+  </div>
+  <div *ngIf="!state" class="not-close">
+    <app-edit-panel-options [questions]="questions" (selected)="rootStateChanged($event)"></app-edit-panel-options>
+  </div>
 
+  <div *ngIf="state === 'TOOTH_MISSING'" class="not-close">
+    <app-edit-panel-options [questions]="questions"
+                            (selected)="removedToothStateChanged($event)"></app-edit-panel-options>
+  </div>
 
+  <div *ngIf="state === 'EARLIER_CARE_QUESTION'" class="not-close">
+    <div>Попереднє лікування?</div>
+    <div class="text-centered content-centered custom-row ">
+      <div class="col"><mat-icon class="pointer not-close" (click)="nativeToothQuestionStateChanged('EARLIER_CARE_STATE')">add</mat-icon></div>
+      <div class="col"><mat-icon class="pointer not-close" (click)="nativeToothQuestionStateChanged('HEALTH_TOOTH_QUESTION')">remove</mat-icon></div>
+    </div>
+  </div>
+
+  <div *ngIf="state === 'HEALTH_TOOTH_QUESTION'" class="not-close">
+    <app-edit-panel-options [questions]="questions"
+                            (selected)="healthToothQuestionChanged($event)"></app-edit-panel-options>
   </div>
 
 </div>

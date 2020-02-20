@@ -172,10 +172,10 @@ export const LOWER_TEETH_CHILDREN = [
 ];
 
 
-export const EMPTY_STATE_QUESTIONS = [
+export const ROOT_STATE_QUESTIONS = [
   {
     text: "Зуб",
-    nextState: "NATIVE_TOOTH"
+    nextState: "EARLIER_CARE_QUESTION"
   }, {
     text: "Відсутній зуб",
     nextState: "TOOTH_MISSING"
@@ -186,4 +186,27 @@ export const EMPTY_STATE_QUESTIONS = [
     text: "Проміжна частина протезу",
     nextState: "TOOTH_BRIDGE"
   },
+];
+
+export const REMOVED_TOOTH_STATE_QUESTIONS = [
+  {
+    text: "Адентія",
+    state: "ADENTIA"
+  }, {
+    text: "Ретинований",
+    state: "RETINATED"
+  }, {
+    text: "Видалений",
+    state: "REMOVED"
+  }
+];
+
+export const HEALTH_TOOTH_QUESTIONS = [
+  {
+    text: "Здоровий",
+    state: "HEALTHY_STATE"
+  }, {
+    text: "Хворий",
+    nextState: "SICK_TOOTH_STATE"
+  }
 ];

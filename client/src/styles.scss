@@ -111,6 +111,10 @@ body.is-loading .main-content {
   flex-direction: column;
 }
 
+.custom-row {
+  display: flex;
+}
+
 .auth-container > * {
   width: 100%;
 }
@@ -130,6 +134,10 @@ body.is-loading .main-content {
 
 .color {
   color: #66C3D0;
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 .mat-dialog-content .mat-form-field {
