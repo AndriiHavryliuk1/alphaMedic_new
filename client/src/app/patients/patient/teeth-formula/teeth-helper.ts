@@ -204,9 +204,38 @@ export const REMOVED_TOOTH_STATE_QUESTIONS = [
 export const HEALTH_TOOTH_QUESTIONS = [
   {
     text: "Здоровий",
-    state: "HEALTHY_STATE"
+    state: "HEALTHY"
   }, {
     text: "Хворий",
-    nextState: "SICK_TOOTH_STATE"
+    nextState: "SICK_TOOTH"
+  }
+];
+
+export const TEETH_CROWN_STATES = [
+  {
+    text: "Культя",
+    state: "CULT"
+  }, {
+    text: "Реставрація/пломба",
+    state: "DENTAL_FILLING"
+  }, {
+    text: "Тимчасова пломба",
+    state: "TEMPORARY_DENTAL_FILLING"
+  }, {
+    text: "Ортопедична конструкція",
+    state: "ORTHOPEDIC_CONSTRUCTION"
+  }
+];
+
+export const ROOT_STATES = [
+  {
+    text: "Ентодонтія",
+    state: "CULT"
+  }, {
+    text: "Резекція верхівки",
+    state: "RESECTION_OF_APEX"
+  }, {
+    text: "Гемісекція",
+    state: "HEMISECTION"
   }
 ];

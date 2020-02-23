@@ -3,8 +3,8 @@ import {FormControl} from '@angular/forms';
 import {Observable, Subject} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {DOWN_ARROW, ENTER, UP_ARROW} from '@angular/cdk/keycodes';
-import { MatAutocomplete, MatAutocompleteTrigger } from '@angular/material/autocomplete';
-import {escapeHTML} from '../../utils/utils';
+import {MatAutocomplete, MatAutocompleteTrigger} from '@angular/material/autocomplete';
+import {escapeHTML, sortItemsByText} from '../../utils/utils';
 
 interface IAutoCompleteItem {
   text: string;
@@ -25,6 +25,7 @@ export class AutocompleteComponent implements OnInit, OnChanges {
   @Input() public placeholder: string;
   @Input() public materialIcon: string;
   @Input() public menuClass: string;
+  @Input() public floatLabel: string;
   @Output() public valueChanged = new Subject<IAutoCompleteItem>();
   @ViewChild(MatAutocompleteTrigger, {static: false}) public autocompleteTrigger: MatAutocompleteTrigger;
 
@@ -45,6 +46,7 @@ export class AutocompleteComponent implements OnInit, OnChanges {
     this.currentValue = this.selectedItem;
     this.searchText = this.selectedItem ? this.selectedItem.text : '';
     this.myControl = new FormControl(this.searchText);
+    sortItemsByText(this.items);
     this.filteredOptions = this.myControl.valueChanges
       .pipe(
         startWith(''),
@@ -57,8 +59,7 @@ export class AutocompleteComponent implements OnInit, OnChanges {
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes.selectedItem && !changes.selectedItem.firstChange) {
-      this.searchText = this.selectedItem ? this.selectedItem.text : '';
-      this.myControl.setValue(this.searchText);
+      this.setFormControlValue();
     }
   }
 
@@ -70,6 +71,7 @@ export class AutocompleteComponent implements OnInit, OnChanges {
     if (this.currentValue !== this.selectedItem) {
       this.selectedItem = this.currentValue;
       this.valueChanged.next(this.selectedItem);
+      this.setFormControlValue();
     }
   }
 
@@ -77,8 +79,8 @@ export class AutocompleteComponent implements OnInit, OnChanges {
    * Handler for onAutoCompleteOpened callback
    */
   public onAutoCompleteOpened() {
-    this.elementRef.nativeElement.children[0].classList.add("menu-showing");
-    const cdkOverlayContainer = document.getElementsByClassName("cdk-overlay-container")[0];
+    this.elementRef.nativeElement.children[0].classList.add('menu-showing');
+    const cdkOverlayContainer = document.getElementsByClassName('cdk-overlay-container')[0];
     if (cdkOverlayContainer) {
       cdkOverlayContainer.addEventListener('keydown', this.onKeyDown.bind(this), true);
     }
@@ -114,11 +116,16 @@ export class AutocompleteComponent implements OnInit, OnChanges {
     }
   }
 
+  private setFormControlValue() {
+    this.searchText = this.selectedItem ? this.selectedItem.text : '';
+    this.myControl.setValue(this.searchText);
+  }
+
   /**
    * Filter function to show correct result in dropdown
    */
   private filter(value: string | IAutoCompleteItem): IAutoCompleteItem[] {
-    this.searchText = typeof value === 'string' ? value.toLowerCase() : (!value ? "" : value.text.toLowerCase());
+    this.searchText = typeof value === 'string' ? value.toLowerCase() : (!value ? '' : value.text.toLowerCase());
     if (this.selectedItem && this.selectedItem.text === this.searchText) {
       return [];
     }
@@ -128,8 +135,10 @@ export class AutocompleteComponent implements OnInit, OnChanges {
       this.onOptionChanged(null);
     }
 
+    sortItemsByText(results);
+
     return this.isNotFoundItem ? [{
-      id: "notFound",
+      id: 'notFound',
       text: this.notFoundText,
       ngClass: 'not-found'
     }] : results;

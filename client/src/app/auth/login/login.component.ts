@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(userData).pipe(finalize(() => setLoading(false))).subscribe(async (data) => {
       await this.appInitializerService.getAppData();
-      this.router.navigate(['user']);
+      this.router.navigateByUrl(this.authService.getReturnUrl() || '/');
     }, (error: Error) => {
       this.alertService.showAlert(error.message, Constants.ALERT_DURATION.ERROR, Constants.ALERT_TYPES.ERROR);
     });

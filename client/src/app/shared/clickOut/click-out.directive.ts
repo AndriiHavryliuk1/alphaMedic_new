@@ -16,7 +16,8 @@ export class ClickOutDirective {
   @HostListener('window:click', ['$event'])
   onClickListener(event) {
     if (!this.firstClick && !this.elementRef.nativeElement.contains(event.target)
-      && !(this.rootClassForSkip && getAncestorByClass(this.rootClassForSkip, event.target))) {
+      && !(this.rootClassForSkip && getAncestorByClass(this.rootClassForSkip, event.target))
+      && !getAncestorByClass("mat-autocomplete-panel", event.target)) {
       this.appClickOut.emit();
     }
     this.firstClick = false;

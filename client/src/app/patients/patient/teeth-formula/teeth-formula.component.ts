@@ -51,6 +51,7 @@ export class TeethFormulaComponent implements OnInit, OnDestroy, AfterViewInit{
       const editPanel = this.panelHost.viewContainerRef.createComponent(editPanelFactory);
       editPanel.instance.state = null;
       editPanel.instance.toothNumber = getToothNumberFromNumber(tooth.id, tooth.id.indexOf("child") > -1);
+      editPanel.instance.toothId = tooth.id;
       editPanel.instance.viewPoint = {
         x: event.pageX,
         y: event.pageY

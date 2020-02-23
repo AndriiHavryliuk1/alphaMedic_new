@@ -13,6 +13,7 @@ import {User} from '../../models/user';
 export class AuthService {
 
   public user = new BehaviorSubject<User>(null);
+  private returnUrl = '';
 
   constructor(private http: HttpClient, private authResource: AuthResource) {
 
@@ -36,6 +37,16 @@ export class AuthService {
   public logOut() {
     localStorage.removeItem('jwt');
     this.user.next(null);
+  }
+
+  public setReturnUrl(returnUrl) {
+    this.returnUrl = returnUrl;
+  }
+
+  public getReturnUrl() {
+    const returnUrl = this.returnUrl;
+    this.returnUrl = '';
+    return returnUrl;
   }
 
   private errorHandler(response) {

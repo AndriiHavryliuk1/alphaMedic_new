@@ -78,3 +78,14 @@ export function getToothNumberFromNumber(str, isChild?) {
   }
   return splitedNumber[0] + "." + splitedNumber[1];
 }
+
+export function sortItemsByText(items) {
+  items.sort((a, b) => {
+    if (a.text > b.text) {
+      return -1;
+    } else if (a.text < b.text) {
+      return 1;
+    }
+    return 0;
+  });
+}

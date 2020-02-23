@@ -1,6 +1,8 @@
 <div class="panel-editor" (appClickOut)="closePanel()" rootClassForSkip="not-close">
   <div class="mat-body-2 title">
-    <mat-icon *ngIf="initialState !== state" class="back-icon not-close" (click)="backToPreviousState()">keyboard_backspace</mat-icon>
+    <mat-icon *ngIf="initialState !== state" class="back-icon not-close" (click)="backToPreviousState()">
+      keyboard_backspace
+    </mat-icon>
     <span>{{title}}</span>
   </div>
   <div *ngIf="!state" class="not-close">
@@ -15,14 +17,63 @@
   <div *ngIf="state === 'EARLIER_CARE_QUESTION'" class="not-close">
     <div>Попереднє лікування?</div>
     <div class="text-centered content-centered custom-row ">
-      <div class="col"><mat-icon class="pointer not-close" (click)="nativeToothQuestionStateChanged('EARLIER_CARE_STATE')">add</mat-icon></div>
-      <div class="col"><mat-icon class="pointer not-close" (click)="nativeToothQuestionStateChanged('HEALTH_TOOTH_QUESTION')">remove</mat-icon></div>
+      <div class="col">
+        <mat-icon class="pointer not-close" (click)="nativeToothQuestionStateChanged('EARLIER_CARE_STATE')">add
+        </mat-icon>
+      </div>
+      <div class="col">
+        <mat-icon class="pointer not-close" (click)="nativeToothQuestionStateChanged('HEALTH_TOOTH_QUESTION')">remove
+        </mat-icon>
+      </div>
     </div>
   </div>
 
   <div *ngIf="state === 'HEALTH_TOOTH_QUESTION'" class="not-close">
     <app-edit-panel-options [questions]="questions"
                             (selected)="healthToothQuestionChanged($event)"></app-edit-panel-options>
+  </div>
+
+
+  <div *ngIf="state === 'EARLIER_CARE_STATE'">
+    <div>
+      <div class="mat-body-2">Коронка</div>
+      <div>
+        <app-autocomplete [items]="earlierCrowns"
+                          (valueChanged)="onEarlierCrownsChanged($event)"
+                          [selectedItem]="selectedEarlierCrown"
+                          floatLabel="never"
+                          placeholder="Дефекти коронки">
+        </app-autocomplete>
+      </div>
+      <div *ngIf="showDentalFillingPanel" class="custom-row not-close">
+        <div id="Dental-filling-panel"
+             class="content-centered"
+             [inlineSVG]="showFrontDentalFilling ? 'assets/images/dental-filling-front.svg' : 'assets/images/dental-filling-rear.svg'"
+             (click)="onDentalFillingPanelClickHandler($event)"></div>
+        <div>
+          <div class="mat-body-2">Стан</div>
+          <app-edit-panel-options [questions]="dentalFillingValues"
+                                  (selected)="removedToothStateChanged($event)"></app-edit-panel-options>
+        </div>
+
+
+      </div>
+
+    </div>
+    <div class="mat-body-2">Корінь</div>
+
+    <div>
+      <app-autocomplete [items]="earlierRoots"
+                        (valueChanged)="onEarlierRootsChanged($event)"
+                        [selectedItem]="selectedEarlierRoot"
+                        floatLabel="never"
+                        placeholder="Дефекти кореня">
+      </app-autocomplete>
+    </div>
+    <div>
+
+    </div>
+
   </div>
 
 </div>

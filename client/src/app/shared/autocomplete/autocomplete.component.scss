@@ -2,6 +2,9 @@
   pointer-events: none;
 }
 
+.input-styles {
+  width: calc(100% - 25px);
+}
 
 .mat-autocomplete-form {
   position: relative;
