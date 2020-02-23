@@ -117,9 +117,9 @@ export class EditPanelComponent implements OnInit, AfterViewInit {
     } else {
       this.showDentalFillingPanel = false;
     }
-    if (value && value.state) {
-      this.state = value.state;
-    }
+    // if (value && value.state) {
+    //   this.state = value.state;
+    // }
     console.log(value);
   }
 
