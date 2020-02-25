@@ -1,31 +1,9 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {APP_INITIALIZER, NgModule} from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatSelectModule } from '@angular/material/select';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
-import {DoctorsListComponent} from './doctors/doctors-list/doctors-list.component';
-import {DoctorsSingleViewComponent} from './doctors/doctors-single-view/doctors-single-view.component';
-import {RegistrationComponent} from './auth/registration/registration.component';
-import {LoginComponent} from './auth/login/login.component';
-import {UserSingleViewComponent} from './user/user-single-view/user-single-view.component';
-import {HomeComponent} from './home/home.component';
-import {DepartmentsListComponent} from './departments/departments-list/departments-list.component';
-import {DepartmentsService} from './services/departments.service';
-import {DoctorsService} from './services/doctors/doctors.service';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {DoctorsListResolver} from './services/doctors/doctors-list-resolver.service';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {AuthService} from './services/auth/auth.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptorService} from './services/auth/auth-interceptor.service';
@@ -36,45 +14,23 @@ import {AppointmentsModule} from './appointments/appointments.module';
 import {ServicesService} from './services/services/services.service';
 import {DiagnosisService} from './services/diagnosis/diagnosis.service';
 import {TeethService} from './services/teeth/teeth.service';
+import {AuthModule} from './auth/auth.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    DoctorsListComponent,
-    DoctorsSingleViewComponent,
-    RegistrationComponent,
-    LoginComponent,
-    UserSingleViewComponent,
-    HomeComponent,
-    DepartmentsListComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
     HttpClientModule,
-    ReactiveFormsModule,
-    MatButtonToggleModule,
-    MatInputModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatToolbarModule,
-    MatDatepickerModule,
-    MatSnackBarModule,
-    MatRadioModule,
-    MatNativeDateModule,
-    BrowserAnimationsModule,
     SharedModule,
     PatientsModule,
-    AppointmentsModule
+    AppointmentsModule,
+    AuthModule
   ],
   providers: [
-    DepartmentsService,
-    DoctorsService,
-    DoctorsListResolver,
     ServicesService,
     DiagnosisService,
     TeethService,

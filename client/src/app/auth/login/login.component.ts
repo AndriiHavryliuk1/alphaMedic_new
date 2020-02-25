@@ -55,9 +55,9 @@ export class LoginComponent implements OnInit {
       password: sha256(this.password.value)
     };
 
-    this.authService.login(userData).pipe(finalize(() => setLoading(false))).subscribe(async (data) => {
+    this.authService.login(userData).pipe(finalize(() => setLoading(false))).subscribe(async () => {
       await this.appInitializerService.getAppData();
-      this.router.navigateByUrl(this.authService.getReturnUrl() || '/');
+      this.router.navigateByUrl(this.authService.getReturnUrl());
     }, (error: Error) => {
       this.alertService.showAlert(error.message, Constants.ALERT_DURATION.ERROR, Constants.ALERT_TYPES.ERROR);
     });
