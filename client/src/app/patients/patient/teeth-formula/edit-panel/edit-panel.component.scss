@@ -16,3 +16,12 @@
   float: left;
   cursor: pointer;
 }
+
+#dental-filling-panel {
+  display: flex;
+  margin-right: 10px;
+}
+
+mat-form-field {
+  width: 100% !important;
+}

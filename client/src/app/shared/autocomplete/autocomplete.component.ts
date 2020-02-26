@@ -26,6 +26,7 @@ export class AutocompleteComponent implements OnInit, OnChanges {
   @Input() public materialIcon: string;
   @Input() public menuClass: string;
   @Input() public floatLabel: string;
+  @Input() public formClass: string;
   @Output() public valueChanged = new Subject<IAutoCompleteItem>();
   @ViewChild(MatAutocompleteTrigger, {static: false}) public autocompleteTrigger: MatAutocompleteTrigger;
 

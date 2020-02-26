@@ -21,14 +21,13 @@ export class EditPanelComponent implements OnInit, AfterViewInit {
   public questions;
   public title: string;
   public initialState: string;
-  public earlierCrowns;
-  public earlierRoots;
+  public possibleCrownStates;
+  public possibleRootStates;
   public selectedEarlierCrown = null;
   public selectedEarlierRoot = null;
   public showDentalFillingPanel;
   public showFrontDentalFilling;
   public dentalFillingValues;
-  public currentState;
 
   private statesHistory = [];
 
@@ -58,9 +57,9 @@ export class EditPanelComponent implements OnInit, AfterViewInit {
         this.title = "Зуб " + this.toothNumber + " відсутній зуб";
         this.questions = REMOVED_TOOTH_STATE_QUESTIONS.slice();
         break;
-      case "EARLIER_CARE_STATE":
-        this.earlierCrowns = TEETH_CROWN_STATES.slice();
-        this.earlierRoots = ROOT_STATES.slice();
+      case "SICK_TOOTH":
+        this.possibleCrownStates = TEETH_CROWN_STATES.slice();
+        this.possibleRootStates = ROOT_STATES.slice();
         break;
       case "HEALTH_TOOTH_QUESTION":
         this.questions = HEALTH_TOOTH_QUESTIONS.slice();
@@ -75,8 +74,8 @@ export class EditPanelComponent implements OnInit, AfterViewInit {
   healthToothQuestionChanged(value) {
     if (value.state) {
       this.closePanel();
-    } else if (value.nextState) {
-      this.state = value.nextState;
+    } else if (value.nextPanelState) {
+      this.state = value.nextPanelState;
       this.init();
     }
   }
@@ -88,18 +87,13 @@ export class EditPanelComponent implements OnInit, AfterViewInit {
   }
 
   rootStateChanged(value) {
-    switch (value.nextState) {
+    switch (value.nextPanelState) {
+      case "HEALTH_TOOTH_QUESTION":
       case "TOOTH_MISSING":
-        this.state = value.nextState;
-        this.init();
-        break;
-      case 'EARLIER_CARE_QUESTION':
-        this.state = value.nextState;
+        this.state = value.nextPanelState;
         this.init();
         break;
       case "IMPLANT":
-        this.closePanel();
-        break;
       case "TOOTH_BRIDGE":
         this.closePanel();
         break;
@@ -108,7 +102,7 @@ export class EditPanelComponent implements OnInit, AfterViewInit {
     }
   }
 
-  onEarlierCrownsChanged(value) {
+  onCrownsChanged(value) {
     if (value && value.state.indexOf("DENTAL_FILLING") > -1) {
       const lastFrontTooth = this.toothId.indexOf("child") > -1 ? 3 : 5;
       this.showDentalFillingPanel = true;
@@ -117,9 +111,7 @@ export class EditPanelComponent implements OnInit, AfterViewInit {
     } else {
       this.showDentalFillingPanel = false;
     }
-    // if (value && value.state) {
-    //   this.state = value.state;
-    // }
+
     console.log(value);
   }
 
@@ -131,8 +123,8 @@ export class EditPanelComponent implements OnInit, AfterViewInit {
     console.log(value);
   }
 
-  nativeToothQuestionStateChanged(nextState) {
-    this.state = nextState;
+  nativeToothQuestionStateChanged(nextPanelState) {
+    this.state = nextPanelState;
     this.init();
   }
 

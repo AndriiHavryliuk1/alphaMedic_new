@@ -175,16 +175,16 @@ export const LOWER_TEETH_CHILDREN = [
 export const ROOT_STATE_QUESTIONS = [
   {
     text: "Зуб",
-    nextState: "EARLIER_CARE_QUESTION"
+    nextPanelState: "HEALTH_TOOTH_QUESTION"
   }, {
     text: "Відсутній зуб",
-    nextState: "TOOTH_MISSING"
+    nextPanelState: "TOOTH_MISSING"
   }, {
     text: "Імплант",
-    nextState: "IMPLANT"
+    state: "IMPLANT"
   }, {
     text: "Проміжна частина протезу",
-    nextState: "TOOTH_BRIDGE"
+    state: "TOOTH_BRIDGE"
   },
 ];
 
@@ -207,23 +207,23 @@ export const HEALTH_TOOTH_QUESTIONS = [
     state: "HEALTHY"
   }, {
     text: "Хворий",
-    nextState: "SICK_TOOTH"
+    nextPanelState: "SICK_TOOTH"
   }
 ];
 
 export const TEETH_CROWN_STATES = [
   {
     text: "Культя",
-    state: "CULT"
+    crownState: "CULT"
   }, {
     text: "Реставрація/пломба",
-    state: "DENTAL_FILLING"
+    crownState: "DENTAL_FILLING"
   }, {
     text: "Тимчасова пломба",
-    state: "TEMPORARY_DENTAL_FILLING"
+    crownState: "TEMPORARY_DENTAL_FILLING"
   }, {
     text: "Ортопедична конструкція",
-    state: "ORTHOPEDIC_CONSTRUCTION"
+    crownState: "ORTHOPEDIC_CONSTRUCTION"
   }
 ];
 
