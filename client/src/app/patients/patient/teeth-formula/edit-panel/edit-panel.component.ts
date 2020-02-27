@@ -103,7 +103,8 @@ export class EditPanelComponent implements OnInit, AfterViewInit {
   }
 
   onCrownsChanged(value) {
-    if (value && value.state.indexOf("DENTAL_FILLING") > -1) {
+    console.log(value);
+    if (value && value.crownState.indexOf("DENTAL_FILLING") > -1) {
       const lastFrontTooth = this.toothId.indexOf("child") > -1 ? 3 : 5;
       this.showDentalFillingPanel = true;
       this.showFrontDentalFilling = +this.toothNumber.split(".")[1] <= lastFrontTooth;

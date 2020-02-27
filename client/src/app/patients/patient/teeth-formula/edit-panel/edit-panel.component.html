@@ -24,13 +24,11 @@
     <div>
       <div class="mat-body-2">Коронка</div>
       <div>
-        <app-autocomplete [items]="possibleCrownStates"
-                          (valueChanged)="onCrownsChanged($event)"
-                          [selectedItem]="selectedEarlierCrown"
-                          formClass="full-width"
-                          floatLabel="never"
-                          placeholder="Дефекти коронки">
-        </app-autocomplete>
+        <app-multi-value-editor (changed)="onCrownsChanged($event)"
+                                formClass="full-width"
+                                placeholder="Дефекти коронки"
+                                [possibleItems]="possibleCrownStates"
+        ></app-multi-value-editor>
       </div>
       <div *ngIf="showDentalFillingPanel" class="custom-row not-close">
         <div id="dental-filling-panel"
