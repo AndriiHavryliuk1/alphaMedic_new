@@ -63,8 +63,7 @@ import {ClickOutsideModule} from 'ng-click-outside';
     SharedModule,
     ClickOutsideModule
   ],
-  providers: [PatientsService],
-  exports: [PatientsListComponent, PatientComponent]
+  providers: [PatientsService]
 })
 export class PatientsModule {
 }

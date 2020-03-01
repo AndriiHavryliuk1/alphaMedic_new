@@ -15,6 +15,7 @@ import {ServicesService} from './services/services/services.service';
 import {DiagnosisService} from './services/diagnosis/diagnosis.service';
 import {TeethService} from './services/teeth/teeth.service';
 import {AuthModule} from './auth/auth.module';
+import {PatientsRoutingModule} from './patients/patients-routing.module';
 
 @NgModule({
   declarations: [
@@ -24,8 +25,8 @@ import {AuthModule} from './auth/auth.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    PatientsRoutingModule,
     HttpClientModule,
-    SharedModule,
     PatientsModule,
     AppointmentsModule,
     AuthModule
