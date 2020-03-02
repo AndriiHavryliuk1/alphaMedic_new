@@ -6,7 +6,7 @@ import {AuthGuard} from './guards/auth.guard';
 import {AppointmentComponent} from './appointments/appointment/appointment.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'patients', pathMatch: 'full'},
+  {path: 'patients', loadChildren: () => import('./patients/patients.module').then(m => m.PatientsModule)},
   {path: 'appointment', component: AppointmentComponent, canActivate: [AuthGuard]},
   {path: 'sign-to-appointment', component: AppointmentComponent, canActivate: [AuthGuard]},
   {path: 'sign-in', component: LoginComponent},

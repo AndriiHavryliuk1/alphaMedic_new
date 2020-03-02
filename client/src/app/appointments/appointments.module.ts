@@ -8,7 +8,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import {ReactiveFormsModule} from '@angular/forms';
-import {BrowserModule} from '@angular/platform-browser';
 import {RouterModule} from '@angular/router';
 import {NewAppointmentComponent} from './new-appointment/new-appointment.component';
 import {AppointmentComponent} from './appointment/appointment.component';
@@ -21,7 +20,6 @@ import {AppointmentsService} from '../services/appointments/appointments.service
 @NgModule({
   declarations: [NewAppointmentComponent, AppointmentComponent],
   imports: [
-    BrowserModule,
     CommonModule,
     MatIconModule,
     MatButtonModule,

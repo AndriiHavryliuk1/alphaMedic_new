@@ -8,8 +8,6 @@ import {AuthService} from './services/auth/auth.service';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthInterceptorService} from './services/auth/auth-interceptor.service';
 import {appInitializerFactory, AppInitializerService} from './services/app/app-initializer.service';
-import {SharedModule} from './shared/shared.module';
-import {PatientsModule} from './patients/patients.module';
 import {AppointmentsModule} from './appointments/appointments.module';
 import {ServicesService} from './services/services/services.service';
 import {DiagnosisService} from './services/diagnosis/diagnosis.service';
@@ -27,7 +25,6 @@ import {PatientsRoutingModule} from './patients/patients-routing.module';
     AppRoutingModule,
     PatientsRoutingModule,
     HttpClientModule,
-    PatientsModule,
     AppointmentsModule,
     AuthModule
   ],

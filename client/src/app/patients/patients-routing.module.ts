@@ -14,7 +14,7 @@ import {PatientsListComponent} from './patients-list/patients-list.component';
 import {PatientsListResolver} from '../services/patients/patients-list-resolver.service';
 
 const routes: Routes = [
-  {path: 'patients', resolve: {patients: PatientsListResolver},
+  {path: '', resolve: {patients: PatientsListResolver},
     component: PatientsListComponent,
     canActivate: [AuthGuard]
    // loadChildren: () => import("./patients/patients.module").then(m => m.PatientsModule)
