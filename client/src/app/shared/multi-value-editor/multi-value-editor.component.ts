@@ -12,7 +12,7 @@ interface IMultiValueItem {
 @Component({
   selector: 'app-multi-value-editor',
   templateUrl: './multi-value-editor.component.html',
-  styleUrls: ['./multi-value-editor.component.css'],
+  styleUrls: ['./multi-value-editor.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MultiValueEditorComponent implements OnInit {

@@ -174,68 +174,140 @@ export const LOWER_TEETH_CHILDREN = [
 
 export const ROOT_STATE_QUESTIONS = [
   {
-    text: "Зуб",
-    nextPanelState: "HEALTH_TOOTH_QUESTION"
+    text: 'Зуб',
+    nextPanelState: 'HEALTH_TOOTH_QUESTION'
   }, {
-    text: "Відсутній зуб",
-    nextPanelState: "TOOTH_MISSING"
+    text: 'Відсутній зуб',
+    nextPanelState: 'TOOTH_MISSING'
   }, {
-    text: "Імплант",
-    state: "IMPLANT"
+    text: 'Імплант',
+    state: 'IMPLANT'
   }, {
-    text: "Проміжна частина протезу",
-    state: "TOOTH_BRIDGE"
+    text: 'Проміжна частина протезу',
+    state: 'TOOTH_BRIDGE'
   },
 ];
 
 export const REMOVED_TOOTH_STATE_QUESTIONS = [
   {
-    text: "Адентія",
-    state: "ADENTIA"
+    text: 'Адентія',
+    state: 'ADENTIA'
   }, {
-    text: "Ретинований",
-    state: "RETINATED"
+    text: 'Ретинований',
+    state: 'RETINATED'
   }, {
-    text: "Видалений",
-    state: "REMOVED"
+    text: 'Видалений',
+    state: 'REMOVED'
   }
 ];
 
 export const HEALTH_TOOTH_QUESTIONS = [
   {
-    text: "Здоровий",
-    state: "HEALTHY"
+    text: 'Здоровий',
+    state: 'HEALTHY'
   }, {
-    text: "Хворий",
-    nextPanelState: "SICK_TOOTH"
+    text: 'Хворий',
+    nextPanelState: 'SICK_TOOTH'
   }
 ];
 
 export const TEETH_CROWN_STATES = [
   {
-    text: "Культя",
-    crownState: "CULT"
+    text: 'Карієс',
+    crownState: 'CARIES',
+    fillCrownColor: '#F61616',
+    crownValue: {}
   }, {
-    text: "Реставрація/пломба",
-    crownState: "DENTAL_FILLING"
+    text: 'Реставрація/пломба',
+    crownState: 'DENTAL_FILLING',
+    fillCrownColor: '#16F625',
+    crownValue: {}
   }, {
-    text: "Тимчасова пломба",
-    crownState: "TEMPORARY_DENTAL_FILLING"
+    text: 'Тимчасова пломба',
+    crownState: 'TEMPORARY_DENTAL_FILLING',
+    fillCrownColor: '#E9DB15',
+    crownValue: {}
   }, {
-    text: "Ортопедична конструкція",
-    crownState: "ORTHOPEDIC_CONSTRUCTION"
+    text: 'Ортопедична конструкція',
+    crownState: 'ORTHOPEDIC_CONSTRUCTION',
+    crownValue: {}
+  }, {
+    text: 'Культя',
+    crownState: 'CULT',
+    crownValue: {}
+  }, {
+    text: 'Некаріозне ураження',
+    crownState: 'NOT_CARIES',
+    fillCrownColor: '#E915DB',
+    crownValue: {}
   }
+];
+
+export const DENTAL_FILLING_STATES = [
+  {text: 'Хороший', value: 'GOOD'},
+  {text: 'Заміна(рекомендовано)', value: 'BAD'}
 ];
 
 export const ROOT_STATES = [
   {
-    text: "Ентодонтія",
-    state: "CULT"
+    text: 'Ентодонтія',
+    rootState: 'CULT'
   }, {
-    text: "Резекція верхівки",
-    state: "RESECTION_OF_APEX"
+    text: 'Резекція верхівки',
+    rootState: 'RESECTION_OF_APEX'
   }, {
-    text: "Гемісекція",
-    state: "HEMISECTION"
+    text: 'Гемісекція',
+    rootState: 'HEMISECTION'
+  }, {
+    text: 'Запальний процес пульпи',
+    rootState: 'PULP_INFLAMMATION'
+  }, {
+    text: 'Карієс',
+    rootState: 'CARIES'
+  }, {
+    text: 'Резорбція',
+    rootState: 'RESORPTION'
+  }, {
+    text: 'Вертикальна фактура(тріщина)',
+    rootState: 'CRACK'
+  }
+];
+
+export const RESORPTION_VALUES = [
+  {
+    text: "Верхівки",
+    value: "TOP"
+  }, {
+    text: "Внутрішньо-кореневе",
+    value: "INSIDE"
+  }
+];
+
+export const ORTHOPEDIC_CONSTRUCTION_VALUES = [
+  {
+    text: 'Вінір накладка',
+    value: 'VINIR'
+  }, {
+    text: 'Коронка',
+    value: 'CROWN'
+  }, {
+    text: 'Культьова вкладка',
+    value: 'CULT_TAB'
+  }, {
+    text: 'Меріленд протез',
+    value: 'MERILEND_PROSTHESIS'
+  }, {
+    text: 'Мостоподібний протез',
+    value: 'BRIDGE_PROSTHESIS'
+  }
+];
+
+export const SICK_TOOTH_STATES = [
+  {
+    text: 'Клиновидний дефект',
+    value: 'WEDGE_DEFECT'
+  }, {
+    text: 'Травма',
+    nextPanelState: 'TRAUMA'
   }
 ];

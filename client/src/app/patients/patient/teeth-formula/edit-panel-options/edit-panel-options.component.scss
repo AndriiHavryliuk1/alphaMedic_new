@@ -10,3 +10,7 @@
 .li-option:hover {
   background-color: map_get($hover-colors, 'light');;
 }
+
+.selected {
+  background-color: $selected-color;
+}

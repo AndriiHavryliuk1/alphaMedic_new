@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, Input, Output, ViewChild} from '@angular/core';
 import {Subject} from 'rxjs';
 
 @Component({
@@ -9,5 +9,29 @@ import {Subject} from 'rxjs';
 })
 export class EditPanelOptionsComponent {
   @Input() questions;
+  @Input() singleSelection: boolean;
+  @Input() multiSelection: boolean;
   @Output() selected = new Subject();
+  @ViewChild('liElem') liElement: ElementRef<HTMLLIElement>;
+
+  public onClick(event, question) {
+    const liElement = event.target;
+    if (this.singleSelection || this.multiSelection) {
+      if (liElement.classList.contains('selected')) {
+        liElement.classList.remove('selected');
+      } else {
+        liElement.classList.add('selected');
+      }
+
+      if (this.singleSelection && liElement.parentNode) {
+        const children = liElement.parentNode.querySelectorAll("li");
+        children.forEach((li) => {
+          if (li !== liElement && li.classList.contains("selected")) {
+            li.classList.remove('selected');
+          }
+        });
+      }
+    }
+    this.selected.next(question);
+  }
 }

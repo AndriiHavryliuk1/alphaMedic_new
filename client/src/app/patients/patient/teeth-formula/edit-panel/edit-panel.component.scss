@@ -5,6 +5,8 @@
   padding: 10px;
   background-color: white;
   min-width: 200px;
+  overflow-y: auto;
+  max-height: 65vh;
 }
 
 .title {
@@ -17,7 +19,7 @@
   cursor: pointer;
 }
 
-#dental-filling-panel {
+.dental-filling-panel {
   display: flex;
   margin-right: 10px;
 }

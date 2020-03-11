@@ -21,45 +21,63 @@
 
 
   <div *ngIf="state === 'SICK_TOOTH'">
+    <app-edit-panel-options [questions]="sickToothStates"
+                            [multiSelection]="true"
+                            (selected)="sickToothStateChanged($event)"></app-edit-panel-options>
+
     <div>
-      <div class="mat-body-2">Коронка</div>
+<!--      <div class="mat-body-2">Коронка</div>-->
       <div>
-        <app-multi-value-editor (changed)="onCrownsChanged($event)"
+        <app-multi-value-editor (changed)="onCrownStatesChanged($event)"
                                 formClass="full-width"
                                 placeholder="Дефекти коронки"
                                 [possibleItems]="possibleCrownStates"
         ></app-multi-value-editor>
       </div>
-      <div *ngIf="showDentalFillingPanel" class="custom-row not-close">
-        <div id="dental-filling-panel"
-             class="content-centered"
-             [inlineSVG]="showFrontDentalFilling ? 'assets/images/dental-filling-front.svg' : 'assets/images/dental-filling-rear.svg'"
-             (click)="onDentalFillingPanelClickHandler($event)"></div>
-        <div>
-          <div class="mat-body-2 title">Стан</div>
-          <app-edit-panel-options [questions]="dentalFillingValues"
-                                  (selected)="removedToothStateChanged($event)"></app-edit-panel-options>
-        </div>
 
+      <div *ngFor="let crown of selectedCrownStates" class="not-close">
+        <div *ngIf="crown.fillCrownColor" class="not-close">
+          <div class="mat-body-2 title">{{crown.text}}</div>
+          <div class="custom-row">
+            <div
+              class="dental-filling-panel content-centered not-close"
+              [inlineSVG]="showFrontDentalFilling ? 'assets/images/dental-filling-front.svg' : 'assets/images/dental-filling-rear.svg'"
+              (click)="onDentalFillingPanelClickHandler($event)"></div>
+            <div>
+              <div class="mat-body-2 title">Стан</div>
+              <app-edit-panel-options [questions]="dentalFillingValues"
+                                      (selected)="removedToothStateChanged($event)"></app-edit-panel-options>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="crown.crownState === 'ORTHOPEDIC_CONSTRUCTION'">
+          <div class="mat-body-2 title">{{crown.text}}</div>
+          <app-multi-value-editor (changed)="onCrownOrthopedicValueChanged($event)"
+                                  formClass="full-width"
+                                  placeholder="Ортопедична конструкція"
+                                  [possibleItems]="orthopedicConstructionValues"
+          ></app-multi-value-editor>
+        </div>
+      </div>
+    </div>
+<!--    <div class="mat-body-2">Корінь</div>-->
+
+    <div>
+      <app-multi-value-editor (changed)="onRootsStateChanged($event)"
+                              formClass="full-width"
+                              placeholder="Дефекти кореня"
+                              [possibleItems]="possibleRootStates"
+      ></app-multi-value-editor>
+      <div *ngFor="let root of selectedRootStates" class="not-close">
+        <div *ngIf="root.rootState === 'RESORPTION'" class="not-close">
+          <div class="mat-body-2 title">{{root.text}}</div>
+          <app-edit-panel-options [questions]="resorptionValues"
+                                  [singleSelection]="true"
+                                  (selected)="resorptionValueChanged($event)"></app-edit-panel-options>
+        </div>
+      </div>
+      <div>
 
       </div>
-
     </div>
-    <div class="mat-body-2">Корінь</div>
-
-    <div>
-      <app-autocomplete [items]="possibleRootStates"
-                        (valueChanged)="onEarlierRootsChanged($event)"
-                        [selectedItem]="selectedEarlierRoot"
-                        formClass="full-width"
-                        floatLabel="never"
-                        placeholder="Дефекти кореня">
-      </app-autocomplete>
-    </div>
-    <div>
-
-    </div>
-
   </div>
-
-</div>
