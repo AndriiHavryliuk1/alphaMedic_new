@@ -1,5 +1,5 @@
 <form class="mat-autocomplete-form" [ngClass]="formClass">
-  <mat-form-field [ngClass]="{'dropdown-icon': !selectedItem}" [floatLabel]="floatLabel || 'auto'">
+  <mat-form-field [ngClass]="{'dropdown-icon': !selectedItem, 'no-top-margin': floatLabel === 'never'}" [floatLabel]="floatLabel || 'auto'">
     <mat-icon *ngIf="materialIcon">{{materialIcon}}</mat-icon>
     <input name="autoComplete"
            type="text"

@@ -41,7 +41,7 @@ export class TeethFormulaComponent implements OnInit, OnDestroy {
       const editPanelFactory = this.componentFactoryResolver.resolveComponentFactory(EditPanelComponent);
       this.panelHost.viewContainerRef.clear();
       const editPanel = this.panelHost.viewContainerRef.createComponent(editPanelFactory);
-      editPanel.instance.state = null;
+      editPanel.instance.panelState = null;
       editPanel.instance.toothNumber = getToothNumberFromNumber(tooth.id, tooth.id.indexOf('child') > -1);
       editPanel.instance.toothId = tooth.id;
       editPanel.instance.viewPoint = {
@@ -49,7 +49,7 @@ export class TeethFormulaComponent implements OnInit, OnDestroy {
         y: event.pageY
       };
 
-      this.closeSub = editPanel.instance.close.subscribe(() => {
+      this.closeSub = editPanel.instance.close.subscribe((value) => {
         this.panelHost.viewContainerRef.clear();
         this.closeSub.unsubscribe();
       });

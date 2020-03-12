@@ -7,7 +7,7 @@ import {
   RESORPTION_VALUES,
   ROOT_STATE_QUESTIONS,
   ROOT_STATES, SICK_TOOTH_STATES,
-  TEETH_CROWN_STATES
+  TEETH_CROWN_STATES, TRAUMA_STATES
 } from '../teeth-helper';
 
 @Component({
@@ -16,7 +16,7 @@ import {
   styleUrls: ['./edit-panel.component.scss']
 })
 export class EditPanelComponent implements OnInit, AfterViewInit {
-  @Input() state: string = null;
+  @Input() panelState: string = null;
   @Input() toothNumber: string;
   @Input() toothId: string;
   @Input() viewPoint: { x: number, y: number };
@@ -26,13 +26,20 @@ export class EditPanelComponent implements OnInit, AfterViewInit {
   public initialState: string;
   public possibleCrownStates;
   public possibleRootStates;
+  public possibleTraumaStates;
   public orthopedicConstructionValues;
   public resorptionValues;
   public sickToothStates;
+  public traumaState;
   public showFrontDentalFilling;
   public dentalFillingValues;
   public selectedCrownStates = [];
   public selectedRootStates = [];
+  public selectedTraumaState = null;
+
+  private toothStates = [];
+  private crownStates = [];
+  private rootStates = [];
 
   private statesHistory = [];
 
@@ -40,7 +47,7 @@ export class EditPanelComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.initialState = this.state;
+    this.initialState = this.panelState;
     const lastFrontTooth = this.toothId.indexOf('child') > -1 ? 3 : 5;
     this.showFrontDentalFilling = +this.toothNumber.split('.')[1] <= lastFrontTooth;
     this.init();
@@ -59,7 +66,7 @@ export class EditPanelComponent implements OnInit, AfterViewInit {
 
   init() {
     this.title = 'Зуб ' + this.toothNumber;
-    switch (this.state) {
+    switch (this.panelState) {
       case 'TOOTH_MISSING':
         this.title = 'Зуб ' + this.toothNumber + ' відсутній зуб';
         this.questions = REMOVED_TOOTH_STATE_QUESTIONS.slice();
@@ -71,6 +78,7 @@ export class EditPanelComponent implements OnInit, AfterViewInit {
         this.orthopedicConstructionValues = ORTHOPEDIC_CONSTRUCTION_VALUES.slice();
         this.resorptionValues = RESORPTION_VALUES.slice();
         this.sickToothStates = SICK_TOOTH_STATES.slice();
+        this.possibleTraumaStates = TRAUMA_STATES.slice();
         break;
       case 'HEALTH_TOOTH_QUESTION':
         this.questions = HEALTH_TOOTH_QUESTIONS.slice();
@@ -79,21 +87,21 @@ export class EditPanelComponent implements OnInit, AfterViewInit {
         this.questions = ROOT_STATE_QUESTIONS.slice();
         break;
     }
-    this.statesHistory.push(this.state);
+    this.statesHistory.push(this.panelState);
   }
 
   healthToothQuestionChanged(value) {
     if (value.state) {
       this.closePanel();
     } else if (value.nextPanelState) {
-      this.state = value.nextPanelState;
+      this.panelState = value.nextPanelState;
       this.init();
     }
   }
 
   backToPreviousState() {
     this.statesHistory.pop();
-    this.state = this.statesHistory.pop() || null;
+    this.panelState = this.statesHistory.pop() || null;
     this.init();
   }
 
@@ -101,7 +109,7 @@ export class EditPanelComponent implements OnInit, AfterViewInit {
     switch (value.nextPanelState) {
       case 'HEALTH_TOOTH_QUESTION':
       case 'TOOTH_MISSING':
-        this.state = value.nextPanelState;
+        this.panelState = value.nextPanelState;
         this.init();
         break;
       case 'IMPLANT':
@@ -135,18 +143,32 @@ export class EditPanelComponent implements OnInit, AfterViewInit {
   }
 
   sickToothStateChanged(value) {
-
+    if (value.state) {
+      const index = this.toothStates.findIndex(tooth => tooth.state === value.state);
+      if (index > -1) {
+        this.toothStates.splice(index, 1);
+      } else {
+        this.toothStates.push(value.state);
+      }
+    }
   }
 
-  removedToothStateChanged(value) {
+  onTraumaStateChanged(value) {
+    this.selectedTraumaState = value;
+  }
+
+  missingToothStateChanged(value) {
     switch (value.state) {
       case 'ADENTIA':
+        this.toothStates.push(value);
         this.closePanel();
         break;
       case 'RETINATED':
+        this.toothStates.push(value);
         this.closePanel();
         break;
       case 'REMOVED':
+        this.toothStates.push(value);
         this.closePanel();
         break;
       default:
@@ -155,7 +177,11 @@ export class EditPanelComponent implements OnInit, AfterViewInit {
   }
 
   public closePanel() {
-    this.close.emit();
+    this.close.emit({
+      toothStates: this.toothStates,
+      crownStates: this.crownStates,
+      rootStates: this.rootStates
+    });
   }
 
 }

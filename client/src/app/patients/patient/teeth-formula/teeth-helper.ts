@@ -306,8 +306,35 @@ export const SICK_TOOTH_STATES = [
   {
     text: 'Клиновидний дефект',
     value: 'WEDGE_DEFECT'
+  }
+];
+
+export const TRAUMA_STATES = [
+  {
+    text: 'Вивих',
+    value: 'DISLOCATION'
   }, {
-    text: 'Травма',
-    nextPanelState: 'TRAUMA'
+    text: 'Перелом',
+    nextPanelState: 'FRACTURE'
+  }
+];
+
+export const FRACTURE_STATES = [
+  {
+    text: 'Коронка',
+    crownState: 'CROWN_FRACTURE'
+  }, {
+    text: 'Корінь',
+    rootState: 'ROOT_FRACTURE'
+  }
+];
+
+export const CROWN_FRACTURE_VALUES = [
+  {
+    text: 'Пульпа пошкоджена',
+    crownState: 'PULP_DAMAGED'
+  }, {
+    text: 'Пульпа не пошкоджена',
+    rootState: 'NO_PULP_DAMAGED'
   }
 ];

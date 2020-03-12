@@ -1,36 +1,49 @@
 <div class="panel-editor" (appClickOut)="closePanel()" rootClassForSkip="not-close">
   <div class="mat-body-2 title">
-    <mat-icon *ngIf="initialState !== state" class="back-icon not-close" (click)="backToPreviousState()">
+    <mat-icon *ngIf="initialState !== panelState" class="back-icon not-close" (click)="backToPreviousState()">
       keyboard_backspace
     </mat-icon>
     <span>{{title}}</span>
   </div>
-  <div *ngIf="!state" class="not-close">
+  <div *ngIf="!panelState" class="not-close">
     <app-edit-panel-options [questions]="questions" (selected)="rootStateChanged($event)"></app-edit-panel-options>
   </div>
 
-  <div *ngIf="state === 'TOOTH_MISSING'" class="not-close">
+  <div *ngIf="panelState === 'TOOTH_MISSING'" class="not-close">
     <app-edit-panel-options [questions]="questions"
-                            (selected)="removedToothStateChanged($event)"></app-edit-panel-options>
+                            (selected)="missingToothStateChanged($event)"></app-edit-panel-options>
   </div>
 
-  <div *ngIf="state === 'HEALTH_TOOTH_QUESTION'" class="not-close">
+  <div *ngIf="panelState === 'HEALTH_TOOTH_QUESTION'" class="not-close">
     <app-edit-panel-options [questions]="questions"
                             (selected)="healthToothQuestionChanged($event)"></app-edit-panel-options>
   </div>
 
 
-  <div *ngIf="state === 'SICK_TOOTH'">
+  <div *ngIf="panelState === 'SICK_TOOTH'">
     <app-edit-panel-options [questions]="sickToothStates"
                             [multiSelection]="true"
                             (selected)="sickToothStateChanged($event)"></app-edit-panel-options>
 
     <div>
-<!--      <div class="mat-body-2">Коронка</div>-->
+      <div class="mat-body-2">Травма</div>
+      <app-autocomplete [items]="possibleTraumaStates"
+                        (valueChanged)="onTraumaStateChanged($event)"
+                        [selectedItem]="selectedTraumaState"
+                        formClass="full-width"
+                        floatLabel="never"
+                        placeholder="Виберіть травму">
+      </app-autocomplete>
+    </div>
+
+    <div>
+      <!--      <div class="mat-body-2">Коронка</div>-->
       <div>
+        <div class="mat-body-2">Дефекти коронки</div>
         <app-multi-value-editor (changed)="onCrownStatesChanged($event)"
                                 formClass="full-width"
-                                placeholder="Дефекти коронки"
+                                floatLabel="never"
+                                placeholder="Виберіть дефекти коронки"
                                 [possibleItems]="possibleCrownStates"
         ></app-multi-value-editor>
       </div>
@@ -60,12 +73,14 @@
         </div>
       </div>
     </div>
-<!--    <div class="mat-body-2">Корінь</div>-->
+    <!--    <div class="mat-body-2">Корінь</div>-->
 
     <div>
+      <div class="mat-body-2">Дефекти кореня</div>
       <app-multi-value-editor (changed)="onRootsStateChanged($event)"
                               formClass="full-width"
-                              placeholder="Дефекти кореня"
+                              placeholder="Виберіть дефекти кореня"
+                              floatLabel="never"
                               [possibleItems]="possibleRootStates"
       ></app-multi-value-editor>
       <div *ngFor="let root of selectedRootStates" class="not-close">
@@ -81,3 +96,4 @@
       </div>
     </div>
   </div>
+</div>
