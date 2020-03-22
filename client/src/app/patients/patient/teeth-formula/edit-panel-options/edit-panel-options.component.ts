@@ -11,6 +11,7 @@ export class EditPanelOptionsComponent {
   @Input() questions;
   @Input() singleSelection: boolean;
   @Input() multiSelection: boolean;
+  @Input() type = 'LIST';
   @Output() selected = new Subject();
   @ViewChild('liElem') liElement: ElementRef<HTMLLIElement>;
 
@@ -33,5 +34,13 @@ export class EditPanelOptionsComponent {
       }
     }
     this.selected.next(question);
+  }
+
+  public onChange(value) {
+    this.selected.next(value.value);
+  }
+
+  public onCheckBoxChanged(value) {
+    this.selected.next(value);
   }
 }

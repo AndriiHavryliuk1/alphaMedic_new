@@ -211,46 +211,69 @@ export const HEALTH_TOOTH_QUESTIONS = [
   }
 ];
 
+export const DEFAULT_DENTAL_FILLING_STATE = {
+  text: 'Заміна(рекомендовано)',
+  value: 'BAD'
+};
+
+export const DENTAL_FILLING_STATES = [
+  DEFAULT_DENTAL_FILLING_STATE,
+  {text: 'Хороший', value: 'GOOD'}
+];
+
 export const TEETH_CROWN_STATES = [
   {
     text: 'Карієс',
     crownState: 'CARIES',
     fillCrownColor: '#F61616',
-    crownValue: {}
+    crownValue: {
+      fillingState: DEFAULT_DENTAL_FILLING_STATE,
+      segments: []
+    }
   }, {
     text: 'Реставрація/пломба',
     crownState: 'DENTAL_FILLING',
     fillCrownColor: '#16F625',
-    crownValue: {}
+    crownValue: {
+      fillingState: DEFAULT_DENTAL_FILLING_STATE,
+      segments: []
+    }
   }, {
     text: 'Тимчасова пломба',
     crownState: 'TEMPORARY_DENTAL_FILLING',
     fillCrownColor: '#E9DB15',
-    crownValue: {}
+    crownValue: {
+      fillingState: DEFAULT_DENTAL_FILLING_STATE,
+      segments: []
+    }
   }, {
     text: 'Ортопедична конструкція',
     crownState: 'ORTHOPEDIC_CONSTRUCTION',
-    crownValue: {}
+    crownValue: {
+      fillingState: DEFAULT_DENTAL_FILLING_STATE,
+      segments: []
+    }
   }, {
     text: 'Культя',
     crownState: 'CULT',
-    crownValue: {}
+    crownValue: {
+      fillingState: DEFAULT_DENTAL_FILLING_STATE,
+      segments: []
+    }
   }, {
     text: 'Некаріозне ураження',
     crownState: 'NOT_CARIES',
     fillCrownColor: '#E915DB',
-    crownValue: {}
+    crownValue: {
+      fillingState: DEFAULT_DENTAL_FILLING_STATE,
+      segments: []
+    }
   }
-];
-
-export const DENTAL_FILLING_STATES = [
-  {text: 'Хороший', value: 'GOOD'},
-  {text: 'Заміна(рекомендовано)', value: 'BAD'}
 ];
 
 export const ROOT_STATES = [
   {
-    text: 'Ентодонтія',
+    text: 'Ендодонтія',
     rootState: 'CULT'
   }, {
     text: 'Резекція верхівки',
@@ -332,9 +355,9 @@ export const FRACTURE_STATES = [
 export const CROWN_FRACTURE_VALUES = [
   {
     text: 'Пульпа пошкоджена',
-    crownState: 'PULP_DAMAGED'
+    crownValue: 'PULP_DAMAGED'
   }, {
     text: 'Пульпа не пошкоджена',
-    rootState: 'NO_PULP_DAMAGED'
+    crownValue: 'NO_PULP_DAMAGED'
   }
 ];

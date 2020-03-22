@@ -28,6 +28,7 @@ import {EditPanelComponent} from './patient/teeth-formula/edit-panel/edit-panel.
 import {EditPanelOptionsComponent} from './patient/teeth-formula/edit-panel-options/edit-panel-options.component';
 import {SharedModule} from '../shared/shared.module';
 import {ClickOutsideModule} from 'ng-click-outside';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -43,24 +44,25 @@ import {ClickOutsideModule} from 'ng-click-outside';
     DoctorsDairyComponent,
     EditPanelComponent,
     EditPanelOptionsComponent],
-  imports: [
-    CommonModule,
-    MatIconModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatInputModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatDatepickerModule,
-    RouterModule,
-    MatCardModule,
-    MatRadioModule,
-    AppointmentsModule,
-    MatTabsModule,
-    InlineSVGModule,
-    SharedModule,
-    ClickOutsideModule
-  ],
+    imports: [
+        CommonModule,
+        MatIconModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatInputModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatDatepickerModule,
+        RouterModule,
+        MatCardModule,
+        MatRadioModule,
+        AppointmentsModule,
+        MatTabsModule,
+        InlineSVGModule,
+        SharedModule,
+        ClickOutsideModule,
+        MatCheckboxModule
+    ],
   providers: [PatientsService]
 })
 export class PatientsModule {

@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {
-  DENTAL_FILLING_STATES,
+  CROWN_FRACTURE_VALUES,
+  DENTAL_FILLING_STATES, FRACTURE_STATES,
   HEALTH_TOOTH_QUESTIONS,
   ORTHOPEDIC_CONSTRUCTION_VALUES,
   REMOVED_TOOTH_STATE_QUESTIONS,
@@ -27,6 +28,8 @@ export class EditPanelComponent implements OnInit, AfterViewInit {
   public possibleCrownStates;
   public possibleRootStates;
   public possibleTraumaStates;
+  public possibleFractureStates;
+  public possibleCrownFractureValues;
   public orthopedicConstructionValues;
   public resorptionValues;
   public sickToothStates;
@@ -36,6 +39,8 @@ export class EditPanelComponent implements OnInit, AfterViewInit {
   public selectedCrownStates = [];
   public selectedRootStates = [];
   public selectedTraumaState = null;
+  public selectedFractureState = null;
+  public selectedCrownFractureValue = null;
 
   private toothStates = [];
   private crownStates = [];
@@ -79,6 +84,8 @@ export class EditPanelComponent implements OnInit, AfterViewInit {
         this.resorptionValues = RESORPTION_VALUES.slice();
         this.sickToothStates = SICK_TOOTH_STATES.slice();
         this.possibleTraumaStates = TRAUMA_STATES.slice();
+        this.possibleFractureStates = FRACTURE_STATES.slice();
+        this.possibleCrownFractureValues = CROWN_FRACTURE_VALUES.slice();
         break;
       case 'HEALTH_TOOTH_QUESTION':
         this.questions = HEALTH_TOOTH_QUESTIONS.slice();
@@ -130,19 +137,38 @@ export class EditPanelComponent implements OnInit, AfterViewInit {
     console.log(orthopedicValues);
   }
 
-  onDentalFillingPanelClickHandler(event) {
-    console.log(event);
+  onDentalFillingPanelClickHandler(event, crownState) {
+    console.log(event, crownState);
+  }
+
+  onDentalFillingValueChangedHandler(value, crownState) {
+    const target = value.target as any;
+    if (value instanceof MouseEvent && target.id.startsWith("seg_")) {
+      const segmentId = target.id;
+      const isPresent = crownState.crownValue.segments.contains(segmentId);
+      if (isPresent) {
+        const index = crownState.crownValue.segments.indexOf(segmentId);
+        crownState.crownValue.segments.splice(index, 1);
+        target.style.fill = "";
+      } else {
+        crownState.crownValue.segments.push(segmentId);
+        target.style.fill = crownState.fillCrownColor;
+      }
+    } else {
+      crownState.crownValue.fillingState = value;
+    }
   }
 
   onRootsStateChanged(rootStates) {
     this.selectedRootStates = rootStates.slice();
   }
 
-  resorptionValueChanged(value) {
+  rootResorptionValueChanged(value) {
     console.log(value);
   }
 
   sickToothStateChanged(value) {
+    console.log(value);
     if (value.state) {
       const index = this.toothStates.findIndex(tooth => tooth.state === value.state);
       if (index > -1) {
@@ -155,6 +181,15 @@ export class EditPanelComponent implements OnInit, AfterViewInit {
 
   onTraumaStateChanged(value) {
     this.selectedTraumaState = value;
+  }
+
+  onFractureStateChanged(value) {
+    this.selectedFractureState = value;
+  }
+
+  onSelectedCrownFractureValueChanged(value) {
+    console.log(value);
+    this.selectedCrownFractureValue = value;
   }
 
   missingToothStateChanged(value) {
@@ -177,11 +212,23 @@ export class EditPanelComponent implements OnInit, AfterViewInit {
   }
 
   public closePanel() {
+    this.addWithoutDuplication(this.crownStates, this.selectedCrownStates, 'crownState');
+    this.addWithoutDuplication(this.rootStates, this.selectedRootStates, 'rootState');
     this.close.emit({
       toothStates: this.toothStates,
       crownStates: this.crownStates,
       rootStates: this.rootStates
     });
+  }
+
+  private addWithoutDuplication(items, itemsToAdd, property) {
+    const filteredItems = itemsToAdd.reduce((res, item) => {
+      if (items.find(i => i[property] === item[property])) {
+        res.push(item);
+      }
+      return res;
+    }, []);
+    items = items.concat(filteredItems);
   }
 
 }
