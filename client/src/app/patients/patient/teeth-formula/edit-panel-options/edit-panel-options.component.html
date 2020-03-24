@@ -1,6 +1,5 @@
 <ul *ngIf="type === 'LIST'" class="list-group list-group-flush">
   <li class="list-group-item li-option not-close"
-      #liElem
       *ngFor="let question of questions"
       (click)="onClick($event, question)">{{question.text}}</li>
 </ul>
@@ -17,7 +16,10 @@
   </mat-radio-group>
 </div>
 
-<div *ngIf="type === 'CHECKBOX'">
-  <mat-checkbox *ngFor="let question of questions"
-                (change)="onCheckBoxChanged({checked: $event.checked, value: question})">{{question.text}}</mat-checkbox>
+<div *ngIf="type === 'CHECKBOX'"
+     class="radio-group"
+     #checkboxes>
+  <mat-checkbox *ngFor="let question of questions;  let i = index"
+                [checked]="required ? i === 0 : false"
+                (change)="onCheckBoxChanged({event: $event, value: question})">{{question.text}}</mat-checkbox>
 </div>

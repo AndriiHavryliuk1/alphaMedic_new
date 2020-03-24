@@ -51,6 +51,19 @@ export class MultiValueEditorComponent implements OnInit {
       map((item: IMultiValueItem) => this.filter(item)));
   }
 
+  /**
+   * onBlur callback
+   * @param autocomplete - current mat-autocomplete object
+   */
+  onBlur(autocomplete: MatAutocomplete) {
+    // need timeout to wait for value applied
+    setTimeout(() => {
+      if (autocomplete.isOpen) {
+        this.autocompleteTrigger.closePanel();
+      }
+    }, 150);
+  }
+
   remove(item: IMultiValueItem): void {
     const index = this.selectedItems.findIndex(it => it.text === item.text);
     if (index > -1) {

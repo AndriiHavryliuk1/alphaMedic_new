@@ -249,10 +249,7 @@ export const TEETH_CROWN_STATES = [
   }, {
     text: 'Ортопедична конструкція',
     crownState: 'ORTHOPEDIC_CONSTRUCTION',
-    crownValue: {
-      fillingState: DEFAULT_DENTAL_FILLING_STATE,
-      segments: []
-    }
+    crownValue: {}
   }, {
     text: 'Культя',
     crownState: 'CULT',
@@ -271,16 +268,24 @@ export const TEETH_CROWN_STATES = [
   }
 ];
 
+export const DEFAULT_ROOT_STATE_VALUE = {
+  text: 'Рекомендовано зевізія',
+  rootState: 'SEVISION'
+};
+
 export const ROOT_STATES = [
   {
     text: 'Ендодонтія',
-    rootState: 'CULT'
+    rootState: 'CULT',
+    rootValues: [DEFAULT_ROOT_STATE_VALUE]
   }, {
     text: 'Резекція верхівки',
-    rootState: 'RESECTION_OF_APEX'
+    rootState: 'RESECTION_OF_APEX',
+    rootValues: [DEFAULT_ROOT_STATE_VALUE]
   }, {
     text: 'Гемісекція',
-    rootState: 'HEMISECTION'
+    rootState: 'HEMISECTION',
+    rootValues: [DEFAULT_ROOT_STATE_VALUE]
   }, {
     text: 'Запальний процес пульпи',
     rootState: 'PULP_INFLAMMATION'
@@ -289,20 +294,28 @@ export const ROOT_STATES = [
     rootState: 'CARIES'
   }, {
     text: 'Резорбція',
-    rootState: 'RESORPTION'
+    rootState: 'RESORPTION',
+    rootValues: []
   }, {
     text: 'Вертикальна фактура(тріщина)',
     rootState: 'CRACK'
   }
 ];
 
+export const ROOT_STATE_VALUES = [
+    DEFAULT_ROOT_STATE_VALUE, {
+    text: 'Без патологічних змін',
+    rootState: 'NO_PATHOLOGICAL'
+  }
+];
+
 export const RESORPTION_VALUES = [
   {
-    text: "Верхівки",
-    value: "TOP"
+    text: 'Верхівки',
+    value: 'TOP'
   }, {
-    text: "Внутрішньо-кореневе",
-    value: "INSIDE"
+    text: 'Внутрішньо-кореневе',
+    value: 'INSIDE'
   }
 ];
 
@@ -328,14 +341,14 @@ export const ORTHOPEDIC_CONSTRUCTION_VALUES = [
 export const SICK_TOOTH_STATES = [
   {
     text: 'Клиновидний дефект',
-    value: 'WEDGE_DEFECT'
+    state: 'WEDGE_DEFECT'
   }
 ];
 
 export const TRAUMA_STATES = [
   {
     text: 'Вивих',
-    value: 'DISLOCATION'
+    state: 'DISLOCATION'
   }, {
     text: 'Перелом',
     nextPanelState: 'FRACTURE'

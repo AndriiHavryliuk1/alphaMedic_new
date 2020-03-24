@@ -23,7 +23,7 @@
   <div *ngIf="panelState === 'SICK_TOOTH'">
     <app-edit-panel-options [questions]="sickToothStates"
                             type="CHECKBOX"
-                            (selected)="sickToothStateChanged($event)"></app-edit-panel-options>
+                            (selected)="onSickToothStateChanged($event)"></app-edit-panel-options>
 
     <div>
       <div class="mat-body-2">Травма</div>
@@ -44,7 +44,6 @@
                           floatLabel="never"
                           placeholder="Виберіть ділянку">
         </app-autocomplete>
-
 
 
         <div *ngIf="selectedFractureState && selectedFractureState.crownState">
@@ -86,7 +85,7 @@
         </div>
         <div *ngIf="crown.crownState === 'ORTHOPEDIC_CONSTRUCTION'">
           <div class="mat-body-2">{{crown.text}}</div>
-          <app-multi-value-editor (changed)="onCrownOrthopedicValueChanged($event)"
+          <app-multi-value-editor (changed)="onCrownOrthopedicValueChanged($event, crown)"
                                   formClass="full-width"
                                   placeholder="Ортопедична конструкція"
                                   floatLabel="never"
@@ -95,7 +94,6 @@
         </div>
       </div>
     </div>
-    <!--    <div class="mat-body-2">Корінь</div>-->
 
     <div>
       <div class="mat-body-2">Дефекти кореня</div>
@@ -110,12 +108,19 @@
           <div class="mat-body-2">{{root.text}}</div>
           <app-edit-panel-options [questions]="resorptionValues"
                                   type="RADIO"
-                                  (selected)="rootResorptionValueChanged($event)"></app-edit-panel-options>
+                                  (selected)="onRootResorptionValueChanged($event, root)">
+          </app-edit-panel-options>
+        </div>
+        <div *ngIf="root.rootValues && root.rootState !== 'RESORPTION'">
+          <div class="mat-body-2">{{root.text}}</div>
+          <app-edit-panel-options [questions]="possibleRootStateValues"
+                                  type="CHECKBOX"
+                                  [required]="true"
+                                  (selected)="onRootStateValueChanged($event, root)">
+          </app-edit-panel-options>
         </div>
       </div>
-      <div>
 
-      </div>
     </div>
   </div>
 </div>

@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component, ElementRef, Input, Output, ViewChild} from '@angular/core';
 import {Subject} from 'rxjs';
+import {MatCheckbox} from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-edit-panel-options',
@@ -11,9 +12,11 @@ export class EditPanelOptionsComponent {
   @Input() questions;
   @Input() singleSelection: boolean;
   @Input() multiSelection: boolean;
+  @Input() required: boolean;
   @Input() type = 'LIST';
   @Output() selected = new Subject();
-  @ViewChild('liElem') liElement: ElementRef<HTMLLIElement>;
+  @ViewChild('checkboxes') checkboxes: ElementRef;
+  @ViewChild('checkbox') checkbox: MatCheckbox;
 
   public onClick(event, question) {
     const liElement = event.target;
@@ -25,9 +28,9 @@ export class EditPanelOptionsComponent {
       }
 
       if (this.singleSelection && liElement.parentNode) {
-        const children = liElement.parentNode.querySelectorAll("li");
+        const children = liElement.parentNode.querySelectorAll('li');
         children.forEach((li) => {
-          if (li !== liElement && li.classList.contains("selected")) {
+          if (li !== liElement && li.classList.contains('selected')) {
             li.classList.remove('selected');
           }
         });
@@ -40,7 +43,14 @@ export class EditPanelOptionsComponent {
     this.selected.next(value.value);
   }
 
-  public onCheckBoxChanged(value) {
-    this.selected.next(value);
+  public onCheckBoxChanged({event, value}) {
+    if (this.required) {
+      const checkedBoxes = this.checkboxes.nativeElement.querySelectorAll('.mat-checkbox-checked');
+      if (checkedBoxes.length === 1 && event.source.id === checkedBoxes[0].id) {
+        event.source.checked = true;
+        return;
+      }
+    }
+    this.selected.next({checked: event.checked, value});
   }
 }

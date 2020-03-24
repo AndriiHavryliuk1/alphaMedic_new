@@ -28,6 +28,7 @@
     "jquery-slim": "^3.0.0",
     "js-sha256": "^0.9.0",
     "jwt-decode": "^2.2.0",
+    "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "ng-click-outside": "^6.0.0",
     "ng-inline-svg": "^9.2.2",

@@ -15,7 +15,8 @@
       [formControl]="itemCtrl"
       (click)="openAutocomplete(auto)"
       [matAutocomplete]="auto"
-      [matChipInputFor]="chipList">
+      [matChipInputFor]="chipList"
+      (blur)="onBlur(auto)">
   </mat-chip-list>
   <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event.option.value)">
     <mat-option *ngFor="let item of filteredItems | async" [value]="item" class="not-close">

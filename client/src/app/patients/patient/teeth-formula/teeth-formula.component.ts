@@ -50,6 +50,7 @@ export class TeethFormulaComponent implements OnInit, OnDestroy {
       };
 
       this.closeSub = editPanel.instance.close.subscribe((value) => {
+        console.log(value);
         this.panelHost.viewContainerRef.clear();
         this.closeSub.unsubscribe();
       });
