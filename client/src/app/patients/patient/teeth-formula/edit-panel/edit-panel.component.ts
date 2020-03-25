@@ -123,12 +123,8 @@ export class EditPanelComponent implements OnInit, AfterViewInit {
         this.panelState = value.nextPanelState;
         this.init();
         break;
-      case 'IMPLANT':
-      case 'TOOTH_BRIDGE':
-        this.toothStates.push(value);
-        this.closePanel();
-        break;
       default:
+        this.toothStates.push(value);
         this.closePanel();
     }
   }
@@ -210,7 +206,7 @@ export class EditPanelComponent implements OnInit, AfterViewInit {
 
   onRootStateValueChanged(changes, root) {
     if (changes.checked) {
-      root.rootValues = this.getWithoutDuplication(root.rootValues, [changes.value], 'crownState');
+      root.rootValues = this.getWithoutDuplication(root.rootValues, [changes.value], 'rootValue');
     } else {
       this.removeFromArray(root.rootValues, 'rootValue', changes.value.rootValue);
     }

@@ -213,12 +213,12 @@ export const HEALTH_TOOTH_QUESTIONS = [
 
 export const DEFAULT_DENTAL_FILLING_STATE = {
   text: 'Заміна(рекомендовано)',
-  value: 'BAD'
+  valueState: 'BAD'
 };
 
 export const DENTAL_FILLING_STATES = [
   DEFAULT_DENTAL_FILLING_STATE,
-  {text: 'Хороший', value: 'GOOD'}
+  {text: 'Хороший', valueState: 'GOOD'}
 ];
 
 export const TEETH_CROWN_STATES = [
@@ -270,7 +270,7 @@ export const TEETH_CROWN_STATES = [
 
 export const DEFAULT_ROOT_STATE_VALUE = {
   text: 'Рекомендовано зевізія',
-  rootState: 'SEVISION'
+  rootValue: 'SEVISION'
 };
 
 export const ROOT_STATES = [
@@ -305,36 +305,36 @@ export const ROOT_STATES = [
 export const ROOT_STATE_VALUES = [
     DEFAULT_ROOT_STATE_VALUE, {
     text: 'Без патологічних змін',
-    rootState: 'NO_PATHOLOGICAL'
+    rootValue: 'NO_PATHOLOGICAL'
   }
 ];
 
 export const RESORPTION_VALUES = [
   {
     text: 'Верхівки',
-    value: 'TOP'
+    rootValue: 'TOP'
   }, {
     text: 'Внутрішньо-кореневе',
-    value: 'INSIDE'
+    rootValue: 'INSIDE'
   }
 ];
 
 export const ORTHOPEDIC_CONSTRUCTION_VALUES = [
   {
     text: 'Вінір накладка',
-    value: 'VINIR'
+    crownValue: 'VINIR'
   }, {
     text: 'Коронка',
-    value: 'CROWN'
+    crownValue: 'CROWN'
   }, {
     text: 'Культьова вкладка',
-    value: 'CULT_TAB'
+    crownValue: 'CULT_TAB'
   }, {
     text: 'Меріленд протез',
-    value: 'MERILEND_PROSTHESIS'
+    crownValue: 'MERILEND_PROSTHESIS'
   }, {
     text: 'Мостоподібний протез',
-    value: 'BRIDGE_PROSTHESIS'
+    crownValue: 'BRIDGE_PROSTHESIS'
   }
 ];
 
