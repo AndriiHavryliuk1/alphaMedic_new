@@ -14,6 +14,7 @@ const externalAPIRouter = require('./api/routes/externalAPI');
 const servicesRouter = require('./api/routes/services');
 const teethRouter = require('./api/routes/teeth');
 const diagnosisRouter = require('./api/routes/diagnosis');
+const teethFormulaRouter = require('./api/routes/teethFormula');
 
 const isAuth = require('./middleware/is-auth');
 const dbGenerator = require('./services/dbGenerator');
@@ -39,6 +40,7 @@ app.use('/teeth', isAuth, teethRouter);
 app.use('/diagnosis', isAuth, diagnosisRouter);
 app.use('/auth', authRouter);
 app.use('/external-api', externalAPIRouter);
+app.use('/teethFormula', teethFormulaRouter);
 
 // handle all errors
 app.use((error, req, res, next) => {

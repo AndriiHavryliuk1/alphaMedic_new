@@ -4,6 +4,7 @@ import {getAncestorById, getToothNumberFromNumber} from '../../../utils/utils';
 import {EditPanelComponent} from './edit-panel/edit-panel.component';
 import {PlaceholderDirective} from '../../../shared/placeholder/placeholder.directive';
 import {Subscription} from 'rxjs';
+import {TeethFormulaService} from '../../../services/patients/teeth-formula/teeth-formula.service';
 
 @Component({
   selector: 'app-teeth-formula',
@@ -22,7 +23,8 @@ export class TeethFormulaComponent implements OnInit, OnDestroy {
 
   private closeSub: Subscription;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) {
+  constructor(private componentFactoryResolver: ComponentFactoryResolver,
+              private teethFormulaService: TeethFormulaService) {
   }
 
   ngOnInit() {
@@ -49,10 +51,11 @@ export class TeethFormulaComponent implements OnInit, OnDestroy {
         y: event.pageY
       };
 
-      this.closeSub = editPanel.instance.close.subscribe((value) => {
-        console.log(value);
+      this.closeSub = editPanel.instance.close.subscribe(async (value) => {
         this.panelHost.viewContainerRef.clear();
         this.closeSub.unsubscribe();
+        const updatedFormula = await this.teethFormulaService.updateTooth(tooth.id.replace("_wrapper", ""), value);
+        console.log(updatedFormula);
       });
     }
 

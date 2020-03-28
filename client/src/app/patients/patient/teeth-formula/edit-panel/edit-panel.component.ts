@@ -229,9 +229,9 @@ export class EditPanelComponent implements OnInit, AfterViewInit {
     this.crownStates = this.getWithoutDuplication(this.crownStates, this.selectedCrownStates, 'crownState');
     this.rootStates = this.getWithoutDuplication(this.rootStates, this.selectedRootStates, 'rootState');
     this.close.emit({
-      toothStates: this.toothStates,
-      crownStates: this.crownStates,
-      rootStates: this.rootStates
+      toothStates: [...new Set(this.toothStates)],
+      crownStates: [...new Set(this.crownStates)],
+      rootStates: [...new Set(this.rootStates)]
     });
   }
 

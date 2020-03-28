@@ -1,6 +1,6 @@
 module.exports = (requiredRoles) => {
     return (req, res, next) => {
-        if (requiredRoles.some(reqRole => req.roles.indexOf(reqRole) > -1)) {
+        if (req.roles && requiredRoles.some(reqRole => req.roles.indexOf(reqRole) > -1)) {
             return next()
         }
         const error = new Error('Not authorized.');
