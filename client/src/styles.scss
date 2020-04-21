@@ -168,6 +168,7 @@ mat-dialog-actions.mat-dialog-actions {
 .patient-photo {
   width: 100px;
   height: 100px;
+  object-fit: contain;
 }
 
 .clickable {

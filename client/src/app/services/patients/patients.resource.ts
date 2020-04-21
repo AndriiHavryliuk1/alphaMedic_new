@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import {Constants} from '../../utils/constants';
 
@@ -20,6 +20,18 @@ export class PatientsResource {
 
   createPatient(data) {
     return this.http.post(Constants.SERVER_URL + '/patients', data);
+  }
+
+  uploadProfilePhoto(id, data) {
+    // const options = { headers: new HttpHeaders({
+    //     'Content-Type': 'multipart/form-data',
+    //     'Content-Disposition': `form-data; name="profile"; filename="${data.name}"`
+    //   })};
+    return this.http.post(Constants.SERVER_URL + `/patients/${id}/profile-photo`, data, {responseType: 'text'});
+  }
+
+  loadProfilePhoto(id) {
+    return this.http.get(Constants.SERVER_URL + `/patients/${id}/profile-photo`, {responseType: 'text'});
   }
 
 }

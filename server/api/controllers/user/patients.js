@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const fs = require('fs');
+const path = require('path');
 const {ROLES} = require('../../../utils/utils');
 const Patient = require('../../models/user/Patient');
 
@@ -83,6 +85,43 @@ exports.createPatient = async (req, res, next) => {
         next(error);
     }
 };
+
+exports.uploadProfilePhoto = async (req, res, next) => {
+    if (!req.file) {
+        next(new Error('File extension is incorrect. Please use JPEG/PNG/JPG'));
+        return;
+    }
+    try {
+        const currentPatient = await User.findOne({_id: req.params.id, active: true});
+        if (currentPatient) {
+            currentPatient.imageURL = req.file.path;
+            currentPatient.save();
+            fs.readFile(currentPatient.imageURL, { encoding: 'base64' }, (err, data) => {
+                res.send(data);
+            });
+        } else {
+            throw new Error("No patient found!");
+        }
+    } catch(error) {
+        fs.unlink(req.file.path, () => console.log("removed"));
+        next(error);
+    }
+}
+
+exports.loadProfilePhoto = async (req, res, next) => {
+    try {
+        const currentPatient = await User.findOne({_id: req.params.id, active: true});
+        if (currentPatient) {
+            fs.readFile(currentPatient.imageURL, { encoding: 'base64' }, (err, data) => {
+                res.send(data);
+            });
+        } else {
+            throw new Error("No patient found!");
+        }
+    } catch(error) {
+        next(error);
+    }
+}
 
 /**
  * check for duplication

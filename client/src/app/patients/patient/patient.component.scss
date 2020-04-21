@@ -11,6 +11,18 @@ mat-card.position-initial {
   position: initial;
 }
 
+.patient-photo-wrapper {
+
+  button {
+    display: none;
+    width: 100%;
+  }
+}
+
+.patient-photo-wrapper:hover button {
+  display: block;
+}
+
 /*div.mat-tab-links {*/
 /*  display: table;*/
 /*  width: 100%;*/

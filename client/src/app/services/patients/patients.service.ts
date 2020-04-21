@@ -21,7 +21,7 @@ export class PatientsService {
         return throwError(reject(error));
       })).subscribe((response: Patient[]) => {
         const patients = response.map(p => new Patient(p));
-        this.cachedPatients = patients.map(p => new Patient(p));
+        this.cachedPatients = patients.slice();
         resolve(patients);
       });
     });
@@ -50,6 +50,26 @@ export class PatientsService {
         this.cachedPatients.push(patient);
         this.patientsObserver.next(this.cachedPatients);
         resolve(patient);
+      });
+    });
+  }
+
+  public uploadProfilePhoto(id, data) {
+    return new Promise((resolve, reject) => {
+      this.patientResource.uploadProfilePhoto(id, data).pipe(take(1), catchError((error) => {
+        return throwError(reject(error));
+      })).subscribe((response) => {
+        resolve(response);
+      });
+    });
+  }
+
+  public loadProfilePhoto(id) {
+    return new Promise((resolve, reject) => {
+      this.patientResource.loadProfilePhoto(id).pipe(take(1), catchError((error) => {
+        return throwError(reject(error));
+      })).subscribe((response) => {
+        resolve(response);
       });
     });
   }

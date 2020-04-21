@@ -10,7 +10,7 @@ const userSchema = mongoose.Schema({
     email: { type: String, required: true, trim: true },
     password: { type: String, required: true, trim: true },
     phoneNumbers: { type: Array },
-    imageURL: { data: Buffer, contentType: String },
+    imageURL: { type: String },
     birthday: { type: Date },
     type: { type: String, default: ROLES.DOCTOR, trim: true },
     gender: { type: String },

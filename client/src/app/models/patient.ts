@@ -5,7 +5,7 @@ export class Patient {
   public email: string;
   public fullName: string;
   public fatherName: string;
-  public imageSrc: string;
+  public imageSrc: any;
   public birthday: Date;
   public doctor: {
     name: string;

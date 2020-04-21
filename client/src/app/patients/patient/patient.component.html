@@ -2,8 +2,18 @@
   <h2>Пацієнт</h2>
   <mat-card>
     <div class="image-section">
-      <img src="{{patient.imageSrc || 'assets/images/no-avatar.png'}}" class="patient-photo"
-           alt="Patient`s photo">
+      <div class="patient-photo-wrapper">
+        <img [src]="patient.imageSrc || 'assets/images/no-avatar.png'"
+             class="patient-photo"
+             accept="image/x-png,image/svg,image/jpeg"
+             alt="Patient`s photo">
+        <input style="display: none"
+               name="profile"
+               type="file"
+               (change)="onFileChanged($event)"
+               #fileInput>
+        <button mat-button (click)="fileInput.click()">Змінити</button>
+      </div>
       <div class="container">
         <div>{{fullFullName}}</div>
         <div>{{fullYears}} років. ({{formattedBirthday}})</div>
@@ -13,7 +23,7 @@
     <div class="row">
       <div class="col-2">Лікар:</div>
       <div class="col">
-        <a routerLink="/doctors/{{patient.doctor.id}}">{{patient.doctor.surname  + " " + patient.doctor.name}}</a>
+        <a routerLink="/doctors/{{patient.doctor.id}}">{{patient.doctor.surname + " " + patient.doctor.name}}</a>
       </div>
     </div>
     <div class="row">
@@ -36,7 +46,6 @@
 
     <router-outlet></router-outlet>
   </mat-card>
-
 
 
 </div>

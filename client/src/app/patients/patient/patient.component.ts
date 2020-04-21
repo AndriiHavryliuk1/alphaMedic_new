@@ -2,6 +2,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Patient} from '../../models/patient';
 import * as moment from 'moment';
+import {PatientsService} from '../../services/patients/patients.service';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-patient',
@@ -37,7 +39,9 @@ export class PatientComponent implements OnInit {
     label: 'Щоденник лікаря'
   }];
 
-  constructor(private activatedRoute: ActivatedRoute) {
+  constructor(private activatedRoute: ActivatedRoute,
+              private patientsService: PatientsService,
+              private sanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
@@ -47,8 +51,23 @@ export class PatientComponent implements OnInit {
       this.formattedBirthday = moment(this.patient.birthday).format('DD-MM-YYYY');
       // @ts-ignore
       this.fullYears = Math.floor(moment.duration(moment() - moment(this.patient.birthday)).asYears());
+      this.patientsService.loadProfilePhoto(this.patient.id).then(response => {
+        this.patient.imageSrc = this.sanitizer.bypassSecurityTrustResourceUrl("data:image/png;base64, " + response);
+      });
     });
     activatedRouteSub.unsubscribe();
+  }
+
+  async onFileChanged(event) {
+    const selectedFile = event.target.files[0];
+    const formData = new FormData();
+    formData.append('profile', selectedFile);
+    const response = await this.patientsService.uploadProfilePhoto(this.patient.id, formData);
+    this.patient.imageSrc = this.sanitizer.bypassSecurityTrustResourceUrl("data:image/png;base64, " + response);
+  }
+
+  onUpload() {
+    // upload code goes here
   }
 
 }
