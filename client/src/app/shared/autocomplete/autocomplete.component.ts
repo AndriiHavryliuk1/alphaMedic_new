@@ -1,4 +1,16 @@
-import {Component, ElementRef, Input, OnChanges, OnInit, Output, Pipe, PipeTransform, SimpleChanges, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  Pipe,
+  PipeTransform,
+  SimpleChanges,
+  ViewChild
+} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Observable, Subject} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
@@ -18,17 +30,20 @@ interface IAutoCompleteItem {
   templateUrl: './autocomplete.component.html',
   styleUrls: ['./autocomplete.component.scss']
 })
-export class AutocompleteComponent implements OnInit, OnChanges {
+export class AutocompleteComponent implements OnInit, OnChanges, AfterViewInit {
   @Input() public items: [IAutoCompleteItem];
   @Input() public selectedItem: IAutoCompleteItem;
   @Input() public notFoundText: string;
-  @Input() public placeholder: string;
+  @Input() public placeholder = '';
   @Input() public materialIcon: string;
   @Input() public menuClass: string;
   @Input() public floatLabel: string;
   @Input() public formClass: string;
+  @Input() public disabled = false;
+  @Input() public required = false;
   @Output() public valueChanged = new Subject<IAutoCompleteItem>();
   @ViewChild(MatAutocompleteTrigger, {static: false}) public autocompleteTrigger: MatAutocompleteTrigger;
+  @ViewChild('autoCompleteInput', {static: false}) public autoCompleteInput: ElementRef<HTMLInputElement>;
 
   public myControl: FormControl;
   public filteredOptions: Observable<IAutoCompleteItem[]>;
@@ -44,6 +59,9 @@ export class AutocompleteComponent implements OnInit, OnChanges {
     if (!this.notFoundText) {
       this.notFoundText = 'NO MATCHES FOUND';
     }
+    if (this.required) {
+      this.placeholder += '*';
+    }
     this.currentValue = this.selectedItem;
     this.searchText = this.selectedItem ? this.selectedItem.text : '';
     this.myControl = new FormControl(this.searchText);
@@ -56,6 +74,12 @@ export class AutocompleteComponent implements OnInit, OnChanges {
         })
       );
 
+  }
+
+  public ngAfterViewInit(): void {
+    if (this.disabled) {
+      this.autoCompleteInput.nativeElement.disabled = true;
+    }
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -162,7 +186,7 @@ export class AutocompleteComponent implements OnInit, OnChanges {
 export class HighlightPipe implements PipeTransform {
   public transform(text: string, search): string {
     const pattern = search
-      .replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&")
+      .replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, '\\$&')
       .split(' ')
       .filter((t) => t.length > 0)
       .join('|');

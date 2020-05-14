@@ -6,7 +6,7 @@ import {Patient} from '../../models/patient';
 import {PatientsService} from '../../services/patients/patients.service';
 import {Subscription} from 'rxjs';
 import {DiagnosisService} from '../../services/diagnosis/diagnosis.service';
-import {NewAppointmentComponent} from '../../appointments/new-appointment/new-appointment.component';
+import {NewAppointmentDialogComponent} from '../../appointments/new-appointment-dialog/new-appointment-dialog.component';
 
 @Component({
   selector: 'app-patients-list',
@@ -38,7 +38,7 @@ export class PatientsListComponent implements OnInit, OnDestroy {
   }
 
   addToVisit(currentPatient) {
-    this.matDialog.open(NewAppointmentComponent, {
+    this.matDialog.open(NewAppointmentDialogComponent, {
       data: {
         selectedPatient: currentPatient
       },

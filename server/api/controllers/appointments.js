@@ -54,7 +54,8 @@ exports.registerNewAppointment = async (req, res, next) => {
         duration: req.body.duration, // sec
         dateEnd: endDate,
         doctor: doctor,
-        patient: req.body.patient
+        patient: req.body.patient,
+        provisionalDiagnosis: req.body.provisionalDiagnosis || []
     });
 
     newAppointment.save().then((data) => {

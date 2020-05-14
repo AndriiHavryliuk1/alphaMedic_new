@@ -1,7 +1,9 @@
 <form class="mat-autocomplete-form" [ngClass]="formClass">
-  <mat-form-field [ngClass]="{'dropdown-icon': !selectedItem, 'no-top-margin': floatLabel === 'never'}" [floatLabel]="floatLabel || 'auto'">
+  <mat-form-field [ngClass]="{'dropdown-icon': !selectedItem, 'no-top-margin': floatLabel === 'never'}"
+                  [floatLabel]="floatLabel || 'auto'">
     <mat-icon *ngIf="materialIcon">{{materialIcon}}</mat-icon>
     <input name="autoComplete"
+           #autoCompleteInput
            type="text"
            class="input-styles"
            [placeholder]="placeholder"
@@ -10,9 +12,17 @@
            matInput [formControl]="myControl"
            [matAutocomplete]="auto"
            (blur)="onBlur(auto)">
-    <mat-icon *ngIf="selectedItem" class="mat-clear-icon not-close" (click)="onOptionChanged(null)">clear</mat-icon>
-    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionChanged($event.option.value)" (opened)="onAutoCompleteOpened()" (closed)="onAutoCompleteClosed()" class="{{menuClass}}">
-      <mat-option *ngFor="let option of filteredOptions | async" [value]="option" [ngClass]="option.ngClass ? option.ngClass : ''">
+    <mat-icon *ngIf="selectedItem && !disabled"
+              class="mat-clear-icon not-close"
+              (click)="onOptionChanged(null)">clear
+    </mat-icon>
+    <mat-autocomplete #auto="matAutocomplete"
+                      (optionSelected)="onOptionChanged($event.option.value)"
+                      (opened)="onAutoCompleteOpened()"
+                      (closed)="onAutoCompleteClosed()"
+                      class="{{menuClass}}">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option"
+                  [ngClass]="option.ngClass ? option.ngClass : ''">
         <span [innerHTML]="option.text | highlight: searchText" title="{{option.text}}"></span>
       </mat-option>
     </mat-autocomplete>

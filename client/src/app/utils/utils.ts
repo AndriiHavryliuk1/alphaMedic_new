@@ -89,3 +89,11 @@ export function sortItemsByText(items) {
     return 0;
   });
 }
+
+/**
+ * Return duration in sec
+ */
+export function getDurationFromTime(timeValue: string): number {
+  const separatedDuration = timeValue.split(':');
+  return +separatedDuration[0] * 3600 + +separatedDuration[1] * 60;
+}

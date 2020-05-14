@@ -184,6 +184,11 @@ div > mat-card {
 .fil-seg-panel:hover { fill: rgb(224,224,224);}
 
 .full-width mat-form-field,
-mat-form-field.full-width {
+mat-form-field.full-width,
+mat-form-field {
   width: 100%;
+}
+
+div.mat-form-field-infix {
+  width: auto;
 }

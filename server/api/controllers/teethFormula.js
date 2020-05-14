@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const TeethFormula = require('../modelsMongoose/teethFormula');
+const historyService = require('../services/historyService');
 
 exports.getAllTeethFormula = async (req, res, next) => {
     try {
@@ -33,6 +34,7 @@ exports.updateTeethFormulaForCurrentUser = async (req, res, next) => {
         }
         teethFormula.teeth = req.body.teeth;
         teethFormula.save().then((data) => {
+            historyService.addTeethFormula(data._doc, req, next);
             res.status(200).json(data);
         }).catch(error => {
             next(error);
@@ -44,7 +46,7 @@ exports.updateTeethFormulaForCurrentUser = async (req, res, next) => {
 
 exports.updateToothForCurrentUser = async (req, res, next) => {
     try {
-        let teethFormula = await TeethFormula.findById(req.userId).exec();
+        let teethFormula = await TeethFormula.findOne({userId: req.userId}).exec();
         const tooth = req.body;
         if (!isToothValid(tooth)) {
             const error = new Error('Tooth is not valid')
@@ -63,6 +65,7 @@ exports.updateToothForCurrentUser = async (req, res, next) => {
 
         teethFormula.teeth[req.params.toothId] = tooth;
         teethFormula.save().then((data) => {
+            historyService.addTeethFormula(data._doc, req, next);
             res.status(200).json(data);
         }).catch(error => {
             next(error);

@@ -1,0 +1,29 @@
+<div class="app-dialog-width">
+  <h2 mat-dialog-title>Відвідування</h2>
+
+  <mat-dialog-content>
+
+    <app-appointment-form [selectedPatient]="selectedPatient"
+                          [selectedDiagnosis]="selectedDiagnosis"
+                          [patientStatic]="true"
+                          [visitForm]="visitForm"></app-appointment-form>
+
+    <!--    <div>-->
+    <!--      <mat-form-field>-->
+    <!--        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Дата народження"-->
+    <!--               formControlName="birthday">-->
+    <!--        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
+    <!--        <mat-datepicker #picker></mat-datepicker>-->
+    <!--        <mat-error *ngIf="patientForm.get('birthday').invalid">{{getErrorMessage(patientForm.get('birthday'))}}</mat-error>-->
+    <!--      </mat-form-field>-->
+    <!--    </div>-->
+
+
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button class="mat-raised-button" (click)="closeDialog()">Відмінити</button>
+    <button class="mat-raised-button mat-primary" (click)="createVisit()" [disabled]="!this.visitForm.valid">Зберегти</button>
+  </mat-dialog-actions>
+
+</div>

@@ -12,7 +12,14 @@ import {MultiValueEditorComponent} from './multi-value-editor/multi-value-editor
 import {MatChipsModule} from '@angular/material/chips';
 
 @NgModule({
-  declarations: [SvgIconComponent, AutocompleteComponent, HighlightPipe, PlaceholderDirective, ClickOutDirective, MultiValueEditorComponent],
+  declarations: [
+    SvgIconComponent,
+    AutocompleteComponent,
+    HighlightPipe,
+    PlaceholderDirective,
+    ClickOutDirective,
+    MultiValueEditorComponent
+  ],
   imports: [
     CommonModule,
     MatIconModule,
@@ -23,7 +30,13 @@ import {MatChipsModule} from '@angular/material/chips';
     MatChipsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  exports: [SvgIconComponent, AutocompleteComponent, PlaceholderDirective, ClickOutDirective, MultiValueEditorComponent]
+  exports: [
+    SvgIconComponent,
+    AutocompleteComponent,
+    PlaceholderDirective,
+    ClickOutDirective,
+    MultiValueEditorComponent
+  ]
 })
 export class SharedModule {
 }

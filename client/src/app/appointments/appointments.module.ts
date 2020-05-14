@@ -9,16 +9,18 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import {ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
-import {NewAppointmentComponent} from './new-appointment/new-appointment.component';
+import {NewAppointmentDialogComponent} from './new-appointment-dialog/new-appointment-dialog.component';
 import {AppointmentComponent} from './appointment/appointment.component';
 import {SharedModule} from '../shared/shared.module';
 import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule} from '@angular/material-moment-adapter';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {PatientsService} from '../services/patients/patients.service';
 import {AppointmentsService} from '../services/appointments/appointments.service';
+import { AppointmentFormComponent } from './appointment-form/appointment-form.component';
+import { NewAppointmentComponent } from './new-appointment/new-appointment.component';
 
 @NgModule({
-  declarations: [NewAppointmentComponent, AppointmentComponent],
+  declarations: [NewAppointmentDialogComponent, AppointmentComponent, AppointmentFormComponent, NewAppointmentComponent],
   imports: [
     CommonModule,
     MatIconModule,
@@ -39,6 +41,6 @@ import {AppointmentsService} from '../services/appointments/appointments.service
     AppointmentsService,
     {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUtc: true, useValue: 'uk-UA' }}
   ],
-  exports: [NewAppointmentComponent, AppointmentComponent]
+  exports: [NewAppointmentDialogComponent, AppointmentComponent, NewAppointmentComponent]
 })
 export class AppointmentsModule { }

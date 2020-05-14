@@ -1,74 +1,18 @@
-<div class="app-dialog-width">
-  <h2 mat-dialog-title>Відвідування</h2>
+<div class="content-centered container">
+  <h2 class="text-centered">Реєстратура</h2>
+  <div class="appointment-content">
 
-  <mat-dialog-content [formGroup]="visitForm">
+    <app-appointment-form [(selectedPatient)]="selectedPatient"
+                          [(selectedDiagnosis)]="selectedDiagnosis"
+                          [visitForm]="visitForm"></app-appointment-form>
 
-    <div class="mat-field" *ngIf="!selectedPatient">
-      <app-autocomplete [items]="patients"
-                        [selectedItem]="selectedPatient"
-                        placeholder="Виберіть пацієнта">
-
-      </app-autocomplete>
+    <div>
+      <button class="mat-raised-button mat-primary apply-btn"
+              (click)="createVisit()"
+              [disabled]="!(this.visitForm.valid && this.selectedPatient)">Зареєструвати
+      </button>
     </div>
 
-    <div class="mat-field" *ngIf="selectedPatient">
-      <mat-form-field>
-        <input matInput placeholder="Пацієнт*" [formControl]="patient"/>
-      </mat-form-field>
-    </div>
-
-    <div class="mat-field">
-      <app-autocomplete [items]="diagnosis"
-                        (valueChanged)="onDiagnosisChanged($event)"
-                        [selectedItem]="selectedDiagnosis"
-                        placeholder="Виберіть попередній діагноз">
-
-      </app-autocomplete>
-    </div>
-
-    <div class="visit-date-time-container">
-      <div class="visit-date-field">
-        <mat-form-field>
-          <input matInput [matDatepicker]="picker" placeholder="Дата*"
-                 formControlName="visitDate">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-      </div>
-
-      <div class="visit-time-field">
-        <mat-form-field>
-          <input matInput placeholder="Час*" [ngxTimepicker]="timePicker" [format]="24"
-                 min="08:00" max="20:00" formControlName="visitTime">
-          <ngx-material-timepicker #timePicker [minutesGap]="5" ></ngx-material-timepicker>
-        </mat-form-field>
-      </div>
-
-      <div class="visit-duration-field">
-        <mat-form-field>
-          <input matInput placeholder="Тривалість*" [ngxTimepicker]="durationPicker" [format]="24"
-                 formControlName="duration">
-          <ngx-material-timepicker #durationPicker [minutesGap]="5" ></ngx-material-timepicker>
-        </mat-form-field>
-      </div>
-    </div>
-
-    <!--    <div>-->
-    <!--      <mat-form-field>-->
-    <!--        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Дата народження"-->
-    <!--               formControlName="birthday">-->
-    <!--        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
-    <!--        <mat-datepicker #picker></mat-datepicker>-->
-    <!--        <mat-error *ngIf="patientForm.get('birthday').invalid">{{getErrorMessage(patientForm.get('birthday'))}}</mat-error>-->
-    <!--      </mat-form-field>-->
-    <!--    </div>-->
-
-
-  </mat-dialog-content>
-
-  <mat-dialog-actions>
-    <button class="mat-raised-button" (click)="closeDialog()">Відмінити</button>
-    <button class="mat-raised-button mat-primary" (click)="createVisit()">Зберегти</button>
-  </mat-dialog-actions>
+  </div>
 
 </div>

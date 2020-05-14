@@ -20,7 +20,7 @@ const isAuth = require('./middleware/is-auth');
 const dbGenerator = require('./services/dbGenerator');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 mongoose.connect(configuration.DB_CONECTION_STRING, { useNewUrlParser: true });
 
