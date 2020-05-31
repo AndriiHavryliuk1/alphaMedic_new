@@ -14,6 +14,18 @@ import {DiagnosisService} from './services/diagnosis/diagnosis.service';
 import {TeethService} from './services/teeth/teeth.service';
 import {AuthModule} from './auth/auth.module';
 import {PatientsRoutingModule} from './patients/patients-routing.module';
+import {CalendarModule, DateAdapter, DAYS_OF_WEEK} from 'angular-calendar';
+import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
+import {StartPageRoutingModule} from './start-page/start-page-routing.module';
+import * as moment from 'moment';
+
+// weekStartsOn option is ignored when using moment, as it needs to be configured globally for the moment locale
+moment.updateLocale('en', {
+  week: {
+    dow: 1,
+    doy: 0,
+  },
+});
 
 @NgModule({
   declarations: [
@@ -26,7 +38,12 @@ import {PatientsRoutingModule} from './patients/patients-routing.module';
     PatientsRoutingModule,
     HttpClientModule,
     AppointmentsModule,
-    AuthModule
+    AuthModule,
+    StartPageRoutingModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    }),
   ],
   providers: [
     ServicesService,

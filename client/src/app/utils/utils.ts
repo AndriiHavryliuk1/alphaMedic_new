@@ -97,3 +97,10 @@ export function getDurationFromTime(timeValue: string): number {
   const separatedDuration = timeValue.split(':');
   return +separatedDuration[0] * 3600 + +separatedDuration[1] * 60;
 }
+
+export function getDayOfWeekStartedFromMonday(day: number): number {
+  if (--day === -1) {
+    return 6;
+  }
+  return day;
+}

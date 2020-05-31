@@ -29,6 +29,7 @@ import {EditPanelOptionsComponent} from './patient/teeth-formula/edit-panel-opti
 import {SharedModule} from '../shared/shared.module';
 import {ClickOutsideModule} from 'ng-click-outside';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {PatientsRoutingModule} from './patients-routing.module';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     CarePlanComponent,
     DoctorsDairyComponent,
     EditPanelComponent,
-    EditPanelOptionsComponent],
+    EditPanelOptionsComponent
+  ],
     imports: [
         CommonModule,
         MatIconModule,
@@ -61,7 +63,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
         InlineSVGModule,
         SharedModule,
         ClickOutsideModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        PatientsRoutingModule
     ],
   providers: [PatientsService]
 })

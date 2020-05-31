@@ -1,0 +1,11 @@
+@import "../../../../sass/variables";
+
+.month-cell {
+  display: flex;
+}
+
+.today {
+  background-color: $selected-color;
+  border-radius: 20px;
+  width: 24px;
+}

@@ -1,0 +1,21 @@
+@import "../../../sass/variables";
+
+#month-content:first-child > div.day {
+  border-top: none;
+}
+
+.week {
+  display: flex;
+  width: 100%;
+  height: 20%;
+}
+
+.day {
+  text-align: center;
+  width: 100%;
+  border: $border-color 0.5px solid;
+}
+
+.no-border-top {
+  border-top: none;
+}

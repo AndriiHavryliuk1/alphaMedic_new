@@ -1,0 +1,11 @@
+<div class="header">
+  <button mat-button color="primary" (click)="clickToday()">Сьогодні</button>
+  <div class="navigation-icons content-centered text-centered">
+    <mat-icon title="Попередній" class="no-select" (click)="clickPrevious()">navigate_before</mat-icon>
+    <mat-icon title="Наступний" class="no-select" (click)="clickNext()">navigate_next</mat-icon>
+  </div>
+  <div class="content-centered text-centered">
+    <span>{{headerText}}</span>
+  </div>
+
+</div>

@@ -1,0 +1,8 @@
+<xd-calendar-month-header></xd-calendar-month-header>
+<div id="month-content">
+  <div *ngFor="let week of monthMatrix; index as i" class="week">
+    <div *ngFor="let day of week" class="day" [ngClass]="{'no-border-top': i === 0}">
+      <xd-calendar-month-cell [day]="day"></xd-calendar-month-cell>
+    </div>
+  </div>
+</div>

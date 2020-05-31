@@ -5,7 +5,6 @@ import {ActivatedRoute} from '@angular/router';
 import {Patient} from '../../models/patient';
 import {PatientsService} from '../../services/patients/patients.service';
 import {Subscription} from 'rxjs';
-import {DiagnosisService} from '../../services/diagnosis/diagnosis.service';
 import {NewAppointmentDialogComponent} from '../../appointments/new-appointment-dialog/new-appointment-dialog.component';
 
 @Component({

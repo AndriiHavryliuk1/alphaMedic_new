@@ -8,12 +8,13 @@ import {NewAppointmentComponent} from './appointments/new-appointment/new-appoin
 import {PatientsListResolver} from './services/patients/patients-list-resolver.service';
 
 const routes: Routes = [
+  {path: 'start-page', loadChildren: () => import('./start-page/start-page.module').then(m => m.StartPageModule)},
   {path: 'patients', loadChildren: () => import('./patients/patients.module').then(m => m.PatientsModule)},
   {path: 'appointment', component: AppointmentComponent, canActivate: [AuthGuard]},
   {path: 'sign-to-appointment', resolve: {patients: PatientsListResolver}, component: NewAppointmentComponent, canActivate: [AuthGuard]},
   {path: 'sign-in', component: LoginComponent},
-  {path: 'sign-up', component: RegistrationComponent}
-
+  {path: 'sign-up', component: RegistrationComponent},
+  {path: '',   redirectTo: '/start-page', pathMatch: 'full'}
 ];
 
 @NgModule({

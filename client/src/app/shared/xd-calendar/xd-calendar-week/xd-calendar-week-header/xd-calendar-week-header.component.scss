@@ -1,0 +1,18 @@
+@import "../../../../sass/variables";
+
+.header {
+  width: 100%;
+  display: flex;
+  .header-cell {
+    text-align: center;
+    width: 100%;
+    border-left: $border-color 0.5px solid;
+    border-right: $border-color 0.5px solid;
+  }
+
+  .today {
+    background-color: $selected-color;
+    border-radius: 20px;
+    width: 24px;
+  }
+}
