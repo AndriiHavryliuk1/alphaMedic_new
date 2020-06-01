@@ -1,4 +1,5 @@
 @import "../../../../sass/variables";
+@import "../xd-calendar-week.component";
 
 .header {
   width: 100%;
@@ -8,11 +9,16 @@
     width: 100%;
     border-left: $border-color 0.5px solid;
     border-right: $border-color 0.5px solid;
+    &.hours-name {
+      width: $hours-name-width;
+      flex: none;
+    }
   }
 
   .today {
     background-color: $selected-color;
     border-radius: 20px;
     width: 24px;
+    display: inline-block;
   }
 }

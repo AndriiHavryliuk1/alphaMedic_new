@@ -7,5 +7,32 @@
   <div class="content-centered text-centered">
     <span>{{headerText}}</span>
   </div>
+  <div class="navigation-buttons">
+    <button mat-button color="primary"
+            *ngIf="currentDateState !== DATE_STATES.YEAR"
+            (click)="changeState(DATE_STATES.YEAR)">Рік
+    </button>
+    <button mat-raised-button color="primary"
+            *ngIf="currentDateState === DATE_STATES.YEAR"
+            (click)="changeState(DATE_STATES.YEAR)">Рік
+    </button>
 
+    <button mat-button color="primary"
+            *ngIf="currentDateState !== DATE_STATES.MONTH"
+            (click)="changeState(DATE_STATES.MONTH)">Місяць
+    </button>
+    <button mat-raised-button color="primary"
+            *ngIf="currentDateState === DATE_STATES.MONTH"
+            (click)="changeState(DATE_STATES.MONTH)">Місяць
+    </button>
+
+    <button mat-button color="primary"
+            *ngIf="currentDateState !== DATE_STATES.WEEK"
+            (click)="changeState(DATE_STATES.WEEK)">Тиждень
+    </button>
+    <button mat-raised-button color="primary"
+            *ngIf="currentDateState === DATE_STATES.WEEK"
+            (click)="changeState(DATE_STATES.WEEK)">Тиждень
+    </button>
+  </div>
 </div>

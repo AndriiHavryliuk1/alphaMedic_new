@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import * as moment from 'moment';
+import {DATE_STATES} from '../xd-calendar.utils';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -9,9 +10,11 @@ import * as moment from 'moment';
 })
 export class XdCalendarHeaderComponent implements OnInit {
   @Input() currentDate = new Date();
-  @Input() currentDateState = 'MONTH';
+  @Input() currentDateState = DATE_STATES.MONTH;
   @Output() public dateChanged = new EventEmitter();
+  @Output() public dateStateChanged = new EventEmitter();
   public headerText: string;
+  public DATE_STATES = DATE_STATES;
   private months = [
     {number: 0, name: 'Січень'},
     {number: 1, name: 'Лютий'},
@@ -42,8 +45,11 @@ export class XdCalendarHeaderComponent implements OnInit {
 
   public clickPrevious() {
     switch (this.currentDateState) {
-      case 'MONTH':
+      case DATE_STATES.MONTH:
         this.currentDate = moment(this.currentDate).subtract(1, 'months').toDate();
+        break;
+      case DATE_STATES.WEEK:
+        this.currentDate = moment(this.currentDate).subtract(1, 'week').toDate();
         break;
       default:
         console.log('Unknown date state');
@@ -52,10 +58,19 @@ export class XdCalendarHeaderComponent implements OnInit {
     this.dateChangeHandler();
   }
 
+  public changeState(newState) {
+    this.currentDateState = newState;
+    this.init();
+    this.dateStateChanged.emit(newState);
+  }
+
   public clickNext() {
     switch (this.currentDateState) {
-      case 'MONTH':
+      case DATE_STATES.MONTH:
         this.currentDate = moment(this.currentDate).add(1, 'months').toDate();
+        break;
+      case DATE_STATES.WEEK:
+        this.currentDate = moment(this.currentDate).add(1, 'week').toDate();
         break;
       default:
         console.log('Unknown date state');
@@ -66,9 +81,21 @@ export class XdCalendarHeaderComponent implements OnInit {
 
   private init() {
     switch (this.currentDateState) {
-      case 'MONTH':
+      case DATE_STATES.MONTH:
         const currentMonth = this.months.find(m => m.number === this.currentDate.getMonth());
         this.headerText = currentMonth.name + ' ' + this.currentDate.getFullYear();
+        break;
+      case DATE_STATES.WEEK:
+       // this.currentDate = moment(this.currentDate).add(1, 'week').toDate();
+        const startWeekDate = moment(this.currentDate).startOf('isoWeek').toDate();
+        const endWeekDate = moment(this.currentDate).endOf('isoWeek').toDate();
+        const startMonth = this.months.find(m => m.number === startWeekDate.getMonth());
+        const endMonth = this.months.find(m => m.number === endWeekDate.getMonth());
+        if (startMonth === endMonth) {
+          this.headerText = startMonth.name + ' ' + this.currentDate.getFullYear();
+        } else {
+          this.headerText = `${startMonth.name} - ${endMonth.name} ${this.currentDate.getFullYear()}`;
+        }
         break;
       default:
         console.log('Unknown date state');

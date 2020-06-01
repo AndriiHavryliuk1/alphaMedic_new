@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, Renderer2, SimpleChanges} from '@angular/core';
 import * as moment from 'moment';
-import {getDayOfWeekStartedFromMonday} from '../../../utils/utils';
+import {getDayOfWeekStartedFromMonday} from '../xd-calendar.utils';
 
 @Component({
   // tslint:disable-next-line:component-selector

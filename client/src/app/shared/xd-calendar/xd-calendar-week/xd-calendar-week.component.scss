@@ -1,0 +1,12 @@
+$hours-name-width: 100px;
+
+
+.hour-row {
+  height: 80px;
+
+  .hour-text {
+    width: $hours-name-width;
+    display: flex;
+    justify-content: center;
+  }
+}

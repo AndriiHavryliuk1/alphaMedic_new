@@ -1,1 +1,7 @@
 <xd-calendar-week-header></xd-calendar-week-header>
+
+<div>
+  <div *ngFor="let hour of hours" class="hour-row">
+    <div class="hour-text">{{hour.text}}</div>
+  </div>
+</div>
