@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import * as moment from 'moment';
 
 @Component({
@@ -7,7 +7,7 @@ import * as moment from 'moment';
   templateUrl: './xd-calendar-week-header.component.html',
   styleUrls: ['./xd-calendar-week-header.component.scss']
 })
-export class XdCalendarWeekHeaderComponent implements OnInit {
+export class XdCalendarWeekHeaderComponent implements OnInit, OnChanges {
   @Input()
   public days = [
     {position: 0, fullName: 'Понеділок', shortName: 'Пн'},
@@ -29,13 +29,21 @@ export class XdCalendarWeekHeaderComponent implements OnInit {
     this.initCurrentWeek();
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.currentDate && !changes.currentDate.firstChange) {
+      this.currentDate = changes.currentDate.currentValue;
+      this.initCurrentWeek();
+    }
+  }
+
   private initCurrentWeek() {
-    const isCurrentWeek = moment(this.currentDate).isSame(new Date(), 'week');
+    const today = new Date();
+    const isCurrentWeek = moment(this.currentDate).isSame(today, 'week');
     const weekStart = moment(this.currentDate).startOf('isoWeek');
     for (let i = 0; i < 7; i++) {
       const day = moment(weekStart).add(i, 'days').toDate().getDate();
       this.days[i].number = day;
-      if (isCurrentWeek && this.currentDate.getDate() === day) {
+      if (isCurrentWeek && today.getDate() === day) {
         this.days[i].today = true;
       }
     }
