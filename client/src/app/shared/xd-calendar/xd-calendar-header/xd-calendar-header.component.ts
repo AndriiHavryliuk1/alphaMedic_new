@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import * as moment from 'moment';
 import {DATE_STATES} from '../xd-calendar.utils';
+import {XdCalendarService} from '../xd-calendar.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -30,7 +31,7 @@ export class XdCalendarHeaderComponent implements OnInit {
     {number: 11, name: 'Грудень'}
   ];
 
-  constructor() {
+  constructor(private xdCalendarService: XdCalendarService) {
   }
 
   public ngOnInit(): void {
@@ -62,6 +63,7 @@ export class XdCalendarHeaderComponent implements OnInit {
     this.currentDateState = newState;
     this.init();
     this.dateStateChanged.emit(newState);
+    this.xdCalendarService.dateState.next(newState);
   }
 
   public clickNext() {
@@ -86,7 +88,7 @@ export class XdCalendarHeaderComponent implements OnInit {
         this.headerText = currentMonth.name + ' ' + this.currentDate.getFullYear();
         break;
       case DATE_STATES.WEEK:
-       // this.currentDate = moment(this.currentDate).add(1, 'week').toDate();
+        // this.currentDate = moment(this.currentDate).add(1, 'week').toDate();
         const startWeekDate = moment(this.currentDate).startOf('isoWeek').toDate();
         const endWeekDate = moment(this.currentDate).endOf('isoWeek').toDate();
         const startMonth = this.months.find(m => m.number === startWeekDate.getMonth());
@@ -104,5 +106,6 @@ export class XdCalendarHeaderComponent implements OnInit {
 
   private dateChangeHandler() {
     this.dateChanged.emit(this.currentDate);
+    this.xdCalendarService.currentDate.next(this.currentDate);
   }
 }

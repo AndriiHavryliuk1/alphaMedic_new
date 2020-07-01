@@ -9,6 +9,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {CalendarCommonModule, CalendarDayModule, CalendarMonthModule, CalendarWeekModule} from 'angular-calendar';
 import {FormsModule} from '@angular/forms';
 import {SharedModule} from '../shared/shared.module';
+import {XdCalendarModule} from '../shared/xd-calendar/xd-calendar.module';
 
 @NgModule({
   declarations: [
@@ -16,18 +17,19 @@ import {SharedModule} from '../shared/shared.module';
     CalendarComponent,
     AppointmentsComponent
   ],
-  imports: [
-    CommonModule,
-    StartPageRoutingModule,
-    MatCardModule,
-    MatTabsModule,
-    CalendarMonthModule,
-    CalendarCommonModule,
-    CalendarWeekModule,
-    CalendarDayModule,
-    FormsModule,
-    SharedModule
-  ],
+    imports: [
+        CommonModule,
+        StartPageRoutingModule,
+        MatCardModule,
+        MatTabsModule,
+        CalendarMonthModule,
+        CalendarCommonModule,
+        CalendarWeekModule,
+        CalendarDayModule,
+        FormsModule,
+        SharedModule,
+        XdCalendarModule
+    ],
   exports: [
     StartPageComponent,
     CalendarComponent,

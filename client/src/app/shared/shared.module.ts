@@ -10,16 +10,7 @@ import {PlaceholderDirective} from './placeholder/placeholder.directive';
 import {ClickOutDirective} from './clickOut/click-out.directive';
 import {MultiValueEditorComponent} from './multi-value-editor/multi-value-editor.component';
 import {MatChipsModule} from '@angular/material/chips';
-import { XdCalendarComponent } from './xd-calendar/xd-calendar.component';
-import { XdCalendarMonthComponent } from './xd-calendar/xd-calendar-month/xd-calendar-month.component';
-import { XdCalendarWeekComponent } from './xd-calendar/xd-calendar-week/xd-calendar-week.component';
-import { XdCalendarDayComponent } from './xd-calendar/xd-calendar-day/xd-calendar-day.component';
-import { XdCalendarYearComponent } from './xd-calendar/xd-calendar-year/xd-calendar-year.component';
-import { XdCalendarMonthHeaderComponent } from './xd-calendar/xd-calendar-month/xd-calendar-month-header/xd-calendar-month-header.component';
-import { XdCalendarMonthCellComponent } from './xd-calendar/xd-calendar-month/xd-calendar-month-cell/xd-calendar-month-cell.component';
-import { XdCalendarHeaderComponent } from './xd-calendar/xd-calendar-header/xd-calendar-header.component';
 import {MatButtonModule} from '@angular/material/button';
-import { XdCalendarWeekHeaderComponent } from './xd-calendar/xd-calendar-week/xd-calendar-week-header/xd-calendar-week-header.component';
 
 @NgModule({
   declarations: [
@@ -28,16 +19,7 @@ import { XdCalendarWeekHeaderComponent } from './xd-calendar/xd-calendar-week/xd
     HighlightPipe,
     PlaceholderDirective,
     ClickOutDirective,
-    MultiValueEditorComponent,
-    XdCalendarComponent,
-    XdCalendarMonthComponent,
-    XdCalendarWeekComponent,
-    XdCalendarDayComponent,
-    XdCalendarYearComponent,
-    XdCalendarMonthHeaderComponent,
-    XdCalendarMonthCellComponent,
-    XdCalendarHeaderComponent,
-    XdCalendarWeekHeaderComponent
+    MultiValueEditorComponent
   ],
   imports: [
     CommonModule,
@@ -55,8 +37,7 @@ import { XdCalendarWeekHeaderComponent } from './xd-calendar/xd-calendar-week/xd
     AutocompleteComponent,
     PlaceholderDirective,
     ClickOutDirective,
-    MultiValueEditorComponent,
-    XdCalendarComponent
+    MultiValueEditorComponent
   ]
 })
 export class SharedModule {

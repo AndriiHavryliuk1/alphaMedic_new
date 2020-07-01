@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, Output} from '@angular/core';
-import {endOfDay, startOfDay} from 'date-fns';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {DATE_STATES} from './xd-calendar.utils';
+import {XdCalendarService} from './xd-calendar.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -8,24 +8,43 @@ import {DATE_STATES} from './xd-calendar.utils';
   templateUrl: './xd-calendar.component.html',
   styleUrls: ['./xd-calendar.component.css']
 })
-export class XdCalendarComponent implements OnInit {
-  @Input() date = new Date();
-  @Input() dateState = DATE_STATES.MONTH;
-  @Output() events = [];
+export class XdCalendarComponent implements OnInit, OnDestroy {
+  @Input() currentDate;
+  @Input() dateState;
+  @Input() events;
+  @Output() eventsChange = new EventEmitter();
 
   public DATE_STATES = DATE_STATES;
-  constructor() { }
+  private dateStateSub;
+  private currentDateSub;
+
+  constructor(private xdCalendarService: XdCalendarService) {
+  }
 
   ngOnInit(): void {
+    if (this.currentDate) {
+      this.xdCalendarService.currentDate.next(this.currentDate);
+    }
+    if (this.dateState) {
+      this.xdCalendarService.dateState.next(this.dateState);
+    }
 
+    if (this.dateState) {
+      this.xdCalendarService.events.next(this.dateState);
+    }
+
+    this.dateStateSub = this.xdCalendarService.dateState.subscribe(newState => {
+      this.dateState = newState;
+    });
+
+    this.currentDateSub = this.xdCalendarService.currentDate.subscribe(newDate => {
+      this.currentDate = newDate;
+    });
   }
 
-  public dateChangeHandler(newDate) {
-    this.date = newDate;
-  }
-
-  public dateStateChangeHandler(newState) {
-    this.dateState = newState;
+  ngOnDestroy(): void {
+    this.dateStateSub.unsubscribe();
+    this.currentDateSub.unsubscribe();
   }
 
 }

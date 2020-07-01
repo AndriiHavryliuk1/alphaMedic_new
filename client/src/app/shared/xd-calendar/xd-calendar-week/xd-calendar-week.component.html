@@ -1,7 +1,14 @@
 <xd-calendar-week-header [currentDate]="currentDate"></xd-calendar-week-header>
 
-<div>
-  <div *ngFor="let hour of hours" class="hour-row">
-    <div class="hour-text">{{hour.text}}</div>
+<div class="week-content">
+  <div>
+    <div *ngFor="let hour of hours" class="hour-row">
+      <div class="hour-text">{{hour.text}}</div>
+    </div>
+  </div>
+  <div *ngFor="let day of week">
+    <div *ngFor="let hour of day" class="week-cell content-centered text-centered">
+      {{hour.text ? hour.text : hour.hours.from + " - " + hour.hours.to}}
+    </div>
   </div>
 </div>

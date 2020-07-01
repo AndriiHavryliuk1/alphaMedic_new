@@ -56,16 +56,15 @@ export class NewAppointmentDialogComponent implements OnInit {
     if (!this.visitForm.valid) {
       return;
     }
-    debugger;
 
-    const visitStartDate = moment(this.visitForm.get('visitDate').value.toDate().toDateString())
+    const visitdateStart = moment(this.visitForm.get('visitDate').value.toDate().toDateString())
       .add(getDurationFromTime(this.visitForm.get('visitTime').value), 'seconds').toDate();
     const duration = getDurationFromTime(this.visitForm.get('duration').value);
 
     const dataForSave = {
-      dateStart: visitStartDate,
+      dateStart: visitdateStart,
       duration, // sec
-      dateEnd: moment(visitStartDate).add(duration, 'seconds').toDate(),
+      dateEnd: moment(visitdateStart).add(duration, 'seconds').toDate(),
       doctor: {
         _id: this.authService.user.value.getId(),
         fullName: this.authService.user.value.getFullName()

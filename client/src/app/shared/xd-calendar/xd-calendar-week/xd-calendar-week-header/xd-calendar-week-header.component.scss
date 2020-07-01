@@ -4,11 +4,10 @@
 .header {
   width: 100%;
   display: flex;
+  margin-bottom: 20px;
   .header-cell {
     text-align: center;
     width: 100%;
-    border-left: $border-color 0.5px solid;
-    border-right: $border-color 0.5px solid;
     &.hours-name {
       width: $hours-name-width;
       flex: none;

@@ -39,14 +39,14 @@ export class NewAppointmentComponent implements OnInit {
       return;
     }
 
-    const visitStartDate = moment(this.visitForm.get('visitDate').value.toDateString())
+    const visitdateStart = moment(this.visitForm.get('visitDate').value.toDateString())
       .add(getDurationFromTime(this.visitForm.get('visitTime').value), 'seconds').toDate();
     const duration = getDurationFromTime(this.visitForm.get('duration').value);
 
     const dataForSave = {
-      dateStart: visitStartDate,
+      dateStart: visitdateStart,
       duration, // sec
-      dateEnd: moment(visitStartDate).add(duration, 'seconds').toDate(),
+      dateEnd: moment(visitdateStart).add(duration, 'seconds').toDate(),
       doctor: {
         _id: this.authService.user.value.getId(),
         fullName: this.authService.user.value.getFullName()

@@ -1,6 +1,9 @@
-<xd-calendar-header [currentDate]="date"
-                    (dateStateChanged)="dateStateChangeHandler($event)"
-                    (dateChanged)="dateChangeHandler($event)">
-</xd-calendar-header>
-<xd-calendar-month *ngIf="dateState === DATE_STATES.MONTH" [currentDate]="date"></xd-calendar-month>
-<xd-calendar-week *ngIf="dateState === DATE_STATES.WEEK" [currentDate]="date"></xd-calendar-week>
+<xd-calendar-header [currentDate]="currentDate" [currentDateState]="dateState"></xd-calendar-header>
+<xd-calendar-month *ngIf="dateState === DATE_STATES.MONTH"
+                   [currentDate]="currentDate"
+                   [events]="events">
+</xd-calendar-month>
+<xd-calendar-week *ngIf="dateState === DATE_STATES.WEEK"
+                  [currentDate]="currentDate"
+                  [events]="events">
+</xd-calendar-week>

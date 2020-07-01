@@ -2,10 +2,48 @@
 
 .month-cell {
   display: flex;
+  height: 100%;
+  justify-content: center;
+
+  > div {
+    width: 100%;
+    height: inherit;
+    overflow-y: hidden;
+
+    .more-events {
+      border-radius: 5px;
+      font-weight: 500;
+      font-size: 13px;
+      width: calc(100% - 10px);
+      margin: 2px 0 2px 5px;
+      cursor: pointer;
+    }
+
+    .more-events:hover {
+      background-color: #f1f3f4;
+    }
+
+    .event {
+      height: 19px;
+      cursor: pointer;
+      border-radius: 5px;
+      background-color: rgb(11, 128, 67);
+      font-weight: 500;
+      color: white;
+      font-size: 13px;
+      width: calc(100% - 10px);
+      margin: 2px 0 2px 5px;
+    }
+
+    .event:hover {
+      opacity: 0.8;
+    }
+  }
 }
 
 .today {
   background-color: $selected-color;
   border-radius: 20px;
-  width: 24px;
+  width: 24px !important;
+  height: 24px !important;
 }

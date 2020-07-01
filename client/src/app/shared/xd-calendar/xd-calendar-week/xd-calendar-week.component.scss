@@ -1,12 +1,39 @@
+@import "../../../sass/variables";
+
 $hours-name-width: 100px;
 
+.week-content {
+  display: flex;
 
-.hour-row {
-  height: 80px;
+  > div {
+    width: 100%;
+  }
 
-  .hour-text {
+  > div:first-child {
     width: $hours-name-width;
-    display: flex;
-    justify-content: center;
+    flex: none;
+    margin-top: -10px;
+
+    > div {
+      border: none;
+    }
+  }
+
+  .week-cell {
+    height: 80px;
+    border-right: $border-color 0.5px solid;
+    border-bottom: $border-color 0.5px solid;
+  }
+
+  .hour-row {
+    height: 80px;
+    width: $hours-name-width;
+
+    .hour-text {
+      flex: none;
+      width: $hours-name-width;
+      display: flex;
+      justify-content: center;
+    }
   }
 }

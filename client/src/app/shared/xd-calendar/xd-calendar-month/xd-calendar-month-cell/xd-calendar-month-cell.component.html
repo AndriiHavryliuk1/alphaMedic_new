@@ -1,5 +1,12 @@
-<div class="month-cell content-centered">
+<div class="month-cell" (click)="onCellClick($event)">
   <div [ngClass]="{'today': day.today}">
     <span>{{day.number}}</span>
+    <div *ngFor="let event of day.events"
+         (click)="onEventClick($event)"
+         class="event">{{event.shortText}}
+    </div>
+    <div *ngIf="showMoreNumber"
+         class="more-events">{{"та ще + " + showMoreNumber}}
+    </div>
   </div>
 </div>

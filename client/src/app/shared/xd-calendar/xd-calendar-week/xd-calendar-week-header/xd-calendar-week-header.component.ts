@@ -43,9 +43,7 @@ export class XdCalendarWeekHeaderComponent implements OnInit, OnChanges {
     for (let i = 0; i < 7; i++) {
       const day = moment(weekStart).add(i, 'days').toDate().getDate();
       this.days[i].number = day;
-      if (isCurrentWeek && today.getDate() === day) {
-        this.days[i].today = true;
-      }
+      this.days[i].today = isCurrentWeek && today.getDate() === day;
     }
   }
 
