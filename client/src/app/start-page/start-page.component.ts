@@ -1,6 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {take} from 'rxjs/operators';
 import {ActivatedRoute} from '@angular/router';
+import {NewAppointmentDialogComponent} from '../appointments/new-appointment-dialog/new-appointment-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
+import {AppointmentsResolver} from '../services/appointments/appointments-resolver.service';
+import {AppointmentsService} from '../services/appointments/appointments.service';
 
 @Component({
   selector: 'app-start-page',
@@ -10,37 +14,55 @@ import {ActivatedRoute} from '@angular/router';
 export class StartPageComponent implements OnInit {
   public events = [];
 
-  constructor(private activatedRoute: ActivatedRoute) {
+  constructor(private activatedRoute: ActivatedRoute,
+              private matDialog: MatDialog,
+              private cdRef: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
     this.activatedRoute.data.pipe(take(1)).subscribe((data) => {
-      data.appointments.forEach(visit => {
-        const event = {
-          name: 'Прийом',
-          dateStart: new Date(visit.dateStart),
-          dateEnd: new Date(visit.dateEnd),
-          additionalInfos: [{
-            name: 'Пацієнт',
-            description: visit.patient.fullName,
-            link: visit.patient._id
-          }, {
-            name: 'Лікар',
-            description: visit.doctor.fullName,
-            link: visit.doctor._id
-          }]
-        };
-        if (visit.provisionalDiagnosis) {
-          event.additionalInfos.push({
-            name: 'Діагноз',
-            description: visit.provisionalDiagnosis.join(', '),
-            link: ''
-          });
-        }
-        this.events.push(event);
-      });
+      this.events = data.appointments.map(visit => this.adaptVisitToEvent(visit));
     });
-    console.log(this.events);
+  }
+
+  addToVisit(data) {
+    const dialogRef = this.matDialog.open(NewAppointmentDialogComponent, {
+      data: {selectedDate: data.date},
+      disableClose: true,
+      autoFocus: false
+    });
+
+    dialogRef.afterClosed().pipe(take(1)).subscribe(visit => {
+      if (visit) {
+        this.events.push(this.adaptVisitToEvent(visit));
+        this.events = this.events.slice();
+      }
+    });
+  }
+
+  private adaptVisitToEvent(visit) {
+    const event = {
+      name: 'Прийом',
+      dateStart: new Date(visit.dateStart),
+      dateEnd: new Date(visit.dateEnd),
+      additionalInfos: [{
+        name: 'Пацієнт',
+        description: visit.patient.fullName,
+        link: visit.patient._id
+      }, {
+        name: 'Лікар',
+        description: visit.doctor.fullName,
+        link: visit.doctor._id
+      }]
+    };
+    if (visit.provisionalDiagnosis) {
+      event.additionalInfos.push({
+        name: 'Діагноз',
+        description: visit.provisionalDiagnosis.join(', '),
+        link: ''
+      });
+    }
+    return event;
   }
 
 }

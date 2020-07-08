@@ -1,5 +1,6 @@
 import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnInit} from '@angular/core';
 import * as moment from 'moment';
+import {XdCalendarService} from '../../xd-calendar.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -11,7 +12,9 @@ export class XdCalendarMonthCellComponent implements OnInit, AfterViewInit {
   @Input() day;
   public showMoreNumber = 0;
 
-  constructor(private elementRef: ElementRef, private cdRef: ChangeDetectorRef) {
+  constructor(private xdCalendarService: XdCalendarService,
+              private elementRef: ElementRef,
+              private cdRef: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
@@ -25,19 +28,19 @@ export class XdCalendarMonthCellComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    requestAnimationFrame(() => {
+    setTimeout(() => {
       this.removeExtraEventsDiv();
     });
   }
 
   onCellClick(event) {
     event.stopPropagation();
-    console.log("onCellClick");
+    this.xdCalendarService.createNewEventClicked.next(this.day);
   }
 
   onEventClick(event) {
     event.stopPropagation();
-    console.log("onEventClick");
+    console.log('onEventClick');
   }
 
   private removeExtraEventsDiv() {

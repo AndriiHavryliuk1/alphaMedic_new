@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
 import {DATE_STATES} from './xd-calendar.utils';
 import {XdCalendarService} from './xd-calendar.service';
 
@@ -8,20 +8,39 @@ import {XdCalendarService} from './xd-calendar.service';
   templateUrl: './xd-calendar.component.html',
   styleUrls: ['./xd-calendar.component.css']
 })
-export class XdCalendarComponent implements OnInit, OnDestroy {
+export class XdCalendarComponent implements OnInit, OnDestroy, OnChanges {
   @Input() currentDate;
   @Input() dateState;
   @Input() events;
-  @Output() eventsChange = new EventEmitter();
+  @Output() createNewEventClicked = new EventEmitter();
 
   public DATE_STATES = DATE_STATES;
   private dateStateSub;
   private currentDateSub;
+  private createNewEventClickedSub;
 
   constructor(private xdCalendarService: XdCalendarService) {
   }
 
   ngOnInit(): void {
+    this.init();
+  }
+
+  ngOnDestroy(): void {
+    this.dateStateSub.unsubscribe();
+    this.currentDateSub.unsubscribe();
+    this.createNewEventClickedSub.unsubscribe();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    debugger;
+    if (changes.events && !changes.events.firstChange) {
+      this.events = changes.events.currentValue;
+      this.init();
+    }
+  }
+
+  private init() {
     if (this.currentDate) {
       this.xdCalendarService.currentDate.next(this.currentDate);
     }
@@ -40,11 +59,9 @@ export class XdCalendarComponent implements OnInit, OnDestroy {
     this.currentDateSub = this.xdCalendarService.currentDate.subscribe(newDate => {
       this.currentDate = newDate;
     });
-  }
-
-  ngOnDestroy(): void {
-    this.dateStateSub.unsubscribe();
-    this.currentDateSub.unsubscribe();
+    this.createNewEventClickedSub = this.xdCalendarService.createNewEventClicked.subscribe((day) => {
+      this.createNewEventClicked.next(day);
+    });
   }
 
 }

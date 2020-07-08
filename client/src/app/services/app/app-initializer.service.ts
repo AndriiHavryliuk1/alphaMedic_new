@@ -3,6 +3,7 @@ import {UserSettingsService} from '../user-settings/user-settings.service';
 import {TeethService} from '../teeth/teeth.service';
 import {ServicesService} from '../services/services.service';
 import {DiagnosisService} from '../diagnosis/diagnosis.service';
+import {PatientsService} from '../patients/patients.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class AppInitializerService {
   constructor(private userSettingsService: UserSettingsService,
               private teethService: TeethService,
               private servicesService: ServicesService,
-              private diagnosisService: DiagnosisService) {
+              private diagnosisService: DiagnosisService,
+              private patientsService: PatientsService) {
   }
 
   public async getAppData() {
@@ -23,7 +25,8 @@ export class AppInitializerService {
     const promises = [
       this.teethService.getTeeth(),
       this.servicesService.getServices(),
-      this.diagnosisService.getDiagnosis()
+      this.diagnosisService.getDiagnosis(),
+      this.patientsService.getPatients()
     ];
 
     return Promise.all(promises.map(this.reflect));

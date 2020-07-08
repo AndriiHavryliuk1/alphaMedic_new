@@ -1,4 +1,4 @@
-import {Component, HostListener, Inject, OnInit} from '@angular/core';
+import {Component, HostListener, Inject, NgZone, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import * as moment from 'moment';
@@ -18,27 +18,35 @@ export class NewAppointmentDialogComponent implements OnInit {
   public visitForm;
   public selectedDiagnosis;
   public selectedPatient;
+  public patientStatic = false;
 
   constructor(public dialogRef: MatDialogRef<NewAppointmentDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data,
               private alertService: AlertService,
               private authService: AuthService,
-              private appointmentsService: AppointmentsService) {
+              private appointmentsService: AppointmentsService,
+              private ngZone: NgZone) {
 
-    this.selectedPatient = {
-      id: data.selectedPatient.id,
-      text: data.selectedPatient.fullName
-    };
-
-  }
-
-  ngOnInit() {
     this.visitForm = new FormGroup({
       doctorText: new FormControl(''),
       visitDate: new FormControl(null, [Validators.required]),
       visitTime: new FormControl(null, [Validators.required]),
       duration: new FormControl(null, [Validators.required])
     });
+
+    if (data.selectedPatient) {
+      this.selectedPatient = {
+        id: data.selectedPatient.id,
+        text: data.selectedPatient.fullName
+      };
+      this.patientStatic = true;
+    } else if (data.selectedDate) {
+      this.visitForm.get('visitDate').value = data.selectedDate;
+    }
+
+  }
+
+  ngOnInit() {
 
     this.selectedDiagnosis = null;
   }
@@ -48,8 +56,8 @@ export class NewAppointmentDialogComponent implements OnInit {
     this.closeDialog();
   }
 
-  public closeDialog() {
-    this.dialogRef.close();
+  public closeDialog(data?) {
+    this.dialogRef.close(data);
   }
 
   async createVisit() {
@@ -57,7 +65,7 @@ export class NewAppointmentDialogComponent implements OnInit {
       return;
     }
 
-    const visitdateStart = moment(this.visitForm.get('visitDate').value.toDate().toDateString())
+    const visitdateStart = moment(this.visitForm.get('visitDate').value.toDateString())
       .add(getDurationFromTime(this.visitForm.get('visitTime').value), 'seconds').toDate();
     const duration = getDurationFromTime(this.visitForm.get('duration').value);
 
@@ -77,8 +85,10 @@ export class NewAppointmentDialogComponent implements OnInit {
     };
 
     try {
-      await this.appointmentsService.createAppointment(dataForSave);
-      this.closeDialog();
+      const newAppointment = await this.appointmentsService.createAppointment(dataForSave);
+      this.ngZone.run(() => {
+        this.closeDialog(newAppointment);
+      });
     } catch (e) {
       this.alertService.showAlert(e.error.message, Constants.ALERT_DURATION.ERROR, Constants.ALERT_TYPES.ERROR);
     }

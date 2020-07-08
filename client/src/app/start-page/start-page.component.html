@@ -7,4 +7,4 @@
 <!--  </mat-tab>-->
 <!--</mat-tab-group>-->
 
-<xd-calendar [events]="events"></xd-calendar>
+<xd-calendar [events]="events" (createNewEventClicked)="addToVisit($event)"></xd-calendar>

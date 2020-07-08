@@ -26,6 +26,7 @@ export class AppointmentFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    debugger;
 
     if (this.selectedPatient) {
       this.patient = new FormControl({value: this.selectedPatient.fullName, disabled: true});

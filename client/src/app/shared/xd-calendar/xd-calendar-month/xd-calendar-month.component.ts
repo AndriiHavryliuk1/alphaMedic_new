@@ -33,11 +33,13 @@ export class XdCalendarMonthComponent implements OnInit, OnChanges, AfterViewIni
     if (changes.currentDate && !changes.currentDate.firstChange) {
       this.currentDate = changes.currentDate.currentValue;
       this.initMonthMatrix();
+    } else if (changes.events && !changes.events.firstChange) {
+      this.events = changes.events.currentValue;
+      this.initMonthMatrix();
     }
   }
 
   private initMonthMatrix() {
-    debugger;
     const startDayOfMonth = getDayOfWeekStartedFromMonday(moment(this.currentDate).startOf('month').day());
     const daysInCurrentMonth = moment(this.currentDate).daysInMonth();
     const daysInPreviousMonth = moment(this.currentDate).subtract(1, 'months').daysInMonth();
@@ -63,8 +65,8 @@ export class XdCalendarMonthComponent implements OnInit, OnChanges, AfterViewIni
           const dayNumber = daysInPreviousMonth - startDayOfMonth + 1 + day;
           this.monthMatrix[week].push({
             number: dayNumber,
-            events: this.getFilteredEventsFormDate(previousMonthEvents, dayNumber, 'day')
-
+            events: this.getFilteredEventsFormDate(previousMonthEvents, dayNumber, 'day'),
+            date: moment(previousMonth).date(dayNumber).toDate()
           });
         } else {
           this.monthMatrix[week].push({
@@ -74,9 +76,13 @@ export class XdCalendarMonthComponent implements OnInit, OnChanges, AfterViewIni
             this.monthMatrix[week][day].today = true;
             currentDayAdded = true;
           }
-          this.monthMatrix[week][day].events = !currentMonthAdded
-            ? this.getFilteredEventsFormDate(currentMonthEvents, addedDays, 'day')
-            : this.getFilteredEventsFormDate(nextMonthEvents, addedDays, 'day');
+          if (!currentMonthAdded) {
+            this.monthMatrix[week][day].date = moment(this.currentDate).date(addedDays).toDate();
+            this.monthMatrix[week][day].events = this.getFilteredEventsFormDate(currentMonthEvents, addedDays, 'day');
+          } else {
+            this.monthMatrix[week][day].date = moment(nextMonth).date(addedDays).toDate();
+            this.monthMatrix[week][day].events = this.getFilteredEventsFormDate(nextMonthEvents, addedDays, 'day');
+          }
 
           if (addedDays === daysInCurrentMonth) {
             addedDays = 0;

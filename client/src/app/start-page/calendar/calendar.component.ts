@@ -164,7 +164,6 @@ export class CalendarComponent {
   }
 
   addEvent(): void {
-    debugger;
     this.events = [
       ...this.events,
       {

@@ -13,7 +13,9 @@ export class PatientsService {
   public patientsObserver = new Subject<Patient[]>();
   private cachedPatients = [];
 
-  constructor(private patientResource: PatientsResource) { }
+  constructor(private patientResource: PatientsResource) {
+    console.log("patientsService");
+  }
 
   public getPatients() {
     return new Promise<Patient[]>((resolve, reject) => {

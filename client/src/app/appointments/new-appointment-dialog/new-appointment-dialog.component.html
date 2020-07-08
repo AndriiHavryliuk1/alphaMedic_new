@@ -3,9 +3,9 @@
 
   <mat-dialog-content>
 
-    <app-appointment-form [selectedPatient]="selectedPatient"
-                          [selectedDiagnosis]="selectedDiagnosis"
-                          [patientStatic]="true"
+    <app-appointment-form [(selectedPatient)]="selectedPatient"
+                          [(selectedDiagnosis)]="selectedDiagnosis"
+                          [patientStatic]="patientStatic"
                           [visitForm]="visitForm"></app-appointment-form>
 
     <!--    <div>-->

@@ -62,6 +62,9 @@ export class AutocompleteComponent implements OnInit, OnChanges, AfterViewInit {
     if (this.required) {
       this.placeholder += '*';
     }
+    if (this.selectedItem === undefined) {
+      this.selectedItem = null;
+    }
     this.currentValue = this.selectedItem;
     this.searchText = this.selectedItem ? this.selectedItem.text : '';
     this.myControl = new FormControl(this.searchText);
