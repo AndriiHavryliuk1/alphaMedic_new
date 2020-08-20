@@ -30,16 +30,18 @@
 
     <div class="visit-time-field">
       <mat-form-field>
-        <input matInput placeholder="Час*" [ngxTimepicker]="timePicker" [format]="24"
+        <input matInput placeholder="Час*" [disableClick]="true" [ngxTimepicker]="timePicker" [format]="24"
                min="08:00" max="20:00" formControlName="visitTime">
+        <mat-icon class="open-timepicker-icon" (click)="timePicker.open()">more_time</mat-icon>
         <ngx-material-timepicker #timePicker [minutesGap]="5"></ngx-material-timepicker>
       </mat-form-field>
     </div>
 
     <div class="visit-duration-field">
       <mat-form-field>
-        <input matInput placeholder="Тривалість*" [ngxTimepicker]="durationPicker" [format]="24"
+        <input matInput placeholder="Тривалість*" [disableClick]="true" [ngxTimepicker]="durationPicker" [format]="24"
                formControlName="duration">
+        <mat-icon class="open-timepicker-icon" (click)="durationPicker.open()">more_time</mat-icon>
         <ngx-material-timepicker #durationPicker [minutesGap]="5"></ngx-material-timepicker>
       </mat-form-field>
     </div>

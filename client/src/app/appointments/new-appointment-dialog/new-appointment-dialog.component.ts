@@ -61,7 +61,7 @@ export class NewAppointmentDialogComponent implements OnInit {
   }
 
   async createVisit() {
-    if (!this.visitForm.valid) {
+    if (!this.visitForm.valid || !this.selectedPatient) {
       return;
     }
 

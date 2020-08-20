@@ -18,3 +18,17 @@
 .visit-duration-field {
   margin-left: 10px;
 }
+
+.visit-duration-field input,
+.visit-time-field input {
+  padding-right: 20px;
+}
+
+.open-timepicker-icon {
+  width: 20px;
+  position: absolute;
+  right: 0;
+  font-size: 18px;
+  color: rgb(117,117,117);
+  cursor: pointer;
+}

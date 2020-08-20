@@ -23,7 +23,7 @@
 
   <mat-dialog-actions>
     <button class="mat-raised-button" (click)="closeDialog()">Відмінити</button>
-    <button class="mat-raised-button mat-primary" (click)="createVisit()" [disabled]="!this.visitForm.valid">Зберегти</button>
+    <button class="mat-raised-button mat-primary" (click)="createVisit()" [disabled]="!visitForm.valid || !selectedPatient">Зберегти</button>
   </mat-dialog-actions>
 
 </div>

@@ -12,10 +12,14 @@ import {XdCalendarHeaderComponent} from './xd-calendar-header/xd-calendar-header
 import {XdCalendarWeekHeaderComponent} from './xd-calendar-week/xd-calendar-week-header/xd-calendar-week-header.component';
 import {MatIconModule} from '@angular/material/icon';
 import {XdCalendarService} from './xd-calendar.service';
+import {XdCalendarShowMoreComponent} from './xd-calendar-components/xd-calendar-show-more/xd-calendar-show-more.component';
+import {XdCalendarPlaceholderDirective} from './xd-calendar-directives/xd-calendar-placeholder.directive';
+import {XdCalendarClickOutDirective} from './xd-calendar-directives/xd-calendar-click-out.directive';
 
 @NgModule({
   declarations: [
-
+    XdCalendarPlaceholderDirective,
+    XdCalendarClickOutDirective,
     XdCalendarComponent,
     XdCalendarMonthComponent,
     XdCalendarWeekComponent,
@@ -24,7 +28,8 @@ import {XdCalendarService} from './xd-calendar.service';
     XdCalendarMonthHeaderComponent,
     XdCalendarMonthCellComponent,
     XdCalendarHeaderComponent,
-    XdCalendarWeekHeaderComponent
+    XdCalendarWeekHeaderComponent,
+    XdCalendarShowMoreComponent
   ],
   imports: [
     CommonModule,

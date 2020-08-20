@@ -24,6 +24,15 @@ export class XdCalendarComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnInit(): void {
     this.init();
+    this.dateStateSub = this.xdCalendarService.dateState.subscribe(newState => {
+      this.dateState = newState;
+    });
+    this.currentDateSub = this.xdCalendarService.currentDate.subscribe(newDate => {
+      this.currentDate = newDate;
+    });
+    this.createNewEventClickedSub = this.xdCalendarService.createNewEventClicked.subscribe((day) => {
+      this.createNewEventClicked.next(day);
+    });
   }
 
   ngOnDestroy(): void {
@@ -33,7 +42,6 @@ export class XdCalendarComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    debugger;
     if (changes.events && !changes.events.firstChange) {
       this.events = changes.events.currentValue;
       this.init();
@@ -47,21 +55,9 @@ export class XdCalendarComponent implements OnInit, OnDestroy, OnChanges {
     if (this.dateState) {
       this.xdCalendarService.dateState.next(this.dateState);
     }
-
     if (this.dateState) {
       this.xdCalendarService.events.next(this.dateState);
     }
-
-    this.dateStateSub = this.xdCalendarService.dateState.subscribe(newState => {
-      this.dateState = newState;
-    });
-
-    this.currentDateSub = this.xdCalendarService.currentDate.subscribe(newDate => {
-      this.currentDate = newDate;
-    });
-    this.createNewEventClickedSub = this.xdCalendarService.createNewEventClicked.subscribe((day) => {
-      this.createNewEventClicked.next(day);
-    });
   }
 
 }

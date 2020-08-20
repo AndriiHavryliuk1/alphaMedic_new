@@ -1,0 +1,10 @@
+<div (xdCalendarClickOut)="closePanel()" class="show-more">
+  <div><span>{{currentDay.shortName + " " + date.getDate()}}</span>
+    <mat-icon class="close-icon" (click)="closePanel()">close</mat-icon>
+  </div>
+
+  <div *ngFor="let event of events"
+       class="event">{{event.shortText}}
+  </div>
+
+</div>

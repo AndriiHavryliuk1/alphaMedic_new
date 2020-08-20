@@ -1,3 +1,4 @@
+<ng-template xdPlaceholder></ng-template>
 <div class="month-cell" (click)="onCellClick($event)">
   <div [ngClass]="{'today': day.today}">
     <span>{{day.number}}</span>
@@ -5,8 +6,9 @@
          (click)="onEventClick($event)"
          class="event">{{event.shortText}}
     </div>
-    <div *ngIf="showMoreNumber"
-         class="more-events">{{"та ще + " + showMoreNumber}}
+    <div *ngIf="moreEventsCount"
+         (click)="onShowMoreEventsClick($event)"
+         class="more-events">{{"та ще + " + moreEventsCount}}
     </div>
   </div>
 </div>

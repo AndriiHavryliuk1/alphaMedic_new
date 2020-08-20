@@ -1,6 +1,19 @@
-import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, Input, OnInit} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ComponentFactoryResolver,
+  ElementRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import * as moment from 'moment';
 import {XdCalendarService} from '../../xd-calendar.service';
+import {XdCalendarPlaceholderDirective} from '../../xd-calendar-directives/xd-calendar-placeholder.directive';
+import {XdCalendarShowMoreComponent} from '../../xd-calendar-components/xd-calendar-show-more/xd-calendar-show-more.component';
+import {Subscription} from 'rxjs';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -8,12 +21,16 @@ import {XdCalendarService} from '../../xd-calendar.service';
   templateUrl: './xd-calendar-month-cell.component.html',
   styleUrls: ['./xd-calendar-month-cell.component.scss']
 })
-export class XdCalendarMonthCellComponent implements OnInit, AfterViewInit {
+export class XdCalendarMonthCellComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() day;
-  public showMoreNumber = 0;
+  public moreEventsCount = 0;
+
+  @ViewChild(XdCalendarPlaceholderDirective) panelHost: XdCalendarPlaceholderDirective;
+  private closeSub: Subscription;
 
   constructor(private xdCalendarService: XdCalendarService,
               private elementRef: ElementRef,
+              private componentFactoryResolver: ComponentFactoryResolver,
               private cdRef: ChangeDetectorRef) {
   }
 
@@ -33,6 +50,12 @@ export class XdCalendarMonthCellComponent implements OnInit, AfterViewInit {
     });
   }
 
+  ngOnDestroy(): void {
+    if (this.closeSub) {
+      this.closeSub.unsubscribe();
+    }
+  }
+
   onCellClick(event) {
     event.stopPropagation();
     this.xdCalendarService.createNewEventClicked.next(this.day);
@@ -41,6 +64,22 @@ export class XdCalendarMonthCellComponent implements OnInit, AfterViewInit {
   onEventClick(event) {
     event.stopPropagation();
     console.log('onEventClick');
+  }
+
+  onShowMoreEventsClick(event) {
+    event.stopPropagation();
+    const editPanelFactory = this.componentFactoryResolver.resolveComponentFactory(XdCalendarShowMoreComponent);
+    this.panelHost.viewContainerRef.clear();
+    const editPanel = this.panelHost.viewContainerRef.createComponent(editPanelFactory);
+
+    editPanel.instance.events = this.day.events.slice(this.day.events.length - this.moreEventsCount);
+    editPanel.instance.date = this.day.date;
+
+    this.closeSub = editPanel.instance.close.subscribe(async () => {
+      this.panelHost.viewContainerRef.clear();
+      this.closeSub.unsubscribe();
+    });
+
   }
 
   private removeExtraEventsDiv() {
@@ -53,7 +92,7 @@ export class XdCalendarMonthCellComponent implements OnInit, AfterViewInit {
       if (freeHeight < (eventDivHeight * eventDivs.length)) {
         let eventsToFit = Math.floor(freeHeight / eventDivHeight) - 1;
         eventsToFit = eventsToFit < 0 ? 0 : eventsToFit;
-        this.showMoreNumber = eventDivs.length - eventsToFit;
+        this.moreEventsCount = eventDivs.length - eventsToFit;
         this.cdRef.detectChanges();
         for (let i = eventsToFit; i < eventDivs.length && eventsToFit >= 0; i++) {
           eventDivs[i].remove();

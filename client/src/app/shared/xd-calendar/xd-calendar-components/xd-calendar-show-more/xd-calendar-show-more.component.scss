@@ -1,0 +1,30 @@
+@import "../../../../sass/variables";
+
+.show-more {
+  z-index: 1000;
+  background: #66C3D0;
+  max-height: 300px;
+  overflow-y: auto;
+
+  .close-icon {
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+  }
+
+  .event {
+    height: 19px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: rgb(11, 128, 67);
+    font-weight: 500;
+    color: white;
+    font-size: 13px;
+    width: calc(100% - 10px);
+    margin: 2px 0 2px 5px;
+  }
+
+  .event:hover {
+    opacity: 0.8;
+  }
+}
