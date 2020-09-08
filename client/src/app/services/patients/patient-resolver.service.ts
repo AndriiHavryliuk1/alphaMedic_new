@@ -1,18 +1,27 @@
 import {ActivatedRouteSnapshot, RouterStateSnapshot, Resolve} from '@angular/router';
 import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
-import {PatientsService} from './patients.service';
 import {Patient} from '../../models/patient';
+import {Store} from '@ngrx/store';
+import {selectPatients} from '../../store/patients/patients.reducer';
+import {catchError, take} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PatientResolver implements Resolve<Patient> {
-  constructor(private patientsService: PatientsService) {
+  constructor(private store: Store) {
 
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-    return this.patientsService.getPatient(route.params.id);
+    return new Promise((resolve, reject) => {
+      this.store.select(selectPatients).pipe(take(1), catchError((e) => {
+        reject(e);
+        return e;
+      })).subscribe((patients: Patient[]) => {
+        return resolve({...patients.find(p => p.id === route.params.id)});
+      });
+    });
   }
 }

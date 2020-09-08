@@ -20,24 +20,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9f79ad36-5ad4-4910-961c-0e899113d401" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../client/src/app/start-page/appointments/appointments.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/src/app/start-page/appointments/appointments.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/src/app/start-page/appointments/appointments.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/src/app/start-page/calendar/calendar.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/src/app/start-page/calendar/calendar.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/src/app/start-page/calendar/calendar.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/src/app/start-page/start-page-routing.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/src/app/start-page/start-page.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/src/app/start-page/start-page.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/src/app/start-page/start-page.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/src/app/start-page/start-page.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/app/store/app.reducer.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/app/store/patients/patients.action.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/app/store/patients/patients.effects.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/app/store/patients/patients.reducer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/app.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/app.component.spec.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/app/patients/patients.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/patients/patients.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/styles.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/patients/add-patient/modify-patient.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/patients/add-patient/modify-patient.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/patients/patient/patient.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/patients/patient/patient.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/patients/patients-list/patients-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/patients/patients-list/patients-list.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/services/app/app-initializer.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/services/app/app-initializer.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/services/patients/patient-resolver.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/services/patients/patient-resolver.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/services/patients/patients-list-resolver.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/services/patients/patients-list-resolver.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/services/patients/patients.resource.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/services/patients/patients.resource.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/services/patients/patients.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/services/patients/patients.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +55,15 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../client" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Unnamed" type="NodeJSConfigurationType" nameIsGenerated="true" working-dir="$PROJECT_DIR$">
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -70,6 +76,7 @@
       <option name="presentableId" value="Default" />
       <updated>1590005820917</updated>
       <workItem from="1590005824086" duration="1521000" />
+      <workItem from="1598989030053" duration="2400000" />
     </task>
     <servers />
   </component>
@@ -89,13 +96,77 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="421" y="96" key="FileChooserDialogImpl" timestamp="1590005833442">
+    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598993493121">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="421" y="96" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1590005833442" />
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup" timestamp="1589961529716">
+    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1598993493121" />
+    <state x="421" y="45" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1598993463716">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="303" y="1" width="672" height="678" key="search.everywhere.popup/0.0.1280.680@0.0.1280.680" timestamp="1589961529716" />
+    <state x="421" y="45" key="#com.intellij.ide.macro.MacrosDialog/0.0.1280.680@0.0.1280.680" timestamp="1598993463716" />
+    <state width="1259" height="204" key="GridCell.Tab.0.bottom" timestamp="1599406542398">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="204" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1599406542398" />
+    <state width="1259" height="204" key="GridCell.Tab.0.center" timestamp="1599406542398">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="204" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1599406542398" />
+    <state width="1259" height="204" key="GridCell.Tab.0.left" timestamp="1599406542398">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="204" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1599406542398" />
+    <state width="1259" height="204" key="GridCell.Tab.0.right" timestamp="1599406542398">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="204" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1599406542398" />
+    <state width="1259" height="204" key="GridCell.Tab.1.bottom" timestamp="1599406542400">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="204" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1599406542400" />
+    <state width="1259" height="204" key="GridCell.Tab.1.center" timestamp="1599406542400">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="204" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1599406542400" />
+    <state width="1259" height="204" key="GridCell.Tab.1.left" timestamp="1599406542400">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="204" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1599406542400" />
+    <state width="1259" height="204" key="GridCell.Tab.1.right" timestamp="1599406542400">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="204" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1599406542400" />
+    <state width="1259" height="204" key="GridCell.Tab.2.bottom" timestamp="1599406542400">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="204" key="GridCell.Tab.2.bottom/0.0.1280.680@0.0.1280.680" timestamp="1599406542400" />
+    <state width="1259" height="204" key="GridCell.Tab.2.center" timestamp="1599406542400">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="204" key="GridCell.Tab.2.center/0.0.1280.680@0.0.1280.680" timestamp="1599406542400" />
+    <state width="1259" height="204" key="GridCell.Tab.2.left" timestamp="1599406542400">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="204" key="GridCell.Tab.2.left/0.0.1280.680@0.0.1280.680" timestamp="1599406542400" />
+    <state width="1259" height="204" key="GridCell.Tab.2.right" timestamp="1599406542400">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="204" key="GridCell.Tab.2.right/0.0.1280.680@0.0.1280.680" timestamp="1599406542400" />
+    <state width="1259" height="204" key="GridCell.Tab.3.bottom" timestamp="1599406542401">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="204" key="GridCell.Tab.3.bottom/0.0.1280.680@0.0.1280.680" timestamp="1599406542401" />
+    <state width="1259" height="204" key="GridCell.Tab.3.center" timestamp="1599406542401">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="204" key="GridCell.Tab.3.center/0.0.1280.680@0.0.1280.680" timestamp="1599406542401" />
+    <state width="1259" height="204" key="GridCell.Tab.3.left" timestamp="1599406542401">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="204" key="GridCell.Tab.3.left/0.0.1280.680@0.0.1280.680" timestamp="1599406542401" />
+    <state width="1259" height="204" key="GridCell.Tab.3.right" timestamp="1599406542401">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1259" height="204" key="GridCell.Tab.3.right/0.0.1280.680@0.0.1280.680" timestamp="1599406542401" />
   </component>
 </project>

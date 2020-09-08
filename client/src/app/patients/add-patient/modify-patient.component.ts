@@ -1,11 +1,15 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
-import { MatDialogRef } from '@angular/material/dialog';
+import {MatDialogRef} from '@angular/material/dialog';
 import {AlertService} from '../../services/alert.service';
 import {PatientsService} from '../../services/patients/patients.service';
 import {Patient} from '../../models/patient';
 import {Constants} from '../../utils/constants';
+import {Store} from '@ngrx/store';
+import * as fromApp from '../../store/app.reducer';
+import {CreatePatientStart} from '../../store/patients/patients.action';
+import {skip, take} from 'rxjs/operators';
 
 @Component({
   selector: 'app-modify-patient',
@@ -22,7 +26,7 @@ export class ModifyPatientComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<ModifyPatientComponent>,
               private alertService: AlertService,
-              private patientsService: PatientsService) {
+              private store: Store<fromApp.AppState>) {
     this.TEXT_MAX_LENGTH = Constants.TEXT_MAX_LENGTH;
   }
 
@@ -57,14 +61,17 @@ export class ModifyPatientComponent implements OnInit {
   }
 
   public async createPatient() {
-    try {
-      const patientForCreate = new Patient(this.patientForm.value);
-      await this.patientsService.createPatient(patientForCreate);
+    const patientForCreate = new Patient(this.patientForm.value);
+    this.store.dispatch(new CreatePatientStart(patientForCreate));
+    this.store.select('patients').pipe(skip(1), take(1)).subscribe((data) => {
+      const error = data.createPatientError;
+      if (error) {
+        this.alertService.showAlert(error.errorMessage || error.message, Constants.ALERT_DURATION.ERROR, Constants.ALERT_TYPES.ERROR);
+        return;
+      }
       this.alertService.showAlert('Користувач доданий', Constants.ALERT_DURATION.ERROR, Constants.ALERT_TYPES.ERROR);
       this.closeDialog();
-    } catch (error) {
-      this.alertService.showAlert(error.errorMessage, Constants.ALERT_DURATION.ERROR, Constants.ALERT_TYPES.ERROR);
-    }
+    });
   }
 
 }

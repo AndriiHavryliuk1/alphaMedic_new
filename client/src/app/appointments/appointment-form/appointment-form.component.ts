@@ -1,14 +1,18 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {DiagnosisService} from '../../services/diagnosis/diagnosis.service';
 import {PatientsService} from '../../services/patients/patients.service';
+import {Store} from '@ngrx/store';
+import * as fromApp from '../../store/app.reducer';
+import {selectPatients} from '../../store/patients/patients.reducer';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-appointment-form',
   templateUrl: './appointment-form.component.html',
   styleUrls: ['./appointment-form.component.scss']
 })
-export class AppointmentFormComponent implements OnInit {
+export class AppointmentFormComponent implements OnInit, OnDestroy {
 
   @Input() public visitForm;
   @Input() public selectedPatient;
@@ -20,9 +24,10 @@ export class AppointmentFormComponent implements OnInit {
   public diagnosis;
   public patients;
   public patient: FormControl;
+  private subscriptions: Subscription[] = [];
 
   constructor(private diagnosisService: DiagnosisService,
-              private patientsService: PatientsService) {
+              private store: Store<fromApp.AppState>) {
   }
 
   ngOnInit(): void {
@@ -35,9 +40,11 @@ export class AppointmentFormComponent implements OnInit {
       text: value.name
     }));
 
-    this.patients = this.patientsService.getCachedPatients().map(value => ({
-      id: value.id,
-      text: value.fullName
+    this.subscriptions.push(this.store.select(selectPatients).subscribe(patients => {
+      this.patients = patients.map((value) => ({
+        id: value.id,
+        text: value.fullName
+      }));
     }));
   }
 
@@ -49,6 +56,12 @@ export class AppointmentFormComponent implements OnInit {
   onPatientsChanged(value) {
     this.selectedPatient = value;
     this.selectedPatientChange.emit(this.selectedPatient);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach((sub) => {
+      sub.unsubscribe();
+    });
   }
 
 }

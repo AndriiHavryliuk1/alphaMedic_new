@@ -3,7 +3,11 @@ import {UserSettingsService} from '../user-settings/user-settings.service';
 import {TeethService} from '../teeth/teeth.service';
 import {ServicesService} from '../services/services.service';
 import {DiagnosisService} from '../diagnosis/diagnosis.service';
-import {PatientsService} from '../patients/patients.service';
+import {Store} from '@ngrx/store';
+import {LoadPatients} from '../../store/patients/patients.action';
+import * as fromApp from '../../store/app.reducer';
+import {skip, take} from 'rxjs/operators';
+import {selectPatients} from '../../store/patients/patients.reducer';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +18,7 @@ export class AppInitializerService {
               private teethService: TeethService,
               private servicesService: ServicesService,
               private diagnosisService: DiagnosisService,
-              private patientsService: PatientsService) {
+              private store: Store<fromApp.AppState>) {
   }
 
   public async getAppData() {
@@ -22,11 +26,14 @@ export class AppInitializerService {
     if (userSettings.error) {
       return Promise.resolve();
     }
+
+    this.store.dispatch(new LoadPatients());
+
     const promises = [
       this.teethService.getTeeth(),
       this.servicesService.getServices(),
       this.diagnosisService.getDiagnosis(),
-      this.patientsService.getPatients()
+      this.getStatePromise(selectPatients)
     ];
 
     return Promise.all(promises.map(this.reflect));
@@ -40,6 +47,12 @@ export class AppInitializerService {
       return {data: v, status: 'fulfilled'};
     }, (e) => {
       return {err: e, status: 'rejected'};
+    });
+  }
+
+  private getStatePromise(selector) {
+    return new Promise((resolve) => {
+      this.store.select(selector).pipe(skip(1), take(1)).subscribe((data) => resolve(data));
     });
   }
 }

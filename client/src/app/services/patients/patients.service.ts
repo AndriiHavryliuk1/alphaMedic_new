@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {catchError, take} from 'rxjs/operators';
+import {catchError, map, take, tap} from 'rxjs/operators';
 import {PatientsResource} from './patients.resource';
-import {Subject, throwError} from 'rxjs';
+import {Observable, Subject, throwError} from 'rxjs';
 import {Patient} from '../../models/patient';
 
 
@@ -14,46 +14,19 @@ export class PatientsService {
   private cachedPatients = [];
 
   constructor(private patientResource: PatientsResource) {
-    console.log("patientsService");
+
   }
 
-  public getPatients() {
-    return new Promise<Patient[]>((resolve, reject) => {
-      this.patientResource.getPatients().pipe(take(1), catchError((error) => {
-        return throwError(reject(error));
-      })).subscribe((response: Patient[]) => {
-        const patients = response.map(p => new Patient(p));
-        this.cachedPatients = patients.slice();
-        resolve(patients);
-      });
-    });
+  public getPatients(): Observable<Patient[]> {
+    return this.patientResource.getPatients().pipe(map((patients) => patients.map(p => new Patient(p))));
   }
 
   public getPatient(id) {
-    return new Promise<Patient>((resolve, reject) => {
-      this.patientResource.getPatient(id).pipe(take(1), catchError((error) => {
-        return throwError(reject(error));
-      })).subscribe((response: Patient) => {
-        const patient = new Patient(response);
-        if (this.cachedPatients.find(pat => pat.id !== patient.id)) {
-          this.cachedPatients.push(new Patient(patient));
-        }
-        resolve(patient);
-      });
-    });
+    return this.patientResource.getPatient(id).pipe(map(p => new Patient(p)));
   }
 
   public createPatient(patientData) {
-    return new Promise<Patient>((resolve, reject) => {
-      this.patientResource.createPatient(patientData).pipe(take(1), catchError((error) => {
-        return throwError(reject(error));
-      })).subscribe((response: Patient) => {
-        const patient = new Patient(response);
-        this.cachedPatients.push(patient);
-        this.patientsObserver.next(this.cachedPatients);
-        resolve(patient);
-      });
-    });
+    return this.patientResource.createPatient(patientData).pipe(map(p => new Patient(p)));
   }
 
   public uploadProfilePhoto(id, data) {

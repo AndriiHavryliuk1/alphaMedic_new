@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import {Constants} from '../../utils/constants';
+import {Observable} from 'rxjs';
+import {Patient} from '../../models/patient';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,7 @@ export class PatientsResource {
   constructor(private http: HttpClient) { }
 
   getPatients() {
-    return this.http.get(Constants.SERVER_URL + '/patients');
+    return this.http.get<Patient[]>(Constants.SERVER_URL + '/patients');
   }
 
   getPatient(id) {

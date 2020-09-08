@@ -1,11 +1,14 @@
 import {ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit} from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import {ModifyPatientComponent} from '../add-patient/modify-patient.component';
 import {ActivatedRoute} from '@angular/router';
 import {Patient} from '../../models/patient';
 import {PatientsService} from '../../services/patients/patients.service';
 import {Subscription} from 'rxjs';
 import {NewAppointmentDialogComponent} from '../../appointments/new-appointment-dialog/new-appointment-dialog.component';
+import {Store} from '@ngrx/store';
+import * as fromApp from '../../store/app.reducer';
+import {selectPatients} from '../../store/patients/patients.reducer';
 
 @Component({
   selector: 'app-patients-list',
@@ -18,18 +21,14 @@ export class PatientsListComponent implements OnInit, OnDestroy {
 
   constructor(private matDialog: MatDialog,
               private activatedRoute: ActivatedRoute,
-              private patientsService: PatientsService) {
+              private store: Store<fromApp.AppState>) {
   }
 
   ngOnInit() {
-    const activatedRouteSub = this.activatedRoute.data.subscribe((data) => {
-      this.patients = data.patients.slice();
-    });
-
-    const patientsObserverSub = this.patientsService.patientsObserver.subscribe((patients) => {
+    const patientsSub = this.store.select(selectPatients).subscribe((patients) => {
       this.patients = patients.slice();
     });
-    this.subscriptions = [activatedRouteSub, patientsObserverSub];
+    this.subscriptions = [patientsSub];
   }
 
   addNewPatient() {
