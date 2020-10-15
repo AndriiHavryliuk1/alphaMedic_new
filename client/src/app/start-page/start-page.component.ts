@@ -1,10 +1,8 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {take} from 'rxjs/operators';
 import {ActivatedRoute} from '@angular/router';
 import {NewAppointmentDialogComponent} from '../appointments/new-appointment-dialog/new-appointment-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
-import {AppointmentsResolver} from '../services/appointments/appointments-resolver.service';
-import {AppointmentsService} from '../services/appointments/appointments.service';
 
 @Component({
   selector: 'app-start-page',

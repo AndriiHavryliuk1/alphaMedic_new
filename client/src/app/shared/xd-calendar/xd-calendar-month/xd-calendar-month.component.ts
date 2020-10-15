@@ -1,4 +1,13 @@
-import {AfterViewInit, Component, ElementRef, Input, OnChanges, OnInit, Renderer2, SimpleChanges} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  Renderer2,
+  SimpleChanges
+} from '@angular/core';
 import * as moment from 'moment';
 import {getDayOfWeekStartedFromMonday} from '../xd-calendar.utils';
 

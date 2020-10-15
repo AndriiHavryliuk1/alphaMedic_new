@@ -185,7 +185,7 @@ export class AutocompleteComponent implements OnInit, OnChanges, AfterViewInit {
 }
 
 
-@Pipe({name: 'highlight'})
+@Pipe({name: 'highlight', pure: true})
 export class HighlightPipe implements PipeTransform {
   public transform(text: string, search): string {
     const pattern = search

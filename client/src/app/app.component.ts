@@ -12,17 +12,17 @@ export class AppComponent implements AfterContentInit {
 
   ngAfterContentInit(): void {
     setLoading(false);
-  }
-}
 
-if (typeof Worker !== 'undefined') {
-  // Create a new
-  const worker = new Worker('./app.worker', { type: 'module' });
-  worker.onmessage = ({ data }) => {
-    console.log(`page got message: ${data}`);
-  };
-  worker.postMessage('hello');
-} else {
-  // Web Workers are not supported in this environment.
-  // You should add a fallback so that your program still executes correctly.
+    if (typeof Worker !== 'undefined') {
+      // Create a new
+      const worker = new Worker('./workers/bubble-sort.worker', { type: 'module' });
+      worker.onmessage = ({ data }) => {
+        console.log(`page got message: ${data}`);
+      };
+      worker.postMessage('hello');
+    } else {
+      // Web Workers are not supported in this environment.
+      // You should add a fallback so that your program still executes correctly.
+    }
+  }
 }
