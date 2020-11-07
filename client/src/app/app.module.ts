@@ -22,8 +22,6 @@ import {StoreModule} from '@ngrx/store';
 import * as fromApp from './store/app.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import {PatientsEffects} from './store/patients/patients.effects';
-import { ServiceWorkerModule } from '@angular/service-worker';
-import { environment } from '../environments/environment';
 
 // weekStartsOn option is ignored when using moment, as it needs to be configured globally for the moment locale
 moment.updateLocale('en', {
@@ -51,8 +49,7 @@ moment.updateLocale('en', {
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
-    }),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    })
   ],
   providers: [
     ServicesService,
