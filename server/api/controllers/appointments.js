@@ -5,7 +5,7 @@ const User = require('../modelsMongoose/user');
 
 exports.getAppointments = (req, res, next) => {
     findBy().then(result => {
-        res.status(200).json(result);
+        res.status(200).json(result.map(v => v.toJSON()));
     }).catch(error => {
         next(error);
     });
@@ -37,8 +37,12 @@ exports.registerNewAppointment = async (req, res, next) => {
     const endDate = new Date(req.body.dateEnd);
 
     const doctor = req.body.doctor;
-    const existedAppointments = await Appointment.find({ $or: [{dateStart: {$gte: startDate, $lte: endDate}}, {dateEnd: {$gte: startDate, $lte: endDate}},     
-        { $and: [ { dateStart: { $lt: startDate } }, { dateEnd: { $gt: startDate } } ] }, { $and: [ { dateStart: { $lt: endDate } }, { dateEnd: { $gt: endDate } } ] }
+    const existedAppointments = await Appointment.find({ 
+        $or: [
+            {dateStart: {$gte: startDate, $lt: endDate}}, 
+            {dateEnd: {$gt: startDate, $lte: endDate}},     
+            {$and: [{dateStart: { $lt: startDate }}, {dateEnd: {$gt: startDate}}]}, 
+            {$and: [{ dateStart: {$lt: endDate}}, {dateEnd: {$gt: endDate}}]}
     ]}).exec();
     
     if (existedAppointments.length && existedAppointments.find(appointment => appointment.doctor._id === doctor._id)) {

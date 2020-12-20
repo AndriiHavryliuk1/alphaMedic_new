@@ -9,7 +9,7 @@ export class Service {
   public lastModificationUser;
 
   constructor(service) {
-    this.id = service._id;
+    this.id = service.id;
     this.number = service.number;
     this.name = service.name;
     this.category = service.category;

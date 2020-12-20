@@ -1,6 +1,6 @@
-import {AfterContentInit, AfterViewChecked, Component} from '@angular/core';
+import {AfterContentInit, Component} from '@angular/core';
 
-import {setLoading} from './utils/utils';
+import {LoadingDialogService} from './services/app/loading-dialog.service';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +8,15 @@ import {setLoading} from './utils/utils';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements AfterContentInit {
-  public waitingText = 'Будь ласка зачекайте';
+  isLoading = true;
+
+  constructor(loadingDialogService: LoadingDialogService) {
+    loadingDialogService.showHideSubject.subscribe((isLoading: boolean) => {
+      this.isLoading = isLoading;
+    });
+  }
 
   ngAfterContentInit(): void {
-    setLoading(false);
+    this.isLoading = false;
   }
 }

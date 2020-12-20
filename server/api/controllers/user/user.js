@@ -18,7 +18,7 @@ exports.getAllPatients = (req, res, next) => {
 
 exports.getUser = (req, res, next) => {
     User.findById(req.params.id).exec().then((data) => {
-        res.status(200).json(data); 
+        res.status(200).json(data.toJSON()); 
     }).catch((error) => {
         next(error);
     });
@@ -47,7 +47,7 @@ exports.createUser = async (req, res, next) => {
     });
 
     newUser.save().then((data) => {
-        res.status(200).json(data);
+        res.status(200).json(data.toJSON());
     }).catch(error => {
         next(error);
     });
@@ -55,7 +55,7 @@ exports.createUser = async (req, res, next) => {
 
 exports.updateUser = (req, res, next) => {
     User.findById(req.params.id).exec().then((data) => {
-        res.status(200).json(data); 
+        res.status(200).json(data.toJSON()); 
     }).catch((error) => {
         next(error);
     });
@@ -72,7 +72,7 @@ exports.updateDoctor = async (req, res, next) => {
 
         const user = new User({doctor});
         user.save().exec().then((data) => {
-            res.status(200).json(data); 
+            res.status(200).json(data.toJSON()); 
         }).catch((error) => {
             next(error);
         });
@@ -85,7 +85,7 @@ exports.updateDoctor = async (req, res, next) => {
 function findFnByParamsObject(req, res, next, obj) {
     return User.find(obj).exec()
         .then(result => {
-            res.status(200).json(result);
+            res.status(200).json(result.map(item => item.toJSON()));
         })
         .catch(error => {
             next(error);

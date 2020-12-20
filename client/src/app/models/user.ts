@@ -20,7 +20,7 @@ export class User {
     if (!user) {
       return;
     }
-    this.id = user._id;
+    this.id = user.id;
     this.name = user.name;
     this.surname = user.surname;
     this.fullName = this.surname + ' ' + this.name;

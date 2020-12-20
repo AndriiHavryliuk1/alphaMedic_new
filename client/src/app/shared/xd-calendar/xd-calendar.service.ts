@@ -1,7 +1,14 @@
 import {BehaviorSubject, Subject} from 'rxjs';
 import {DATE_STATES} from './xd-calendar.utils';
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
 
+@Injectable()
 export class XdCalendarService {
+
+  constructor(private router: Router) {
+  }
+
   public currentDate = new BehaviorSubject<Date>(new Date());
   public dateState = new BehaviorSubject(DATE_STATES.MONTH);
   public events = new BehaviorSubject(null);
@@ -15,4 +22,8 @@ export class XdCalendarService {
     {position: 5, fullName: 'Субота', shortName: 'Сб'},
     {position: 6, fullName: 'Неділя', shortName: 'Нд'}
   ];
+
+  public goToLink(link: string) {
+    this.router.navigateByUrl(link);
+  }
 }

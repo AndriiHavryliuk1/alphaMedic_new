@@ -18,9 +18,7 @@ export class Patient {
   public phoneNumbers: string[] = [];
 
   constructor(user) {
-    if (user._id) {
-      this.id = user._id;
-    }
+    this.id = user;
     this.email = user.email;
     this.name = user.name;
     this.surname = user.surname;

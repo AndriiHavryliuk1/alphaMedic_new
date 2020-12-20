@@ -61,9 +61,9 @@ export class XdCalendarMonthCellComponent implements OnInit, AfterViewInit, OnDe
     this.xdCalendarService.createNewEventClicked.next(this.day);
   }
 
-  onEventClick(event) {
-    event.stopPropagation();
-    console.log('onEventClick');
+  onEventClick(clickEvent, event) {
+    clickEvent.stopPropagation();
+    this.xdCalendarService.goToLink(event.link);
   }
 
   onShowMoreEventsClick(event) {

@@ -25,10 +25,12 @@ const userSchema = mongoose.Schema({
     doctor: {type: Object} // used for patients
 }, { timestamps: true, collection: 'users'});
 
-// userSchema.pre('save', (next, req, res) => {
-//     this.lastModificationUser = "jhgkj";
-//     next()
-
-// });
+userSchema.set('toJSON', {
+    transform: function (doc, ret) {
+        ret.id = ret._id;
+        delete ret._id;
+        delete ret.__v;
+    }
+});
 
 module.exports = mongoose.model('User', userSchema);

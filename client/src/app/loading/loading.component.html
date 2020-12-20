@@ -1,0 +1,10 @@
+<div id="loading-overlay">
+  <div class="overlay-backdrop"></div>
+  <div class="loading-msg-container">
+    <div class="screen-loading wait-shortly-dialog">
+      <i [@rotate]="'run'" class="loading-icon material-icons">&#xe5d5;</i>
+      <div class="loading-text" id="wait-msg">{{waitingText}}</div>
+      <div style="display: none;" class="loading-text" id="load-msg">{{waitingText}}</div>
+    </div>
+  </div>
+</div>

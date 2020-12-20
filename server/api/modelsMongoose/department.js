@@ -16,4 +16,12 @@ const departmentSchema = mongoose.Schema({
     lastModificationUser: { type: String, default: null }
 }, { timestamps: true });
 
+departmentSchema.set('toJSON', {
+    transform: function (doc, ret) {
+        ret.id = ret._id;
+        delete ret._id;
+        delete ret.__v;
+    }
+});
+
 module.exports = mongoose.model('Department', departmentSchema);

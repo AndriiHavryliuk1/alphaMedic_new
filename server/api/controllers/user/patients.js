@@ -32,7 +32,7 @@ exports.getAllPatients = async (req, res, next) => {
 exports.getPatient = async (req, res, next) => {
     try {
         const patient = await User.findById(req.params.id).exec();
-        res.status(200).json(patient);
+        res.status(200).json(new Patient(patient));
     } catch (error) {
         next(error);
     }

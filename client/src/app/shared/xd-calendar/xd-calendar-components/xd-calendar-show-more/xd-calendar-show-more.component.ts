@@ -30,8 +30,12 @@ export class XdCalendarShowMoreComponent implements OnInit, AfterViewInit {
     if (window.innerHeight < heightWithPanel) {
       panelDiv.style.top = panelBounding.top - (heightWithPanel - window.innerHeight) + 'px';
     }
-    panelDiv.style.width = panelBounding.width + "px";
+    panelDiv.style.width = panelBounding.width + 'px';
     panelDiv.style.position = 'absolute';
+  }
+
+  onClickEvent(event) {
+    this.xdCalendarService.goToLink(event.link);
   }
 
 

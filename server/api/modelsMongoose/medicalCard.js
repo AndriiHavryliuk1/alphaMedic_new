@@ -20,4 +20,12 @@ const medicalCardSchema = mongoose.Schema({
     lastModificationUser: { type: String, default: null }
 }, { timestamps: true, collection: 'medicalCards' });
 
+medicalCardSchema.set('toJSON', {
+    transform: function (doc, ret) {
+        ret.id = ret._id;
+        delete ret._id;
+        delete ret.__v;
+    }
+});
+
 module.exports = mongoose.model('MedicalCard', medicalCardSchema);

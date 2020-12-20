@@ -14,7 +14,6 @@ import {ModifyPatientComponent} from './add-patient/modify-patient.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {PatientsService} from '../services/patients/patients.service';
 import {RouterModule} from '@angular/router';
-import {AppointmentsModule} from '../appointments/appointments.module';
 import {PatientComponent} from './patient/patient.component';
 import {QuestionnaireComponent} from './patient/questionnaire/questionnaire.component';
 import {PhotoProtocolComponent} from './patient/photo-protocol/photo-protocol.component';
@@ -58,7 +57,6 @@ import {PatientsRoutingModule} from './patients-routing.module';
         RouterModule,
         MatCardModule,
         MatRadioModule,
-        AppointmentsModule,
         MatTabsModule,
         InlineSVGModule,
         SharedModule,

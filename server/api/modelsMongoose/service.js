@@ -11,4 +11,12 @@ const serviceSchema = mongoose.Schema({
     lastModificationUser: { type: String, default: null }
 }, { timestamps: true, collection: 'services' });
 
+serviceSchema.set('toJSON', {
+    transform: function (doc, ret) {
+        ret.id = ret._id;
+        delete ret._id;
+        delete ret.__v;
+    }
+});
+
 module.exports = mongoose.model('Service', serviceSchema);

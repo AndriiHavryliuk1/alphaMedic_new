@@ -22,6 +22,7 @@ import {StoreModule} from '@ngrx/store';
 import * as fromApp from './store/app.reducer';
 import {EffectsModule} from '@ngrx/effects';
 import {PatientsEffects} from './store/patients/patients.effects';
+import { LoadingComponent } from './loading/loading.component';
 
 // weekStartsOn option is ignored when using moment, as it needs to be configured globally for the moment locale
 moment.updateLocale('en', {
@@ -34,12 +35,12 @@ moment.updateLocale('en', {
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    PatientsRoutingModule,
     HttpClientModule,
     AppointmentsModule,
     AuthModule,

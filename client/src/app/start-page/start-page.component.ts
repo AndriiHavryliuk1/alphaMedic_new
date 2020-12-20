@@ -41,16 +41,17 @@ export class StartPageComponent implements OnInit {
   private adaptVisitToEvent(visit) {
     const event = {
       name: 'Прийом',
+      link: '/appointments/' + visit.id,
       dateStart: new Date(visit.dateStart),
       dateEnd: new Date(visit.dateEnd),
       additionalInfos: [{
         name: 'Пацієнт',
         description: visit.patient.fullName,
-        link: visit.patient._id
+        link: visit.patient.id
       }, {
         name: 'Лікар',
         description: visit.doctor.fullName,
-        link: visit.doctor._id
+        link: visit.doctor.id
       }]
     };
     if (visit.provisionalDiagnosis) {

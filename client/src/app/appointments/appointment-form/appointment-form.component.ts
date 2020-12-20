@@ -36,7 +36,7 @@ export class AppointmentFormComponent implements OnInit, OnDestroy {
     }
 
     this.diagnosis = this.diagnosisService.getCachedDiagnosis().map(value => ({
-      id: value._id,
+      id: value.id,
       text: value.name
     }));
 
