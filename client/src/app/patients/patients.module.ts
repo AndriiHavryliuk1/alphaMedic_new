@@ -45,26 +45,28 @@ import {PatientsRoutingModule} from './patients-routing.module';
     EditPanelComponent,
     EditPanelOptionsComponent
   ],
-    imports: [
-        CommonModule,
-        MatIconModule,
-        MatButtonModule,
-        MatDialogModule,
-        MatInputModule,
-        MatFormFieldModule,
-        ReactiveFormsModule,
-        MatDatepickerModule,
-        RouterModule,
-        MatCardModule,
-        MatRadioModule,
-        MatTabsModule,
-        InlineSVGModule,
-        SharedModule,
-        ClickOutsideModule,
-        MatCheckboxModule,
-        PatientsRoutingModule
-    ],
-  providers: [PatientsService]
+  imports: [
+    CommonModule,
+    MatIconModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatInputModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    RouterModule,
+    MatCardModule,
+    MatRadioModule,
+    MatTabsModule,
+    InlineSVGModule,
+    SharedModule,
+    ClickOutsideModule,
+    MatCheckboxModule,
+    PatientsRoutingModule
+  ],
+  providers: [
+    PatientsService
+  ]
 })
 export class PatientsModule {
 }
