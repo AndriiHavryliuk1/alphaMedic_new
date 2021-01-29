@@ -1,11 +1,10 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {DiagnosisService} from '../../services/diagnosis/diagnosis.service';
-import {PatientsService} from '../../services/patients/patients.service';
 import {Store} from '@ngrx/store';
 import * as fromApp from '../../store/app.reducer';
-import {selectPatients} from '../../store/patients/patients.reducer';
 import {Subscription} from 'rxjs';
+import {selectPatients} from '../../store/app.reducer';
 
 @Component({
   selector: 'app-appointment-form',

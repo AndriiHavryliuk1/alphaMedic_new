@@ -20,22 +20,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9f79ad36-5ad4-4910-961c-0e899113d401" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../client/src/app/store/app.reducer.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/src/app/store/patients/patients.action.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/src/app/store/patients/patients.effects.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../client/src/app/store/patients/patients.reducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../client/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/app/app.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/app.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client/src/app/services/test-rj-js.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/app.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/appointments/appointment-form/appointment-form.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/appointments/appointment-form/appointment-form.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/app/patients/add-patient/modify-patient.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/patients/add-patient/modify-patient.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/app/patients/patient/patient.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/patients/patient/patient.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/app/patients/patients-list/patients-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/patients/patients-list/patients-list.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/app/services/app/app-initializer.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/services/app/app-initializer.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/app/services/patients/patient-resolver.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/services/patients/patient-resolver.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/app/services/patients/patients-list-resolver.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/services/patients/patients-list-resolver.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/app/services/patients/patients.resource.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/services/patients/patients.resource.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/app/services/patients/patients.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/services/patients/patients.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/services/user-settings/user-settings.resource.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/services/user-settings/user-settings.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/services/user-settings/user-settings.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/store/app.reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/store/app.reducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/app/store/patients/patients.reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/app/store/patients/patients.reducer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/controllers/externalAPI.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/controllers/externalAPI.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/routes/externalAPI.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/externalAPI.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,17 +55,20 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
     <configuration name="Unnamed" type="NodeJSConfigurationType" nameIsGenerated="true" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -77,11 +81,12 @@
       <updated>1590005820917</updated>
       <workItem from="1590005824086" duration="1521000" />
       <workItem from="1598989030053" duration="2400000" />
+      <workItem from="1610401912986" duration="983000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -96,77 +101,9 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598993493121">
+    <state x="347" y="44" width="587" height="592" key="find.popup" timestamp="1610402135790">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.680@0.0.1280.680" timestamp="1598993493121" />
-    <state x="421" y="45" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1598993463716">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state x="421" y="45" key="#com.intellij.ide.macro.MacrosDialog/0.0.1280.680@0.0.1280.680" timestamp="1598993463716" />
-    <state width="1259" height="204" key="GridCell.Tab.0.bottom" timestamp="1599406542398">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1259" height="204" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1599406542398" />
-    <state width="1259" height="204" key="GridCell.Tab.0.center" timestamp="1599406542398">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1259" height="204" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1599406542398" />
-    <state width="1259" height="204" key="GridCell.Tab.0.left" timestamp="1599406542398">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1259" height="204" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1599406542398" />
-    <state width="1259" height="204" key="GridCell.Tab.0.right" timestamp="1599406542398">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1259" height="204" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1599406542398" />
-    <state width="1259" height="204" key="GridCell.Tab.1.bottom" timestamp="1599406542400">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1259" height="204" key="GridCell.Tab.1.bottom/0.0.1280.680@0.0.1280.680" timestamp="1599406542400" />
-    <state width="1259" height="204" key="GridCell.Tab.1.center" timestamp="1599406542400">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1259" height="204" key="GridCell.Tab.1.center/0.0.1280.680@0.0.1280.680" timestamp="1599406542400" />
-    <state width="1259" height="204" key="GridCell.Tab.1.left" timestamp="1599406542400">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1259" height="204" key="GridCell.Tab.1.left/0.0.1280.680@0.0.1280.680" timestamp="1599406542400" />
-    <state width="1259" height="204" key="GridCell.Tab.1.right" timestamp="1599406542400">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1259" height="204" key="GridCell.Tab.1.right/0.0.1280.680@0.0.1280.680" timestamp="1599406542400" />
-    <state width="1259" height="204" key="GridCell.Tab.2.bottom" timestamp="1599406542400">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1259" height="204" key="GridCell.Tab.2.bottom/0.0.1280.680@0.0.1280.680" timestamp="1599406542400" />
-    <state width="1259" height="204" key="GridCell.Tab.2.center" timestamp="1599406542400">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1259" height="204" key="GridCell.Tab.2.center/0.0.1280.680@0.0.1280.680" timestamp="1599406542400" />
-    <state width="1259" height="204" key="GridCell.Tab.2.left" timestamp="1599406542400">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1259" height="204" key="GridCell.Tab.2.left/0.0.1280.680@0.0.1280.680" timestamp="1599406542400" />
-    <state width="1259" height="204" key="GridCell.Tab.2.right" timestamp="1599406542400">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1259" height="204" key="GridCell.Tab.2.right/0.0.1280.680@0.0.1280.680" timestamp="1599406542400" />
-    <state width="1259" height="204" key="GridCell.Tab.3.bottom" timestamp="1599406542401">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1259" height="204" key="GridCell.Tab.3.bottom/0.0.1280.680@0.0.1280.680" timestamp="1599406542401" />
-    <state width="1259" height="204" key="GridCell.Tab.3.center" timestamp="1599406542401">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1259" height="204" key="GridCell.Tab.3.center/0.0.1280.680@0.0.1280.680" timestamp="1599406542401" />
-    <state width="1259" height="204" key="GridCell.Tab.3.left" timestamp="1599406542401">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1259" height="204" key="GridCell.Tab.3.left/0.0.1280.680@0.0.1280.680" timestamp="1599406542401" />
-    <state width="1259" height="204" key="GridCell.Tab.3.right" timestamp="1599406542401">
-      <screen x="0" y="0" width="1280" height="680" />
-    </state>
-    <state width="1259" height="204" key="GridCell.Tab.3.right/0.0.1280.680@0.0.1280.680" timestamp="1599406542401" />
+    <state x="347" y="44" width="587" height="592" key="find.popup/0.0.1280.680@0.0.1280.680" timestamp="1610402135790" />
   </component>
 </project>

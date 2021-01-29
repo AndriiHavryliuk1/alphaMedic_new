@@ -3,12 +3,11 @@ import {MatDialog} from '@angular/material/dialog';
 import {ModifyPatientComponent} from '../add-patient/modify-patient.component';
 import {ActivatedRoute} from '@angular/router';
 import {Patient} from '../../models/patient';
-import {PatientsService} from '../../services/patients/patients.service';
 import {Subscription} from 'rxjs';
 import {NewAppointmentDialogComponent} from '../../appointments/new-appointment-dialog/new-appointment-dialog.component';
 import {Store} from '@ngrx/store';
 import * as fromApp from '../../store/app.reducer';
-import {selectPatients} from '../../store/patients/patients.reducer';
+import {selectPatients} from '../../store/app.reducer';
 
 @Component({
   selector: 'app-patients-list',

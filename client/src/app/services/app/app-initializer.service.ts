@@ -7,7 +7,7 @@ import {Store} from '@ngrx/store';
 import {LoadPatients} from '../../store/patients/patients.action';
 import * as fromApp from '../../store/app.reducer';
 import {skip, take} from 'rxjs/operators';
-import {selectPatients} from '../../store/patients/patients.reducer';
+import {selectPatients} from '../../store/app.reducer';
 
 @Injectable({
   providedIn: 'root'

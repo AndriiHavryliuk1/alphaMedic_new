@@ -9,4 +9,6 @@ router.get('/countries', externalAPI.getAllCountries);
 
 router.get('/count', externalAPI.getAllCountrieCallsCount);
 
+router.get('/something', externalAPI.getSomething);
+
 module.exports = router;

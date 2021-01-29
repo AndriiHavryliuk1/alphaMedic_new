@@ -3,8 +3,8 @@ import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {Patient} from '../../models/patient';
 import {Store} from '@ngrx/store';
-import {selectPatients} from '../../store/patients/patients.reducer';
 import {catchError, take} from 'rxjs/operators';
+import {selectPatients} from '../../store/app.reducer';
 
 @Injectable({
   providedIn: 'root'

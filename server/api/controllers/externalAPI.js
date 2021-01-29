@@ -23,6 +23,15 @@ exports.getAllCountrieCallsCount = (req, res, next) => {
     res.status(200).json(`external-api/countries was invoked ${allCountriesCallsCount} times`);
 }
 
+exports.getSomething = async (req, res, next) => {
+    const value = Math.random() * 100;
+    if (value > 70) {
+        res.status(404).json('Not found');
+    } else {
+        res.status(200).json('success');
+    }
+};
+
 async function getCountiesByLanguages(req, res, next) {
     const data = await getAllCountries();
     const languages = JSON.parse(req.query.languages);

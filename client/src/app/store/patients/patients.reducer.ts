@@ -1,7 +1,5 @@
 import * as PatientsActions from './patients.action';
 import {Patient} from '../../models/patient';
-import {createFeatureSelector, createSelector} from '@ngrx/store';
-import {AppState} from '../app.reducer';
 
 const initialState = {
   patients: [],
@@ -62,10 +60,5 @@ export function patientsReducer(state = initialState, action: PatientsActions.Pa
   }
 }
 
-const selectPatientsFeature = createFeatureSelector<AppState, State>("patients");
-
-export const selectPatients = createSelector(
-  selectPatientsFeature,
-  (state: State) => state.patients
-);
+export const getPatients = (state: State) => state.patients;
 

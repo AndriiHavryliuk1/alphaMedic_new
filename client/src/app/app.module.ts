@@ -46,7 +46,7 @@ moment.updateLocale('en', {
     AppointmentsModule,
     AuthModule,
     StartPageRoutingModule,
-    StoreModule.forRoot(fromApp.appReducer),
+    StoreModule.forRoot(fromApp.appReducers),
     EffectsModule.forRoot([PatientsEffects])
   ],
   providers: [
