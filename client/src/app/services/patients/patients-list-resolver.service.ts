@@ -15,6 +15,6 @@ export class PatientsListResolver implements Resolve<Patient> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any>|Promise<any>|any {
-    return this.store.select(selectPatients).pipe(take(1)).toPromise();
+    return this.store.select(selectPatients).pipe(take(1));
   }
 }

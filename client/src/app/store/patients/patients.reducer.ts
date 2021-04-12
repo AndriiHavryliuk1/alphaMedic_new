@@ -1,7 +1,8 @@
-import * as PatientsActions from './patients.action';
 import {Patient} from '../../models/patient';
+import {createReducer, on} from '@ngrx/store';
+import {PatientsActions} from './patients.action';
 
-const initialState = {
+const INITIAL_STATE = {
   patients: [],
   createPatientError: null,
   loadPatientsError: null
@@ -13,52 +14,53 @@ export interface State {
   loadPatientsError: any;
 }
 
-export function patientsReducer(state = initialState, action: PatientsActions.PatientsActions) {
-  switch (action.type) {
-    case PatientsActions.ADD_PATIENT:
-    case PatientsActions.CREATE_PATIENT_SUCCESS:
+export const patientsReducer = createReducer(
+  INITIAL_STATE,
+  on(PatientsActions.addPatient,
+    PatientsActions.createPatientSuccess, (state, action) => ({
+      ...state,
+      loadPatientsError: null,
+      createPatientError: null,
+      patients: [...state.patients, action.patient]
+    })
+  ),
+  on(PatientsActions.addPatients,
+    PatientsActions.loadPatientsSuccess, (state, action) => {
       return {
         ...state,
         loadPatientsError: null,
         createPatientError: null,
-        patients: [...state.patients, action.payload]
+        patients: [...state.patients, ...action.patients]
       };
-    case PatientsActions.ADD_PATIENTS:
-    case PatientsActions.LOAD_PATIENTS_SUCCESS:
-      return {
-        ...state,
-        loadPatientsError: null,
-        createPatientError: null,
-        patients: [...state.patients, ...action.payload]
-      };
-    case PatientsActions.LOAD_PATIENT_SUCCESS:
-      const index = state.patients.findIndex(p => action.payload.id === p.id);
+    }
+  ),
+  on(PatientsActions.loadPatientSuccess, (state, action) => {
+      const index = state.patients.findIndex(p => action.patient.id === p.id);
       if (index === -1) {
-        state.patients.push({...action.payload});
+        state.patients.push({...action.patient});
       } else {
-        state.patients[index] = {...action.payload};
+        state.patients[index] = {...action.patient};
       }
       return {
         loadPatientsError: null,
         createPatientError: null,
         ...state
       };
-    case PatientsActions.LOAD_PATIENTS_ERROR:
-      return {
-        ...state,
-        createPatientError: null,
-        loadPatientsError: action.payload
-      };
-    case PatientsActions.CREATE_PATIENT_ERROR:
-      return {
-        ...state,
-        loadPatientsError: null,
-        createPatientError: action.payload
-      };
-    default:
-      return state;
-  }
-}
+    }
+  ),
+  on(PatientsActions.loadPatientsError, (state, action) => ({
+      ...state,
+      createPatientError: null,
+      loadPatientsError: action.error
+    })
+  ),
+  on(PatientsActions.createPatientError, (state, action) => ({
+      ...state,
+      loadPatientsError: null,
+      createPatientError: action.error
+    })
+  ),
+);
 
 export const getPatients = (state: State) => state.patients;
 

@@ -1,30 +1,22 @@
 import {Actions, Effect, ofType} from '@ngrx/effects';
-import * as PatientsActions from './patients.action';
 import {catchError, map, mergeMap} from 'rxjs/operators';
 import {PatientsService} from '../../services/patients/patients.service';
 import {of} from 'rxjs';
 import {Patient} from '../../models/patient';
-import {
-  CreatePatientError,
-  CreatePatientSuccess,
-  LoadPatientError,
-  LoadPatientsError,
-  LoadPatientsSuccess,
-  LoadPatientSuccess
-} from './patients.action';
 import {Injectable} from '@angular/core';
+import {PatientsActions} from './patients.action';
 
 @Injectable()
 export class PatientsEffects {
   @Effect()
   loadPatients$ = this.actions$.pipe(
-    ofType(PatientsActions.LOAD_PATIENTS),
+    ofType(PatientsActions.loadPatients),
     mergeMap(() => {
       return this.patientsService.getPatients()
         .pipe(
-          map((patients: Patient[]) => new LoadPatientsSuccess(patients)),
+          map((patients: Patient[]) => PatientsActions.loadPatientsSuccess({patients})),
           catchError((error) => {
-            return of(new LoadPatientsError(error));
+            return of(PatientsActions.loadPatientsError(error));
           })
         );
     })
@@ -32,15 +24,15 @@ export class PatientsEffects {
 
   @Effect()
   loadPatient$ = this.actions$.pipe(
-    ofType(PatientsActions.LOAD_PATIENT),
-    mergeMap((patientData: PatientsActions.LoadPatient) => {
-      return this.patientsService.getPatient(patientData.payload.id)
+    ofType(PatientsActions.loadPatient),
+    mergeMap((patientData) => {
+      return this.patientsService.getPatient(patientData.id)
         .pipe(
-          map((patient ) => {
-            return new LoadPatientSuccess(patient);
+          map((patient) => {
+            return PatientsActions.loadPatientSuccess({patient});
           }),
           catchError(() => {
-            return of(new LoadPatientError());
+            return of(PatientsActions.loadPatientError);
           })
         );
     })
@@ -48,15 +40,15 @@ export class PatientsEffects {
 
   @Effect()
   createPatient$ = this.actions$.pipe(
-    ofType(PatientsActions.CREATE_PATIENT_START),
-    mergeMap((patientData: PatientsActions.CreatePatientStart) => {
-      return this.patientsService.createPatient(patientData.payload)
+    ofType(PatientsActions.createPatient),
+    mergeMap((patientData) => {
+      return this.patientsService.createPatient(patientData.patient)
         .pipe(
-          map((patient ) => {
-            return new CreatePatientSuccess(patient);
+          map((patient) => {
+            return PatientsActions.createPatientSuccess({patient});
           }),
           catchError((error) => {
-            return of(new CreatePatientError(error));
+            return of(PatientsActions.createPatientError(error));
           })
         );
     })

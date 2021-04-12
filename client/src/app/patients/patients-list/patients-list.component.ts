@@ -1,9 +1,9 @@
-import {ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {ModifyPatientComponent} from '../add-patient/modify-patient.component';
 import {ActivatedRoute} from '@angular/router';
 import {Patient} from '../../models/patient';
-import {Subscription} from 'rxjs';
+import {Observable} from 'rxjs';
 import {NewAppointmentDialogComponent} from '../../appointments/new-appointment-dialog/new-appointment-dialog.component';
 import {Store} from '@ngrx/store';
 import * as fromApp from '../../store/app.reducer';
@@ -14,9 +14,8 @@ import {selectPatients} from '../../store/app.reducer';
   templateUrl: './patients-list.component.html',
   styleUrls: ['./patients-list.component.scss']
 })
-export class PatientsListComponent implements OnInit, OnDestroy {
-  public patients: Patient[];
-  private subscriptions: Subscription[] = [];
+export class PatientsListComponent implements OnInit {
+  public $patients = new Observable<Patient[]>();
 
   constructor(private matDialog: MatDialog,
               private activatedRoute: ActivatedRoute,
@@ -24,10 +23,7 @@ export class PatientsListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    const patientsSub = this.store.select(selectPatients).subscribe((patients) => {
-      this.patients = patients.slice();
-    });
-    this.subscriptions = [patientsSub];
+    this.$patients = this.store.select(selectPatients);
   }
 
   addNewPatient() {
@@ -42,14 +38,6 @@ export class PatientsListComponent implements OnInit, OnDestroy {
       disableClose: true,
       autoFocus: false
     });
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
-  }
-
-  trackByIndexFn(index, item) {
-    return item.id;
   }
 
 }

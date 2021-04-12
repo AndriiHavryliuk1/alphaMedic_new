@@ -24,14 +24,7 @@ export class XdCalendarShowMoreComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    const panelDiv = this.elementRef.nativeElement.firstChild;
-    const panelBounding = panelDiv.getBoundingClientRect();
-    const heightWithPanel = panelBounding.height + panelBounding.top;
-    if (window.innerHeight < heightWithPanel) {
-      panelDiv.style.top = panelBounding.top - (heightWithPanel - window.innerHeight) + 'px';
-    }
-    panelDiv.style.width = panelBounding.width + 'px';
-    panelDiv.style.position = 'absolute';
+    this.openPanel.bind(this);
   }
 
   onClickEvent(event) {
@@ -41,6 +34,17 @@ export class XdCalendarShowMoreComponent implements OnInit, AfterViewInit {
 
   closePanel() {
     this.close.emit(null);
+  }
+
+  private openPanel() {
+    const panelDiv = this.elementRef.nativeElement.firstChild;
+    const panelBounding = panelDiv.getBoundingClientRect();
+    const heightWithPanel = panelBounding.height + panelBounding.top;
+    if (window.innerHeight < heightWithPanel) {
+      panelDiv.style.top = panelBounding.top - (heightWithPanel - window.innerHeight) + 'px';
+    }
+    panelDiv.style.width = panelBounding.width + 'px';
+    panelDiv.style.position = 'absolute';
   }
 
 }

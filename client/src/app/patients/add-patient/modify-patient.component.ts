@@ -7,9 +7,9 @@ import {Patient} from '../../models/patient';
 import {Constants} from '../../utils/constants';
 import {Store} from '@ngrx/store';
 import * as fromApp from '../../store/app.reducer';
-import {CreatePatientStart} from '../../store/patients/patients.action';
 import {skip, take} from 'rxjs/operators';
 import {selectPatients} from '../../store/app.reducer';
+import {PatientsActions} from '../../store/patients/patients.action';
 
 @Component({
   selector: 'app-modify-patient',
@@ -61,9 +61,8 @@ export class ModifyPatientComponent implements OnInit {
   }
 
   public async createPatient() {
-    debugger;
-    const patientForCreate = new Patient(this.patientForm.value);
-    this.store.dispatch(new CreatePatientStart(patientForCreate));
+    const patient = new Patient(this.patientForm.value);
+    this.store.dispatch(PatientsActions.createPatient({patient}));
     this.store.select(selectPatients).pipe(skip(1), take(1)).subscribe((data) => {
       // @ts-ignore
       const error = data.createPatientError;

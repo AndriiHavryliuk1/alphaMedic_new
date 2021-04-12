@@ -20,7 +20,7 @@ const routes: Routes = [
    // loadChildren: () => import("./patients/patients.module").then(m => m.PatientsModule)
   },
   {
-    path: 'patients/:id', resolve: {patient: PatientResolver}, component: PatientComponent, canActivate: [AuthGuard], children: [
+    path: ':id', resolve: {patient: PatientResolver}, component: PatientComponent, canActivate: [AuthGuard], children: [
       {path: 'questionnaire', component: QuestionnaireComponent},
       {path: 'photo-protocol', component: PhotoProtocolComponent},
       {path: 'perio-state', component: PerioStateComponent},

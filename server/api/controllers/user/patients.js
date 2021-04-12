@@ -16,7 +16,7 @@ const User = require('../../modelsMongoose/user');
 exports.getAllPatients = async (req, res, next) => {
     try {
         const patients = await User.find({type: ROLES.PATIENT}).exec();
-        res.status(200).json(patients.map(pat => new Patient(pat)));
+        res.status(200).json(patients.map(pat => pat.toJSON()));
     } catch (error) {
         next(error);
     }
@@ -32,7 +32,7 @@ exports.getAllPatients = async (req, res, next) => {
 exports.getPatient = async (req, res, next) => {
     try {
         const patient = await User.findById(req.params.id).exec();
-        res.status(200).json(new Patient(patient));
+        res.status(200).json(patient.toJSON());
     } catch (error) {
         next(error);
     }
@@ -80,7 +80,7 @@ exports.createPatient = async (req, res, next) => {
 
     try {
         const savedUser = await newUser.save();
-        res.status(200).json(new Patient(savedUser));
+        res.status(200).json(savedUser.toJSON());
     } catch (error) {
         next(error);
     }

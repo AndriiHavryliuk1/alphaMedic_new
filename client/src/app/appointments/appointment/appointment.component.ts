@@ -17,7 +17,6 @@ export class AppointmentComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    debugger;
     this.subs.push(this.name.valueChanges.pipe(switchMap((value) => {
       return this.simulateServer(value);
     })).subscribe(value => {

@@ -4,10 +4,10 @@ import {TeethService} from '../teeth/teeth.service';
 import {ServicesService} from '../services/services.service';
 import {DiagnosisService} from '../diagnosis/diagnosis.service';
 import {Store} from '@ngrx/store';
-import {LoadPatients} from '../../store/patients/patients.action';
 import * as fromApp from '../../store/app.reducer';
 import {skip, take} from 'rxjs/operators';
 import {selectPatients} from '../../store/app.reducer';
+import {PatientsActions} from '../../store/patients/patients.action';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +27,7 @@ export class AppInitializerService {
       return Promise.resolve();
     }
 
-    this.store.dispatch(new LoadPatients());
+    this.store.dispatch(PatientsActions.loadPatients());
 
     const promises = [
       this.teethService.getTeeth(),

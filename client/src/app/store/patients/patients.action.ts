@@ -1,5 +1,6 @@
-import {Action} from '@ngrx/store';
+import {createAction, props} from '@ngrx/store';
 import {Patient} from '../../models/patient';
+import {HttpErrorResponse} from '@angular/common/http';
 
 export const LOAD_PATIENTS = 'LOAD_PATIENTS';
 export const LOAD_PATIENT = 'LOAD_PATIENT';
@@ -13,88 +14,28 @@ export const CREATE_PATIENT_START = 'CREATE_PATIENT_START';
 export const CREATE_PATIENT_SUCCESS = 'CREATE_PATIENT_SUCCESS';
 export const CREATE_PATIENT_ERROR = 'CREATE_PATIENT_ERROR';
 
-export class AddPatient implements Action {
-  readonly type = ADD_PATIENT;
+const addPatient = createAction(ADD_PATIENT, props<{patient: Patient}>());
+const addPatients = createAction(ADD_PATIENTS, props<{patients: Patient[]}>());
+const loadPatient = createAction(LOAD_PATIENT, props<{id: number}>());
+const loadPatientSuccess = createAction(LOAD_PATIENT_SUCCESS, props<{patient: Patient}>());
+const loadPatientError = createAction(LOAD_PATIENT_ERROR);
+const loadPatients = createAction(LOAD_PATIENTS);
+const loadPatientsSuccess = createAction(LOAD_PATIENTS_SUCCESS, props<{patients: Patient[]}>());
+const createPatient = createAction(CREATE_PATIENT_START, props<{patient: Patient}>());
+const createPatientError = createAction(CREATE_PATIENT_ERROR, props<{error: HttpErrorResponse}>());
+const createPatientSuccess = createAction(CREATE_PATIENT_SUCCESS, props<{patient: Patient}>());
+const loadPatientsError = createAction(LOAD_PATIENTS_ERROR, props<{error: HttpErrorResponse}>());
 
-  constructor(public payload: Patient) {
-  }
-}
-
-export class AddPatients implements Action {
-  readonly type = ADD_PATIENTS;
-
-  constructor(public payload: Patient[]) {
-  }
-}
-
-
-export class LoadPatient implements Action {
-  readonly type = LOAD_PATIENT;
-
-  constructor(public payload: { id: number }) {
-  }
-}
-
-export class LoadPatientSuccess implements Action {
-  readonly type = LOAD_PATIENT_SUCCESS;
-
-  constructor(public payload: Patient) {
-  }
-}
-
-export class LoadPatientError implements Action {
-  readonly type = LOAD_PATIENT_ERROR;
-}
-
-export class LoadPatients implements Action {
-  readonly type = LOAD_PATIENTS;
-
-  constructor() {
-  }
-}
-
-export class LoadPatientsSuccess implements Action {
-  readonly type = LOAD_PATIENTS_SUCCESS;
-
-  constructor(public payload: Patient[]) {
-  }
-}
-
-export class CreatePatientStart implements Action {
-  readonly type = CREATE_PATIENT_START;
-
-  constructor(public payload: Patient) {
-  }
-}
-
-export class CreatePatientError implements Action {
-  readonly type = CREATE_PATIENT_ERROR;
-
-  constructor(public payload) {
-  }
-}
-
-export class CreatePatientSuccess implements Action {
-  readonly type = CREATE_PATIENT_SUCCESS;
-
-  constructor(public payload: Patient) {
-  }
-}
-
-export class LoadPatientsError implements Action {
-  readonly type = LOAD_PATIENTS_ERROR;
-  constructor(public payload) {
-  }
-}
-
-export type PatientsActions = AddPatient
-  | AddPatients
-  | LoadPatients
-  | LoadPatientsSuccess
-  | LoadPatientsError
-  | LoadPatient
-  | LoadPatientSuccess
-  | LoadPatientError
-  | CreatePatientStart
-  | CreatePatientSuccess
-  | CreatePatientError;
+export const PatientsActions = {
+  addPatient,
+  addPatients,
+  loadPatient,
+  createPatientSuccess,
+  loadPatientError,
+  loadPatients,
+  loadPatientsSuccess,
+  createPatient,
+  createPatientError,
+  loadPatientSuccess,
+  loadPatientsError
+};
