@@ -6,8 +6,8 @@ import {Patient} from '../../models/patient';
 import {Observable} from 'rxjs';
 import {NewAppointmentDialogComponent} from '../../appointments/new-appointment-dialog/new-appointment-dialog.component';
 import {Store} from '@ngrx/store';
-import * as fromApp from '../../store/app.reducer';
-import {selectPatients} from '../../store/app.reducer';
+import {selectPatients} from '../../store/patients/patients.selector';
+import {AppState} from '../../store/app.model';
 
 @Component({
   selector: 'app-patients-list',
@@ -15,15 +15,15 @@ import {selectPatients} from '../../store/app.reducer';
   styleUrls: ['./patients-list.component.scss']
 })
 export class PatientsListComponent implements OnInit {
-  public $patients = new Observable<Patient[]>();
+  public patients$ = new Observable<Patient[]>();
 
   constructor(private matDialog: MatDialog,
               private activatedRoute: ActivatedRoute,
-              private store: Store<fromApp.AppState>) {
+              private store: Store<AppState>) {
   }
 
   ngOnInit() {
-    this.$patients = this.store.select(selectPatients);
+    this.patients$ = this.store.select(selectPatients);
   }
 
   addNewPatient() {

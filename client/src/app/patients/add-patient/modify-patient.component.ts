@@ -6,10 +6,10 @@ import {AlertService} from '../../services/alert.service';
 import {Patient} from '../../models/patient';
 import {Constants} from '../../utils/constants';
 import {Store} from '@ngrx/store';
-import * as fromApp from '../../store/app.reducer';
 import {skip, take} from 'rxjs/operators';
-import {selectPatients} from '../../store/app.reducer';
 import {PatientsActions} from '../../store/patients/patients.action';
+import {selectPatients} from '../../store/patients/patients.selector';
+import {AppState} from '../../store/app.model';
 
 @Component({
   selector: 'app-modify-patient',
@@ -26,7 +26,7 @@ export class ModifyPatientComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<ModifyPatientComponent>,
               private alertService: AlertService,
-              private store: Store<fromApp.AppState>) {
+              private store: Store<AppState>) {
     this.TEXT_MAX_LENGTH = Constants.TEXT_MAX_LENGTH;
   }
 

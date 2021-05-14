@@ -2,9 +2,9 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 import {FormControl} from '@angular/forms';
 import {DiagnosisService} from '../../services/diagnosis/diagnosis.service';
 import {Store} from '@ngrx/store';
-import * as fromApp from '../../store/app.reducer';
 import {Subscription} from 'rxjs';
-import {selectPatients} from '../../store/app.reducer';
+import {AppState} from '../../store/app.model';
+import {selectPatients} from '../../store/patients/patients.selector';
 
 @Component({
   selector: 'app-appointment-form',
@@ -26,7 +26,7 @@ export class AppointmentFormComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
 
   constructor(private diagnosisService: DiagnosisService,
-              private store: Store<fromApp.AppState>) {
+              private store: Store<AppState>) {
   }
 
   ngOnInit(): void {

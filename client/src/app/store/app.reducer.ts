@@ -1,14 +1,8 @@
-import {ActionReducerMap, createFeatureSelector, createSelector} from '@ngrx/store';
+import {ActionReducerMap} from '@ngrx/store';
 
-import * as fromPatients from './patients/patients.reducer';
-
-export interface AppState {
-  patients: fromPatients.State;
-}
+import {AppState} from './app.model';
+import {patientsReducer} from './patients/patients.reducer';
 
 export const appReducers: ActionReducerMap<AppState> = {
-  patients: fromPatients.patientsReducer,
+  patients: patientsReducer,
 };
-
-const selectPatientsFeature = createFeatureSelector<AppState, fromPatients.State>("patients");
-export const selectPatients = createSelector(selectPatientsFeature, fromPatients.getPatients);

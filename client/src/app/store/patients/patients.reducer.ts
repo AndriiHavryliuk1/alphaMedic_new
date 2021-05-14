@@ -1,18 +1,12 @@
-import {Patient} from '../../models/patient';
 import {createReducer, on} from '@ngrx/store';
 import {PatientsActions} from './patients.action';
+import {PatientsState} from './patients.model';
 
 const INITIAL_STATE = {
   patients: [],
   createPatientError: null,
   loadPatientsError: null
 };
-
-export interface State {
-  patients: Patient[];
-  createPatientError: any;
-  loadPatientsError: any;
-}
 
 export const patientsReducer = createReducer(
   INITIAL_STATE,
@@ -36,14 +30,16 @@ export const patientsReducer = createReducer(
   ),
   on(PatientsActions.loadPatientSuccess, (state, action) => {
       const index = state.patients.findIndex(p => action.patient.id === p.id);
+      const patients = [...state.patients];
       if (index === -1) {
-        state.patients.push({...action.patient});
+        patients.push(action.patient);
       } else {
-        state.patients[index] = {...action.patient};
+        patients[index] = {...action.patient};
       }
       return {
         loadPatientsError: null,
         createPatientError: null,
+        patients,
         ...state
       };
     }
@@ -62,5 +58,5 @@ export const patientsReducer = createReducer(
   ),
 );
 
-export const getPatients = (state: State) => state.patients;
+export const getPatients = (state: PatientsState) => state.patients;
 

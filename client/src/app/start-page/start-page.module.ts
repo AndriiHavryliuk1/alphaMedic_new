@@ -9,7 +9,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {CalendarCommonModule, CalendarDayModule, CalendarMonthModule, CalendarWeekModule} from 'angular-calendar';
 import {FormsModule} from '@angular/forms';
 import {SharedModule} from '../shared/shared.module';
-import {XdCalendarModule} from '../shared/xd-calendar/xd-calendar.module';
+import {XdCalendarModule} from '../../../projects/xd-calendar/src/lib/xd-calendar.module';
 
 @NgModule({
   declarations: [

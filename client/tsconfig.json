@@ -15,6 +15,12 @@
     "typeRoots": [
       "node_modules/@types"
     ],
+    "paths": {
+      "xd-calendar": [
+        "dist/xd-calendar/xd-calendar",
+        "dist/xd-calendar"
+      ]
+    },
     "lib": [
       "es2018",
       "dom"

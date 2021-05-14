@@ -6,7 +6,7 @@ import {XdCalendarService} from './xd-calendar.service';
   // tslint:disable-next-line:component-selector
   selector: 'xd-calendar',
   templateUrl: './xd-calendar.component.html',
-  styleUrls: ['./xd-calendar.component.css']
+  styleUrls: ['./xd-calendar.component.scss']
 })
 export class XdCalendarComponent implements OnInit, OnDestroy, OnChanges {
   @Input() currentDate;

@@ -16,7 +16,7 @@ export const CREATE_PATIENT_ERROR = 'CREATE_PATIENT_ERROR';
 
 const addPatient = createAction(ADD_PATIENT, props<{patient: Patient}>());
 const addPatients = createAction(ADD_PATIENTS, props<{patients: Patient[]}>());
-const loadPatient = createAction(LOAD_PATIENT, props<{id: number}>());
+const loadPatient = createAction(LOAD_PATIENT, props<{id: string}>());
 const loadPatientSuccess = createAction(LOAD_PATIENT_SUCCESS, props<{patient: Patient}>());
 const loadPatientError = createAction(LOAD_PATIENT_ERROR);
 const loadPatients = createAction(LOAD_PATIENTS);

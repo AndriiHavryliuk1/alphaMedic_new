@@ -4,10 +4,10 @@ import {TeethService} from '../teeth/teeth.service';
 import {ServicesService} from '../services/services.service';
 import {DiagnosisService} from '../diagnosis/diagnosis.service';
 import {Store} from '@ngrx/store';
-import * as fromApp from '../../store/app.reducer';
 import {skip, take} from 'rxjs/operators';
-import {selectPatients} from '../../store/app.reducer';
 import {PatientsActions} from '../../store/patients/patients.action';
+import {AppState} from '../../store/app.model';
+import {selectPatients} from '../../store/patients/patients.selector';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class AppInitializerService {
               private teethService: TeethService,
               private servicesService: ServicesService,
               private diagnosisService: DiagnosisService,
-              private store: Store<fromApp.AppState>) {
+              private store: Store<AppState>) {
   }
 
   public async getAppData() {

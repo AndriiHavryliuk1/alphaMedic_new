@@ -6,7 +6,7 @@ export function getDayOfWeekStartedFromMonday(day: number): number {
 }
 
 export const DATE_STATES = {
-  YEAR: "YEAR",
-  MONTH: "MONTH",
-  WEEK: "WEEK"
+  YEAR: 'YEAR',
+  MONTH: 'MONTH',
+  WEEK: 'WEEK'
 };

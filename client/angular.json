@@ -147,6 +147,46 @@
           }
         }
       }
+    },
+    "xd-calendar": {
+      "projectType": "library",
+      "root": "projects/xd-calendar",
+      "sourceRoot": "projects/xd-calendar/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/xd-calendar/tsconfig.lib.json",
+            "project": "projects/xd-calendar/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/xd-calendar/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/xd-calendar/src/test.ts",
+            "tsConfig": "projects/xd-calendar/tsconfig.spec.json",
+            "karmaConfig": "projects/xd-calendar/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/xd-calendar/tsconfig.lib.json",
+              "projects/xd-calendar/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "client"
