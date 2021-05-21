@@ -1,6 +1,6 @@
 import {createReducer, on} from '@ngrx/store';
-import {PatientsActions} from './patients.action';
-import {PatientsState} from './patients.model';
+import {PatientsActions} from '../actions/patients.action';
+import {PatientsState} from '../models/patients.model';
 
 const INITIAL_STATE = {
   patients: [],

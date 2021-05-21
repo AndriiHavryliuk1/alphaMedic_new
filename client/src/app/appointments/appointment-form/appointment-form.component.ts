@@ -4,7 +4,7 @@ import {DiagnosisService} from '../../services/diagnosis/diagnosis.service';
 import {Store} from '@ngrx/store';
 import {Subscription} from 'rxjs';
 import {AppState} from '../../store/app.model';
-import {selectPatients} from '../../store/patients/patients.selector';
+import {selectPatients} from '../../store/selectors/patients.selector';
 
 @Component({
   selector: 'app-appointment-form',
@@ -33,6 +33,8 @@ export class AppointmentFormComponent implements OnInit, OnDestroy {
     if (this.selectedPatient) {
       this.patient = new FormControl({value: this.selectedPatient.fullName, disabled: true});
     }
+
+    this.visitForm.get('duration').value = '01:00';
 
     this.diagnosis = this.diagnosisService.getCachedDiagnosis().map(value => ({
       id: value.id,

@@ -1,4 +1,4 @@
-import {PatientsState} from './patients/patients.model';
+import {PatientsState} from './models/patients.model';
 
 export interface AppState {
   patients: PatientsState;

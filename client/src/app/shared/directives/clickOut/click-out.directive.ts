@@ -1,5 +1,5 @@
 import {Directive, ElementRef, EventEmitter, HostListener, Input, OnInit, Output} from '@angular/core';
-import {getAncestorByClass} from '../../utils/utils';
+import {getAncestorByClass} from '../../../utils/utils';
 
 @Directive({
   selector: '[appClickOut]'

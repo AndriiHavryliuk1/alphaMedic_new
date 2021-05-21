@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
-import {UserSettingsService} from '../user-settings/user-settings.service';
-import {TeethService} from '../teeth/teeth.service';
-import {ServicesService} from '../services/services.service';
-import {DiagnosisService} from '../diagnosis/diagnosis.service';
+import {UserSettingsService} from '../../services/user-settings/user-settings.service';
+import {TeethService} from '../../services/teeth/teeth.service';
+import {ServicesService} from '../../services/services/services.service';
+import {DiagnosisService} from '../../services/diagnosis/diagnosis.service';
 import {Store} from '@ngrx/store';
 import {skip, take} from 'rxjs/operators';
-import {PatientsActions} from '../../store/patients/patients.action';
+import {PatientsActions} from '../../store/actions/patients.action';
 import {AppState} from '../../store/app.model';
-import {selectPatients} from '../../store/patients/patients.selector';
+import {selectPatients} from '../../store/selectors/patients.selector';
 
 @Injectable({
   providedIn: 'root'

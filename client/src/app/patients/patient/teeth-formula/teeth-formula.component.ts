@@ -2,7 +2,7 @@ import {Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild} from 
 import {LOWER_TEETH, LOWER_TEETH_CHILDREN, UPPER_TEETH, UPPER_TEETH_CHILDREN} from './teeth-helper';
 import {getAncestorById, getToothNumberFromNumber} from '../../../utils/utils';
 import {EditPanelComponent} from './edit-panel/edit-panel.component';
-import {PlaceholderDirective} from '../../../shared/placeholder/placeholder.directive';
+import {PlaceholderDirective} from '../../../shared/directives/placeholder/placeholder.directive';
 import {Subscription} from 'rxjs';
 import {TeethFormulaService} from '../../../services/patients/teeth-formula/teeth-formula.service';
 

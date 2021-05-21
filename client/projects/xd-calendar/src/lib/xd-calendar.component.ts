@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
 import {DATE_STATES} from './xd-calendar.utils';
-import {XdCalendarService} from './xd-calendar.service';
+import {XdCalendarService} from '../core/services/xd-calendar.service';
+import {Subscription} from 'rxjs';
+import {EventBusService, Events} from '../core/services/event-bus.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -15,30 +17,26 @@ export class XdCalendarComponent implements OnInit, OnDestroy, OnChanges {
   @Output() createNewEventClicked = new EventEmitter();
 
   public DATE_STATES = DATE_STATES;
-  private dateStateSub;
-  private currentDateSub;
-  private createNewEventClickedSub;
+  private subs = new Subscription();
 
-  constructor(private xdCalendarService: XdCalendarService) {
+  constructor(private xdCalendarService: XdCalendarService, private eventBus: EventBusService) {
   }
 
   ngOnInit(): void {
     this.init();
-    this.dateStateSub = this.xdCalendarService.dateState.subscribe(newState => {
+    this.subs.add(this.xdCalendarService.dateStateChanged$.subscribe(newState => {
       this.dateState = newState;
-    });
-    this.currentDateSub = this.xdCalendarService.currentDate.subscribe(newDate => {
+    }));
+    this.subs.add(this.xdCalendarService.currentDateChanged$.subscribe(newDate => {
       this.currentDate = newDate;
-    });
-    this.createNewEventClickedSub = this.xdCalendarService.createNewEventClicked.subscribe((day) => {
+    }));
+    this.subs.add(this.eventBus.on(Events.CreateNewEventClicked, (day) => {
       this.createNewEventClicked.next(day);
-    });
+    }));
   }
 
   ngOnDestroy(): void {
-    this.dateStateSub.unsubscribe();
-    this.currentDateSub.unsubscribe();
-    this.createNewEventClickedSub.unsubscribe();
+    this.subs.unsubscribe();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -50,13 +48,13 @@ export class XdCalendarComponent implements OnInit, OnDestroy, OnChanges {
 
   private init() {
     if (this.currentDate) {
-      this.xdCalendarService.currentDate.next(this.currentDate);
+      this.xdCalendarService.setCurrentDate(this.currentDate);
     }
     if (this.dateState) {
-      this.xdCalendarService.dateState.next(this.dateState);
+      this.xdCalendarService.setDateState(this.dateState);
     }
     if (this.dateState) {
-      this.xdCalendarService.events.next(this.dateState);
+      this.xdCalendarService.setEvents(this.dateState);
     }
   }
 

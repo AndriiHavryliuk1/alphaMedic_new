@@ -7,8 +7,8 @@ import {Constants} from '../../utils/constants';
 import {AlertService} from '../../services/alert.service';
 import {Router} from '@angular/router';
 import {finalize} from 'rxjs/operators';
-import {AppInitializerService} from '../../services/app/app-initializer.service';
-import {LoadingDialogService} from '../../services/app/loading-dialog.service';
+import {AppInitializerService} from '../../core/services/app-initializer.service';
+import {LoadingDialogService} from '../../shared/services/loading-dialog.service';
 
 @Component({
   selector: 'app-login',

@@ -11,10 +11,14 @@ import {XdCalendarMonthCellComponent} from './xd-calendar-month/xd-calendar-mont
 import {XdCalendarHeaderComponent} from './xd-calendar-header/xd-calendar-header.component';
 import {XdCalendarWeekHeaderComponent} from './xd-calendar-week/xd-calendar-week-header/xd-calendar-week-header.component';
 import {MatIconModule} from '@angular/material/icon';
-import {XdCalendarService} from './xd-calendar.service';
+import {XdCalendarService} from '../core/services/xd-calendar.service';
 import {XdCalendarShowMoreComponent} from './xd-calendar-components/xd-calendar-show-more/xd-calendar-show-more.component';
 import {XdCalendarPlaceholderDirective} from './xd-calendar-directives/xd-calendar-placeholder.directive';
 import {XdCalendarClickOutDirective} from './xd-calendar-directives/xd-calendar-click-out.directive';
+import {MatDialogModule} from '@angular/material/dialog';
+import {ShowMoreDialogComponent} from '../shared/show-more-dialog/show-more-dialog.component';
+import {EventDetailsComponent} from '../shared/event-details/event-details.component';
+import {CoreModule} from '../core/core.module';
 
 @NgModule({
   declarations: [
@@ -29,14 +33,17 @@ import {XdCalendarClickOutDirective} from './xd-calendar-directives/xd-calendar-
     XdCalendarMonthCellComponent,
     XdCalendarHeaderComponent,
     XdCalendarWeekHeaderComponent,
-    XdCalendarShowMoreComponent
+    XdCalendarShowMoreComponent,
+    ShowMoreDialogComponent,
+    EventDetailsComponent
   ],
   imports: [
     CommonModule,
     MatButtonModule,
-    MatIconModule
+    MatDialogModule,
+    MatIconModule,
+    CoreModule
   ],
-  providers: [XdCalendarService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
     XdCalendarComponent

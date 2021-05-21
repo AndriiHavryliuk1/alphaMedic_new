@@ -4,7 +4,7 @@ import {PatientsService} from '../../services/patients/patients.service';
 import {of} from 'rxjs';
 import {Patient} from '../../models/patient';
 import {Injectable} from '@angular/core';
-import {PatientsActions} from './patients.action';
+import {PatientsActions} from '../actions/patients.action';
 
 @Injectable()
 export class PatientsEffects {

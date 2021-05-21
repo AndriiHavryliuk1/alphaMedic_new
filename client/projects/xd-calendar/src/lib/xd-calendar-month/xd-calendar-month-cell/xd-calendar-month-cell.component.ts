@@ -1,6 +1,6 @@
 import {
   AfterViewInit,
-  ChangeDetectorRef,
+  ChangeDetectionStrategy,
   Component,
   ComponentFactoryResolver,
   ElementRef,
@@ -10,20 +10,26 @@ import {
   ViewChild
 } from '@angular/core';
 import * as moment from 'moment';
-import {XdCalendarService} from '../../xd-calendar.service';
+import {XdCalendarService} from '../../../core/services/xd-calendar.service';
 import {XdCalendarPlaceholderDirective} from '../../xd-calendar-directives/xd-calendar-placeholder.directive';
 import {XdCalendarShowMoreComponent} from '../../xd-calendar-components/xd-calendar-show-more/xd-calendar-show-more.component';
-import {Subscription} from 'rxjs';
+import {BehaviorSubject, Subscription} from 'rxjs';
+import {MatDialog} from '@angular/material/dialog';
+import {ShowMoreDialogComponent} from '../../../shared/show-more-dialog/show-more-dialog.component';
+import {EmitEvent, EventBusService, Events} from '../../../core/services/event-bus.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'xd-calendar-month-cell',
   templateUrl: './xd-calendar-month-cell.component.html',
-  styleUrls: ['./xd-calendar-month-cell.component.scss']
+  styleUrls: ['./xd-calendar-month-cell.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class XdCalendarMonthCellComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() day;
   public moreEventsCount = 0;
+  isReady$ = new BehaviorSubject(false);
+  eventsToShow$ = new BehaviorSubject([]);
 
   @ViewChild(XdCalendarPlaceholderDirective) panelHost: XdCalendarPlaceholderDirective;
   private closeSub: Subscription;
@@ -31,7 +37,8 @@ export class XdCalendarMonthCellComponent implements OnInit, AfterViewInit, OnDe
   constructor(private xdCalendarService: XdCalendarService,
               private elementRef: ElementRef,
               private componentFactoryResolver: ComponentFactoryResolver,
-              private cdRef: ChangeDetectorRef) {
+              private dialog: MatDialog,
+              private eventBus: EventBusService) {
   }
 
   ngOnInit(): void {
@@ -58,7 +65,7 @@ export class XdCalendarMonthCellComponent implements OnInit, AfterViewInit, OnDe
 
   onCellClick(event) {
     event.stopPropagation();
-    this.xdCalendarService.createNewEventClicked.next(this.day);
+    this.eventBus.emit(new EmitEvent(Events.CreateNewEventClicked, this.day));
   }
 
   onEventClick(clickEvent, event) {
@@ -67,6 +74,16 @@ export class XdCalendarMonthCellComponent implements OnInit, AfterViewInit, OnDe
   }
 
   onShowMoreEventsClick(event) {
+    event.stopPropagation();
+    this.dialog.open(ShowMoreDialogComponent, {
+      data: {
+        events: this.day.events.slice(this.day.events.length - this.moreEventsCount),
+        date: this.day.date
+      }
+    });
+  }
+
+  showEventDetails(event) {
     event.stopPropagation();
     const editPanelFactory = this.componentFactoryResolver.resolveComponentFactory(XdCalendarShowMoreComponent);
     this.panelHost.viewContainerRef.clear();
@@ -79,25 +96,25 @@ export class XdCalendarMonthCellComponent implements OnInit, AfterViewInit, OnDe
       this.panelHost.viewContainerRef.clear();
       this.closeSub.unsubscribe();
     });
-
   }
 
   private removeExtraEventsDiv() {
-    const eventDivs = this.elementRef.nativeElement.querySelectorAll('.event');
-    if (eventDivs.length) {
+    const eventsCount = this.day.events.length;
+    if (eventsCount) {
+      const eventsToShow = [...this.day.events];
       const heightOfContainer = this.elementRef.nativeElement.getBoundingClientRect().height;
-      const numberDivHeight = eventDivs[0].offsetTop - this.elementRef.nativeElement.offsetTop;
+      const numberDivHeight = this.elementRef.nativeElement.querySelector('.header')?.getBoundingClientRect().height + 2;
       const freeHeight = heightOfContainer - numberDivHeight; // 2px margin bottom
-      const eventDivHeight = eventDivs[0].getBoundingClientRect().height + 2;
-      if (freeHeight < (eventDivHeight * eventDivs.length)) {
+      const eventDivHeight = 21;
+      if (freeHeight < (eventDivHeight * eventsCount)) {
         let eventsToFit = Math.floor(freeHeight / eventDivHeight) - 1;
         eventsToFit = eventsToFit < 0 ? 0 : eventsToFit;
-        this.moreEventsCount = eventDivs.length - eventsToFit;
-        this.cdRef.detectChanges();
-        for (let i = eventsToFit; i < eventDivs.length && eventsToFit >= 0; i++) {
-          eventDivs[i].remove();
-        }
+        const startIndex = eventsToFit - 1 < 0 ? 0 : eventsToFit - 1;
+        eventsToShow.splice(startIndex, eventsCount - eventsToFit);
+        this.moreEventsCount = eventsCount - eventsToFit;
       }
+      this.eventsToShow$.next(eventsToShow);
+      this.isReady$.next(true);
     }
   }
 

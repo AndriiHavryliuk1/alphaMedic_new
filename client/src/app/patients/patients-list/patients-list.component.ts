@@ -6,7 +6,7 @@ import {Patient} from '../../models/patient';
 import {Observable} from 'rxjs';
 import {NewAppointmentDialogComponent} from '../../appointments/new-appointment-dialog/new-appointment-dialog.component';
 import {Store} from '@ngrx/store';
-import {selectPatients} from '../../store/patients/patients.selector';
+import {selectPatients} from '../../store/selectors/patients.selector';
 import {AppState} from '../../store/app.model';
 
 @Component({

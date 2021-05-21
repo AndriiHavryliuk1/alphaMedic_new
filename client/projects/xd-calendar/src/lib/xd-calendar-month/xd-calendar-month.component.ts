@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import * as moment from 'moment';
 import {getDayOfWeekStartedFromMonday} from '../xd-calendar.utils';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -21,6 +22,7 @@ export class XdCalendarMonthComponent implements OnInit, OnChanges, AfterViewIni
   @Input() public currentDate = new Date();
   @Input() public events = [];
   public monthMatrix = [];
+  isReady$ = new BehaviorSubject(false);
 
   constructor(private elementRef: ElementRef,
               private renderer: Renderer2) {
@@ -34,7 +36,7 @@ export class XdCalendarMonthComponent implements OnInit, OnChanges, AfterViewIni
     setTimeout(() => {
       const monthContentDiv = document.getElementById('month-content');
       this.renderer.setStyle(monthContentDiv, 'height', `calc(100vh - ${monthContentDiv.offsetTop}px)`);
-      //   this.renderer.setStyle(monthContentDiv.firstChild, 'height', `calc(100vh - ${monthContentDiv.offsetTop}px)`);
+      this.isReady$.next(true);
     });
   }
 

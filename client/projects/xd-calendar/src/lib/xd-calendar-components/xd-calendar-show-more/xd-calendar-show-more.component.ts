@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {XdCalendarService} from '../../xd-calendar.service';
+import {XdCalendarService} from '../../../core/services/xd-calendar.service';
 import {getDayOfWeekStartedFromMonday} from '../../xd-calendar.utils';
 
 @Component({

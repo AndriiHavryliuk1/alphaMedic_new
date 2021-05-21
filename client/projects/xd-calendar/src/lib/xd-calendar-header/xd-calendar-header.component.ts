@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import * as moment from 'moment';
 import {DATE_STATES} from '../xd-calendar.utils';
-import {XdCalendarService} from '../xd-calendar.service';
+import {XdCalendarService} from '../../core/services/xd-calendar.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -63,7 +63,7 @@ export class XdCalendarHeaderComponent implements OnInit {
     this.currentDateState = newState;
     this.init();
     this.dateStateChanged.emit(newState);
-    this.xdCalendarService.dateState.next(newState);
+    this.xdCalendarService.setDateState(newState);
   }
 
   public clickNext() {
@@ -106,6 +106,6 @@ export class XdCalendarHeaderComponent implements OnInit {
 
   private dateChangeHandler() {
     this.dateChanged.emit(this.currentDate);
-    this.xdCalendarService.currentDate.next(this.currentDate);
+    this.xdCalendarService.setCurrentDate(this.currentDate);
   }
 }

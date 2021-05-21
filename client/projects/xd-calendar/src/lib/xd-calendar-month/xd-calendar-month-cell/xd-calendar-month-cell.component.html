@@ -1,11 +1,15 @@
 <ng-template xdPlaceholder></ng-template>
 <div class="month-cell" (click)="onCellClick($event)">
   <div [ngClass]="{'today': day.today}">
-    <span>{{day.number}}</span>
-    <div *ngFor="let event of day.events"
-         (click)="onEventClick($event, event)"
-         class="event">{{event.shortText}}
+    <div class="header">
+      <span>{{day.number}}</span>
     </div>
+    <ng-container *ngIf="isReady$ | async">
+      <div *ngFor="let event of eventsToShow$ | async"
+           (click)="onEventClick($event, event)"
+           class="event">{{event.shortText}}
+      </div>
+    </ng-container>
     <div *ngIf="moreEventsCount"
          (click)="onShowMoreEventsClick($event)"
          class="more-events">{{"та ще + " + moreEventsCount}}

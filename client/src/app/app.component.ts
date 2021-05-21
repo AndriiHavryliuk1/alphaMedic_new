@@ -1,6 +1,6 @@
 import {AfterContentInit, Component} from '@angular/core';
 
-import {LoadingDialogService} from './services/app/loading-dialog.service';
+import {LoadingDialogService} from './shared/services/loading-dialog.service';
 import {DateAdapter} from '@angular/material/core';
 
 @Component({

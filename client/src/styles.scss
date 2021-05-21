@@ -36,7 +36,9 @@ body.is-loading #loading-overlay {
 }
 
 body.is-loading .main-content {
-  overflow-y: hidden; }
+  height: 100%;
+  overflow-y: hidden;
+}
 
 #loading-overlay .loading-msg-container {
   position: relative;

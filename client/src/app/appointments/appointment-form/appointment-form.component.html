@@ -31,7 +31,7 @@
     <div class="visit-time-field">
       <mat-form-field>
         <input matInput placeholder="Час*" [disableClick]="true" [ngxTimepicker]="timePicker" [format]="24"
-               min="08:00" max="20:00" formControlName="visitTime">
+               min="08:00" max="21:00" formControlName="visitTime">
         <mat-icon class="open-timepicker-icon" (click)="timePicker.open()">more_time</mat-icon>
         <ngx-material-timepicker #timePicker [minutesGap]="5"></ngx-material-timepicker>
       </mat-form-field>

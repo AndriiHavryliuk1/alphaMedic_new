@@ -212,7 +212,7 @@ export class EditPanelComponent implements OnInit, AfterViewInit {
     }
   }
 
-  public closePanel() {
+  closePanel() {
     if (this.selectedTraumaState && this.selectedTraumaState.state) {
       this.toothStates.push(this.selectedTraumaState);
     }

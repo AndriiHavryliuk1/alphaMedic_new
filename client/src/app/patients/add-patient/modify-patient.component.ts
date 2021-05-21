@@ -7,8 +7,8 @@ import {Patient} from '../../models/patient';
 import {Constants} from '../../utils/constants';
 import {Store} from '@ngrx/store';
 import {skip, take} from 'rxjs/operators';
-import {PatientsActions} from '../../store/patients/patients.action';
-import {selectPatients} from '../../store/patients/patients.selector';
+import {PatientsActions} from '../../store/actions/patients.action';
+import {selectPatients} from '../../store/selectors/patients.selector';
 import {AppState} from '../../store/app.model';
 
 @Component({

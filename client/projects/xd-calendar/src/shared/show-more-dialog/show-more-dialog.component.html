@@ -1,0 +1,10 @@
+<div class="show-more">
+  <div><mat-icon mat-dialog-close class="close-icon">close</mat-icon></div>
+  <div class="header">{{currentDay.shortName + " " + date.getDate()}}</div>
+
+  <div *ngFor="let event of events"
+       class="event"
+       (click)="onClickEvent(event)">{{event.shortText}}
+  </div>
+
+</div>
