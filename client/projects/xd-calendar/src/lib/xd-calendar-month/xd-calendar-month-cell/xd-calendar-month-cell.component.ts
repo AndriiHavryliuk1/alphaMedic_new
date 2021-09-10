@@ -46,15 +46,11 @@ export class XdCalendarMonthCellComponent implements OnInit, AfterViewInit, OnDe
       event.shortText = moment(event.dateStart).format('HH:mm') + ' ' + event.name;
     });
 
-    this.day.events.sort((a, b) => {
-      return a.dateStart - b.dateStart;
-    });
+    this.day.events.sort((a, b) => a.dateStart - b.dateStart);
   }
 
   ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.removeExtraEventsDiv();
-    });
+    setTimeout(() => this.removeExtraEventsDiv());
   }
 
   ngOnDestroy(): void {
@@ -109,7 +105,7 @@ export class XdCalendarMonthCellComponent implements OnInit, AfterViewInit, OnDe
       if (freeHeight < (eventDivHeight * eventsCount)) {
         let eventsToFit = Math.floor(freeHeight / eventDivHeight) - 1;
         eventsToFit = eventsToFit < 0 ? 0 : eventsToFit;
-        const startIndex = eventsToFit - 1 < 0 ? 0 : eventsToFit - 1;
+        const startIndex = eventsToFit - 1 < 0 ? 0 : eventsToFit;
         eventsToShow.splice(startIndex, eventsCount - eventsToFit);
         this.moreEventsCount = eventsCount - eventsToFit;
       }
