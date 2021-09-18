@@ -9,7 +9,7 @@ import {
   SimpleChanges
 } from '@angular/core';
 import * as moment from 'moment';
-import {getDayOfWeekStartedFromMonday} from '../xd-calendar.utils';
+import {getDayOfWeekStartedFromMonday, getFilteredEventsFormDate} from '../xd-calendar.utils';
 import {BehaviorSubject} from 'rxjs';
 
 @Component({
@@ -58,12 +58,12 @@ export class XdCalendarMonthComponent implements OnInit, OnChanges, AfterViewIni
     const currentDay = new Date().getDate();
     this.monthMatrix = [];
 
-    const currentMonthEvents = this.getFilteredEventsFormDate(this.events, this.currentDate, 'month');
+    const currentMonthEvents = getFilteredEventsFormDate(this.events, this.currentDate, 'month');
 
     const previousMonth = moment(this.currentDate).subtract(1, 'months');
-    const previousMonthEvents = this.getFilteredEventsFormDate(this.events, previousMonth, 'month');
+    const previousMonthEvents = getFilteredEventsFormDate(this.events, previousMonth, 'month');
     const nextMonth = moment(this.currentDate).add(1, 'months');
-    const nextMonthEvents = this.getFilteredEventsFormDate(this.events, nextMonth, 'month');
+    const nextMonthEvents = getFilteredEventsFormDate(this.events, nextMonth, 'month');
 
 
     let addedDays = 0;
@@ -76,7 +76,7 @@ export class XdCalendarMonthComponent implements OnInit, OnChanges, AfterViewIni
           const dayNumber = daysInPreviousMonth - startDayOfMonth + 1 + day;
           this.monthMatrix[week].push({
             number: dayNumber,
-            events: this.getFilteredEventsFormDate(previousMonthEvents, dayNumber, 'day'),
+            events: getFilteredEventsFormDate(previousMonthEvents, dayNumber, 'day'),
             date: moment(previousMonth).date(dayNumber).toDate()
           });
         } else {
@@ -89,10 +89,10 @@ export class XdCalendarMonthComponent implements OnInit, OnChanges, AfterViewIni
           }
           if (!currentMonthAdded) {
             this.monthMatrix[week][day].date = moment(this.currentDate).date(addedDays).toDate();
-            this.monthMatrix[week][day].events = this.getFilteredEventsFormDate(currentMonthEvents, addedDays, 'day');
+            this.monthMatrix[week][day].events = getFilteredEventsFormDate(currentMonthEvents, addedDays, 'day');
           } else {
             this.monthMatrix[week][day].date = moment(nextMonth).date(addedDays).toDate();
-            this.monthMatrix[week][day].events = this.getFilteredEventsFormDate(nextMonthEvents, addedDays, 'day');
+            this.monthMatrix[week][day].events = getFilteredEventsFormDate(nextMonthEvents, addedDays, 'day');
           }
 
           if (addedDays === daysInCurrentMonth) {
@@ -103,27 +103,4 @@ export class XdCalendarMonthComponent implements OnInit, OnChanges, AfterViewIni
       }
     }
   }
-
-
-  private getFilteredEventsFormDate(events, date, type) {
-    return events.filter((event) => {
-      return this.checkDateInCurrentRange(event, date, type);
-    });
-  }
-
-
-  private checkDateInCurrentRange(event, date, type) {
-    let isDateStartInRange;
-    let isDateEndInRange;
-    if (type === 'month') {
-      isDateStartInRange = moment(event.dateStart).isSame(date, 'month');
-      isDateEndInRange = moment(event.dateEnd).isSame(date, 'month');
-    } else if (type === 'day') {
-      isDateStartInRange = new Date(event.dateStart).getDate() === date;
-      isDateEndInRange = new Date(event.dateEnd).getDate() === date;
-    }
-    return isDateStartInRange || isDateEndInRange;
-  }
-
-
 }

@@ -1,4 +1,4 @@
-<xd-calendar-week-header [currentDate]="currentDate"></xd-calendar-week-header>
+<xd-calendar-week-header [currentDate]="currentDate" [days]="days"></xd-calendar-week-header>
 
 <div class="week-content">
   <div>
@@ -7,8 +7,12 @@
     </div>
   </div>
   <div *ngFor="let day of week">
-    <div *ngFor="let hour of day" class="week-cell content-centered text-centered">
-      {{hour.text ? hour.text : hour.hours.from + " - " + hour.hours.to}}
+    <div *ngIf="!!day.today" class="week-current-date" [ngStyle]="day.today.style">
+      <div class="week-current-date-spot"></div>
+      <div class="week-current-date-line"></div>
+    </div>
+    <div *ngFor="let cell of day.cells" class="week-cell content-centered text-centered">
+      {{cell}}
     </div>
   </div>
 </div>

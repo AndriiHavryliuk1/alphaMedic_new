@@ -3,6 +3,7 @@
 $hours-name-width: 100px;
 
 .week-content {
+  position: relative;
   display: flex;
 
   > div {
@@ -34,6 +35,30 @@ $hours-name-width: 100px;
       width: $hours-name-width;
       display: flex;
       justify-content: center;
+    }
+  }
+
+  .week-current-date {
+    position: absolute;
+    width: 13%;
+
+    .week-current-date-spot {
+      background: #ea4335;
+      -webkit-border-radius: 50%;
+      border-radius: 50%;
+      content: "";
+      position: absolute;
+      height: 12px;
+      margin-left: -6.5px;
+      margin-top: -5px;
+      width: 12px;
+      z-index: 505;
+    }
+
+    .week-current-date-line {
+      z-index: 505;
+      border-top: #ea4335 solid 2px;
+      pointer-events: none;
     }
   }
 }

@@ -1,4 +1,6 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import * as moment from 'moment';
+import {getFilteredEventsFormDate} from '../xd-calendar.utils';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -9,6 +11,16 @@ import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core'
 export class XdCalendarWeekComponent implements OnInit, OnChanges {
   @Input() currentDate = new Date();
   @Input() events = [];
+
+  public days = [
+    {position: 0, fullName: 'Понеділок', shortName: 'Пн'},
+    {position: 1, fullName: 'Вівторок', shortName: 'Вт'},
+    {position: 2, fullName: 'Середа', shortName: 'Ср'},
+    {position: 3, fullName: 'Четвер', shortName: 'Чт'},
+    {position: 4, fullName: 'П\'ятниця', shortName: 'Пт'},
+    {position: 5, fullName: 'Субота', shortName: 'Сб'},
+    {position: 6, fullName: 'Неділя', shortName: 'Нд'}
+  ] as any;
 
   public week = [];
 
@@ -43,34 +55,47 @@ export class XdCalendarWeekComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    for (let day = 0; day < 7; day++) {
-      const hours = [];
-      for (let hour = 0; hour < 24; hour++) {
-        hours.push({
-          cell: {
-            position: {
-              x: day,
-              y: hour
-            },
-            eventStart: new Date(),
-            eventEnd: new Date()
-          },
-          hours: {
-            from: hour,
-            to: hour + 1
-          }
-        });
-      }
-      this.week.push(hours);
-    }
-
-   // this.week = [this.hours, ...this.week];
+    this.initCurrentWeek();
+    // this.week = [this.hours, ...this.week];
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.currentDate && !changes.currentDate.firstChange) {
       this.currentDate = changes.currentDate.currentValue;
+      this.initCurrentWeek();
     }
+  }
+
+  private initCurrentWeek() {
+    this.week = [];
+    this.initDays();
+    for (let day = 0; day < 7; day++) {
+      const today = this.days[day].today ? {
+        style: {
+          top: (this.currentDate.getHours() * 3600 + this.currentDate.getMinutes() * 60 + this.currentDate.getSeconds()) * 0.0222 + 'px'
+        }
+      } : null;
+      this.week.push({
+        events: getFilteredEventsFormDate(this.events, this.currentDate, 'week'),
+        today,
+        cells: new Array(24)
+      });
+    }
+  }
+
+  private initDays() {
+    const today = new Date();
+    const isCurrentWeek = moment(this.currentDate).isSame(today, 'week');
+    const weekStart = moment(this.currentDate).startOf('isoWeek');
+    for (let i = 0; i < 7; i++) {
+      const day = moment(weekStart).add(i, 'days').toDate().getDate();
+      this.days[i].number = day;
+      this.days[i].today = isCurrentWeek && today.getDate() === day;
+    }
+  }
+
+  private calculateCurrentLinePosition() {
+
   }
 
 }
